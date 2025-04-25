@@ -1,0 +1,161 @@
+{% extends "storelocator/layout.html" %}
+{% load static %}
+
+{% block title %}
+  Cigar Cartel Store Locator
+{% endblock %}
+
+{% block body %}
+
+<main>
+
+    <section id="hero" role="region" aria-label="Hero section with animated particles">
+        <div class="hero-content">
+            
+            <h1 class="hero-title">
+                Thank you for visiting <span class="company-name">Cigar Cartel</span>
+            </h1>
+    
+            <ul>
+                <li>
+                    All of our walk-in humidors are located inside your local 419 Smoke Shop, across Central Florida.
+                </li>
+                <li>
+                    Each humidor offers 200 hand-picked cigars, curated by our certified in-house sommelier, Steven Riviera.
+                </li>
+                <li>
+                    We feature all major cigar brands, from local favorites to exclusive, hard-to-find selections.
+                </li>
+                <li>
+                    Freshness and excellent pricing are our pride—stop by and see for yourself!
+                </li>
+            </ul>
+    
+            <footer id="hero-footer">
+                <p>
+                    Find a store near you
+                </p>
+                <a href="#address-form" aria-label="Scroll to address form">
+                    <i class="arrow fa-solid fa-arrow-down"></i>
+                </a>
+            </footer>
+    
+        </div>
+    </section>
+
+    <!-- Address Lookup Form -->
+    <form id="address-form" role="search" data-url="{% url 'storelocator:index' %}" method="get">
+        
+        {% csrf_token %}
+        {{ form }}
+
+        <button class="btn btn-primary" type="submit" aria-label="Find a store">
+            Find a store
+        </button>
+
+    </form>
+
+    <section class="finder-layout">
+
+        <aside class="store-list">
+            {% for store in left_stores %}
+
+                <div class="card mb-3" onclick="zoomToStore('{{ store.id }}');">
+
+                    <img
+                        src="{{ store.image }}"
+                        class="card-img-top"
+                        alt="{{ store.name }}"
+                        loading="lazy"
+                    />
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{ store.name }}</h5>
+
+                        <p class="card-text street-address">
+                            {{ store.address }}
+                        </p>
+
+                        <p>
+                            {{ store.city__name }}, {{ store.city__state__abbreviation }} {{ store.zip_code }}
+                        </p>
+
+                    </div>
+
+                    <p class="btn-container d-inline-flex gap-1">
+                        <button class="btn btn-primary" type="button" aria-label="directions for {{ store.name }}" onclick="getDirections('{{ store.address }}');">
+                            Get directions
+                        </button>
+                    </p>
+
+                </div>
+
+            {% empty %}
+
+                <p>No stores found.</p>
+
+            {% endfor %}
+        </aside>
+
+        <div id="map" class="map-container" loading="lazy"></div>
+
+        <aside class="store-list">
+            {% for store in right_stores %}
+
+                <div class="card mb-3" onclick="zoomToStore('{{ store.id }}');">
+
+                    <img
+                        src="{{ store.image }}"
+                        class="card-img-top" 
+                        alt="{{ store.name }}"
+                        loading="lazy"
+                    />
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{ store.name }}</h5>
+
+                        <p class="card-text street-address">
+                            {{ store.address }}
+                        </p>
+
+                        <p>
+                            {{ store.city__name }}, {{ store.city__state__abbreviation }} {{ store.zip_code }}
+                        </p>
+                        
+                    </div>
+
+                    <p class="btn-container d-inline-flex gap-1">
+                        <button class="btn btn-primary" type="button" aria-label="directions for {{ store.name }}" onclick="getDirections('{{ store.address }}');">
+                            Get directions
+                        </button>
+                    </p>
+
+                </div>
+
+            {% empty %}
+
+                <p>No stores found.</p>
+                
+            {% endfor %}
+        </aside>
+
+    </section>
+
+    <!-- Embed store data as JSON -->
+    <script type="application/json" id="stores-data">
+        {{ stores_json|safe }}
+    </script>
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'storelocator/js/bundle.js' %}"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=geometry,marker&callback=initMap&vweekly"
+        defer>
+    </script>
+{% endblock %}
+

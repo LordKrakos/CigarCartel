@@ -1,0 +1,12 @@
+// This file is used to configure the JavaScript language service in Visual Studio Code.
+
+{
+    "compilerOptions": {
+      // other options...
+      "baseUrl": ".",
+      "paths": {
+        "three/webgpu": ["node_modules/three/build/three.webgpu.js"],
+        "three/tsl": ["node_modules/three/build/three.tsl.js"],
+      },
+    }
+  }
