@@ -1,17 +1,46 @@
-# Python Bytecode
-*.py[cod]
+# Python-related files
+*.pyc
+*.pyo
 __pycache__/
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# Django-related files
+db.sqlite3
+*.log
+*.pot
+*.py[co]
+*.sqlite3
+media/
+staticfiles/
 
 # Environment variables
 .env
 
-# Django stuff:
-*.log
-db.sqlite3
+# Node.js-related files (if using npm or yarn)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# VSCode files
+# Compiled CSS and JS
+*.css.map
+*.js.map
+
+# IDE-specific files
 .vscode/
+.idea/
+*.swp
+*.swo
 
-# Virtual environments
-venv/
-env/
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Deployment-related files
+*.bak
+*.orig
+*.tmp
