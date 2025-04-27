@@ -32,7 +32,11 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "419smokeshop.com",
+    "www.419smokeshop.com",
+    "storelocator-tt2a.onrender.com",
+]
 
 # Application definition
 
