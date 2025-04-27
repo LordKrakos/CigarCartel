@@ -22,20 +22,17 @@ env = environ.Env()
 environ.Env.read_env(BASE_DIR / '.env')
 # Now you can access your environment variables:
 GOOGLE_MAPS_API_KEY = env('GOOGLE_MAPS_API_KEY')
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env('SECRET_KEY')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'd^0hsn-iwuco#2-wsa_&g5vwir0brnbtm1#@5e2nx2*rswa6^xkhpwji*40gtnoa('
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = []
-
-
 
 # Application definition
 

@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: smokeshop
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn smokeshop.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        value: "'d^92mw-iwuco#2-wsa_&g5vwir0brnbtm1#@5e2nx2*rswa6^xkhpwji*40gtnoa('"
+      - key: GOOGLE_MAPS_API_KEY
+        value: "AIzaSyA3K3GjEDh3qW6aHtfzvNz81nVIt4ILV0E"

@@ -76402,7 +76402,7 @@ function initHeroSection() {
     return;
   }
   var isMobile = window.innerWidth < 768;
-  var goldCount = isMobile ? 1500 : 3000; // Adjust particle count for mobile devices
+  var goldCount = isMobile ? 3000 : 8000; // Increased particle count for both mobile and desktop devices
 
   var width = hero.clientWidth;
   var height = hero.clientHeight;
@@ -76439,12 +76439,13 @@ function initHeroSection() {
   var goldPositions = new Float32Array(goldCount * 3);
   var goldVelocities = new Float32Array(goldCount * 3);
   for (var i = 0; i < goldCount; i++) {
-    goldPositions[i * 3] = (Math.random() - 0.5) * 40;
-    goldPositions[i * 3 + 1] = Math.random() * 20;
-    goldPositions[i * 3 + 2] = (Math.random() - 0.5) * 40;
-    goldVelocities[i * 3] = (Math.random() - 0.7) * 0.001;
-    goldVelocities[i * 3 + 1] = (Math.random() - 0.7) * 0.001;
-    goldVelocities[i * 3 + 2] = (Math.random() - 0.7) * 0.001;
+    goldPositions[i * 3] = (Math.random() - 0.5) * 40; // X-axis: Spread particles evenly horizontally
+    goldPositions[i * 3 + 1] = Math.random() * 40 - 10; // Y-axis: Adjust range to distribute particles vertically
+    goldPositions[i * 3 + 2] = (Math.random() - 0.5) * 40; // Z-axis: Spread particles evenly in depth
+
+    goldVelocities[i * 3] = (Math.random() - 0.5) * 0.01; // X-axis velocity
+    goldVelocities[i * 3 + 1] = (Math.random() - 0.5) * 0.01; // Y-axis velocity
+    goldVelocities[i * 3 + 2] = (Math.random() - 0.5) * 0.01; // Z-axis velocity
   }
   goldGeometry.setAttribute('position', new three__WEBPACK_IMPORTED_MODULE_0__.BufferAttribute(goldPositions, 3));
   var goldTexture = createGoldTexture();
@@ -76471,9 +76472,9 @@ function initHeroSection() {
     requestAnimationFrame(animate);
     var goldArray = goldParticles.geometry.attributes.position.array;
     for (var _i = 0; _i < goldArray.length; _i += 3) {
-      goldArray[_i] += goldVelocities[_i] * delta * 100;
-      goldArray[_i + 1] += goldVelocities[_i + 1] * delta * 100;
-      goldArray[_i + 2] += goldVelocities[_i + 2] * delta * 100;
+      goldArray[_i] += goldVelocities[_i] * delta * 20; // Further reduced speed multiplier for X-axis
+      goldArray[_i + 1] += goldVelocities[_i + 1] * delta * 20; // Further reduced speed multiplier for Y-axis
+      goldArray[_i + 2] += goldVelocities[_i + 2] * delta * 20; // Further reduced speed multiplier for Z-axis
       if (goldArray[_i] > 20) goldArray[_i] = -20;
       if (goldArray[_i] < -20) goldArray[_i] = 20;
       if (goldArray[_i + 1] > 30) goldArray[_i + 1] = 0;
