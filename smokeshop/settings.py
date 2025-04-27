@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 # Read variables from the .env file located at the BASE_DIR
 environ.Env.read_env(BASE_DIR / '.env')
-# Now you can access your environment variables:
-GOOGLE_MAPS_API_KEY = env('GOOGLE_MAPS_API_KEY')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
+# Now you can access your environment variables:
+GOOGLE_MAPS_API_KEY = env('GOOGLE_MAPS_API_KEY')
 
 
 # Quick-start development settings - unsuitable for production
