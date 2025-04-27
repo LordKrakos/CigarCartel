@@ -2,7 +2,9 @@ services:
   - type: web
     name: smokeshop
     env: python
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: |
+      apt-get update && apt-get install -y libcairo2-dev pkg-config
+      pip install -r requirements.txt
     startCommand: "gunicorn smokeshop.wsgi:application"
     envVars:
       - key: SECRET_KEY
