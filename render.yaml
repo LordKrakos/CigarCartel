@@ -3,7 +3,11 @@ services:
     name: smokeshop
     env: python
     buildCommand: |
-      apt-get update && apt-get install -y libcairo2-dev pkg-config
+      apt-get update && apt-get install -y \
+        build-essential \
+        libyaml-dev \
+        libcairo2-dev \
+        pkg-config
       pip install --upgrade pip
       pip install -r requirements.txt
     startCommand: "gunicorn smokeshop.wsgi:application"
