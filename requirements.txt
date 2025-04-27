@@ -60,7 +60,6 @@ ptyprocess==0.7.0
 pyasn1==0.6.1
 pyasn1_modules==0.4.1
 pycairo==1.23.0
-PyGObject==3.42.1
 pyinotify==0.9.6
 PyJWT==2.3.0
 pyOpenSSL==21.0.0
