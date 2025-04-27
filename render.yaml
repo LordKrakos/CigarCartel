@@ -7,6 +7,8 @@ services:
         build-essential \
         libyaml-dev \
         libcairo2-dev \
+        libgirepository1.0-dev \
+        libgdal-dev \
         pkg-config
       pip install --upgrade pip
       pip install -r requirements.txt
