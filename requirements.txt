@@ -76,7 +76,6 @@ simplejson==3.17.6
 six==1.16.0
 SQLAlchemy==2.0.30
 sqlparse==0.5.0
-submit50==3.2.0
 tabulate==0.9.0
 termcolor==1.1.0
 typing_extensions==4.12.1
