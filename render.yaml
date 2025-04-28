@@ -18,3 +18,13 @@ services:
         value: "d^92mw-iwuco2-wsa_&g5vwir0brnbtm1@5e2nx2*rswa6^xkhpwji*40gtnoa"
       - key: GOOGLE_MAPS_API_KEY
         value: "AIzaSyA3K3GjEDh3qW6aHtfzvNz81nVIt4ILV0E"
+      - key: DB_NAME
+        value: "cigarcartel"
+      - key: DB_USER
+        value: "krakos"
+      - key: DB_PASSWORD
+        value: "vfpMITuveIwtEvIvfaVQi73v351GDlag"
+      - key: DB_HOST
+        value: "dpg-d07fk5ali9vc73f8d5lg-a"
+      - key: DB_PORT
+        value: "5432"
