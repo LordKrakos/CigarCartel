@@ -66,6 +66,7 @@ pyOpenSSL==21.0.0
 pyparsing==2.4.7
 python-dotenv==1.0.1
 python-magic==0.4.27
+python-decouple
 pytz==2022.1
 requests==2.32.3
 requests-oauthlib==2.0.0
