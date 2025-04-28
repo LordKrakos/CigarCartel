@@ -34,7 +34,6 @@ GOOGLE_MAPS_API_KEY = env('GOOGLE_MAPS_API_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "localhost",
     "419smokeshop.com",
     "www.419smokeshop.com",
     "storelocator-tt2a.onrender.com",
