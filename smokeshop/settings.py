@@ -30,9 +30,10 @@ GOOGLE_MAPS_API_KEY = env('GOOGLE_MAPS_API_KEY')
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
+    "localhost",
     "419smokeshop.com",
     "www.419smokeshop.com",
     "storelocator-tt2a.onrender.com",
@@ -89,8 +90,12 @@ WSGI_APPLICATION = 'smokeshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cigarcartel',
+        'USER': 'krakos',
+        'PASSWORD': 'codeKrakos',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -132,9 +137,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # If you have a custom static folder
-]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

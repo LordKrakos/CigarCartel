@@ -16,8 +16,9 @@ db.sqlite3
 *.sqlite3
 media/
 staticfiles/
-static/
-*.bak
+
+# Do not ignore custom static files
+!static/
 
 # Environment variables
 .env
@@ -56,8 +57,7 @@ htmlcov/
 .coverage.*
 
 # Migrations
-migrations/
-*/migrations/*.py
+# Ignore compiled migration files but keep migration scripts
 */migrations/*.pyc
 
 # Jupyter Notebook checkpoints
@@ -65,3 +65,6 @@ migrations/
 
 # Render-specific files
 render.yaml
+
+# Database dump files
+db.json
