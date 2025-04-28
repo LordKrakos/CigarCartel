@@ -34,7 +34,6 @@ GOOGLE_MAPS_API_KEY = env('GOOGLE_MAPS_API_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "localhost",
     "419smokeshop.com",
     "www.419smokeshop.com",
     "storelocator-tt2a.onrender.com",
@@ -92,11 +91,11 @@ WSGI_APPLICATION = 'smokeshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT', default='5432'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT', default='5432'),
     }
 }
 
