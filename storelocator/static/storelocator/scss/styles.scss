@@ -12,6 +12,8 @@ $light-accent-shadow: #004c9e66;
 $light-toggler: #ffcc24;
 $light-fog: #fff700;
 $light-dust: #000000;
+$light-hero-title-primary: #fff;
+$light-hero-title-secondary: #000;
 
 // Dark Color Palette
 $dark-background: #101010;
@@ -23,6 +25,8 @@ $dark-accent-shadow: #28a74566;
 $dark-toggler: #004DA0;
 $dark-fog: #00f;
 $dark-dust: #ffcc24;
+$dark-hero-title-primary: #ffcc24;
+$dark-hero-title-secondary: #000;
 
 // Theme Variables
 $themes: (
@@ -36,7 +40,9 @@ $themes: (
         accent-shadow: $light-accent-shadow,
         toggler: $light-toggler,
         fog: $light-fog,
-        dust: $light-dust
+        dust: $light-dust,
+        hero-title-primary: $light-hero-title-primary,
+        hero-title-secondary: $light-hero-title-secondary
     ),
     // Dark Theme
     dark: (
@@ -48,7 +54,9 @@ $themes: (
         accent-shadow: $dark-accent-shadow,
         toggler: $dark-toggler,
         fog: $dark-fog,
-        dust: $dark-dust
+        dust: $dark-dust,
+        hero-title-primary: $dark-hero-title-primary,
+        hero-title-secondary: $dark-hero-title-secondary
     )
 );
 
@@ -171,7 +179,7 @@ body {
         justify-content: center;
         position: fixed;
         top: 0;
-        max-height: 3.5rem;
+        max-height: 4rem;
     
         .container-fluid {
             display: flex;
@@ -189,23 +197,22 @@ body {
                 align-items: center;
                 justify-content: center;
                 width: 100%;
-                max-width: 85px;
+                max-width: 5rem;
                 height: auto;
-                border-radius: 50%;
 
                 a {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                }
-        
-                .logo {
-                    height: auto;
-                    width: 100%;
-                    object-fit: cover;
-                    background-color: #000;
-                    border: 0.35rem solid var(--card);
+                    border: 0.25rem solid var(--card);
                     border-radius: 50%;
+
+                    .logo {
+                        height: auto;
+                        width: 100%;
+                        object-fit: cover;
+                        aspect-ratio: 1;
+                    }
                 }
             }
 
@@ -260,6 +267,32 @@ body {
                     transform: translateX(2.04rem);
                 }
             }
+
+            .theme-notification {
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: var(--text);
+                font-size: 0.9rem;
+                border-left: 4px solid var(--accent);
+                padding: 12px 20px;
+                border-radius: 4px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                background-color: var(--card);
+                z-index: 1000;
+                opacity: 0;
+                transform: translateX(30px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                pointer-events: none;
+
+                .fa-circle-info {
+                    color: var(--accent);
+                    font-size: 1.1rem;
+                }
+            }
         }
     }
 
@@ -271,7 +304,7 @@ body {
         justify-content: center;
         width: 100%;
         min-height: 100%;
-        padding-top: calc(var(--header-height) + 0.5rem); // Adjust for header height
+        padding-top: var(--header-height); // Adjust for header height
     }
 
     // ----------------------

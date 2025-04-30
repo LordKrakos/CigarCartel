@@ -9,6 +9,8 @@ html[data-theme=dark][data-theme=light] {
   --toggler: #ffcc24;
   --fog: #fff700;
   --dust: #000000;
+  --hero-title-primary: #fff;
+  --hero-title-secondary: #000;
 }
 html[data-theme=light][data-theme=dark],
 html[data-theme=dark][data-theme=dark] {
@@ -21,6 +23,8 @@ html[data-theme=dark][data-theme=dark] {
   --toggler: #004DA0;
   --fog: #00f;
   --dust: #ffcc24;
+  --hero-title-primary: #ffcc24;
+  --hero-title-secondary: #000;
 }
 
 * {
@@ -104,7 +108,7 @@ body header {
   justify-content: center;
   position: fixed;
   top: 0;
-  max-height: 3.5rem;
+  max-height: 4rem;
 }
 body header .container-fluid {
   display: flex;
@@ -123,22 +127,21 @@ body header .container-fluid .logo-container {
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 85px;
+  max-width: 5rem;
   height: auto;
-  border-radius: 50%;
 }
 body header .container-fluid .logo-container a {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 0.25rem solid var(--card);
+  border-radius: 50%;
 }
-body header .container-fluid .logo-container .logo {
+body header .container-fluid .logo-container a .logo {
   height: auto;
   width: 100%;
   object-fit: cover;
-  background-color: #000;
-  border: 0.35rem solid var(--card);
-  border-radius: 50%;
+  aspect-ratio: 1;
 }
 body header .container-fluid .theme-toggle-label {
   position: relative;
@@ -182,6 +185,30 @@ body header .container-fluid .theme-toggle-label .theme-toggle {
 body header .container-fluid .theme-toggle-label .theme-toggle:checked ~ .slider {
   transform: translateX(2.04rem);
 }
+body header .container-fluid .theme-notification {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-size: 0.9rem;
+  border-left: 4px solid var(--accent);
+  padding: 12px 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: var(--card);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+body header .container-fluid .theme-notification .fa-circle-info {
+  color: var(--accent);
+  font-size: 1.1rem;
+}
 body main {
   display: flex;
   flex-direction: column;
@@ -189,7 +216,7 @@ body main {
   justify-content: center;
   width: 100%;
   min-height: 100%;
-  padding-top: calc(var(--header-height) + 0.5rem);
+  padding-top: var(--header-height);
 }
 body footer {
   border-top: 1px solid var(--border);

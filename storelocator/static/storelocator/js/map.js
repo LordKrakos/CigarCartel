@@ -45,28 +45,33 @@ function stepZoomWithCallback(targetZoom, delay = 150, callback) {
 }
 
 function openInfoWindow(marker) {
-    const store = marker.storeData;
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const directionsUrl = isMobile
-        ? `https://maps.apple.com/?daddr=${store.latitude},${store.longitude}&dirflg=d` // Apple Maps for mobile
-        : `https://www.google.com/maps/dir/?api=1&destination=${store.latitude},${store.longitude}`; // Google Maps for desktop
+    if (currentInfoWindow) {
+        currentInfoWindow.close();
+    }
+    setTimeout(() => {
+        const store = marker.storeData;
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const directionsUrl = isMobile
+            ? `https://maps.apple.com/?daddr=${store.latitude},${store.longitude}&dirflg=d`
+            : `https://www.google.com/maps/dir/?api=1&destination=${store.latitude},${store.longitude}`;
 
-    const contentString = `
-        <div class="info-window">
-            <h3>${store.name}</h3>
-            <p class="info-address">${store.address}</p>
-            <p class="info-city">${store["city__name"]}, ${store.city__state__abbreviation} ${store.zip_code}</p>
-            <p class="info-phone"><b>Phone:</b> ${store.phone_number}</p>
-            <p class="info-email"><b>Email:</b> ${store.email}</p>
-            <p class="info-hours"><b>Hours:</b> 8:00 AM - 1:00 AM</p>
-            <a href="${directionsUrl}" target="_blank" class="get-directions">Get Directions</a>
-        </div>
-    `;
+        const contentString = `
+            <div class="info-window fade-in">
+                <h3>${store.name}</h3>
+                <p class="info-address">${store.address}</p>
+                <p class="info-city">${store["city__name"]}, ${store.city__state__abbreviation} ${store.zip_code}</p>
+                <p class="info-phone"><b>Phone:</b> ${store.phone_number}</p>
+                <p class="info-email"><b>Email:</b> ${store.email}</p>
+                <p class="info-hours"><b>Hours:</b> 8:00 AM - 1:00 AM</p>
+                <a href="${directionsUrl}" target="_blank" class="get-directions">Get Directions</a>
+            </div>
+        `;
 
-    // Create and open the new info window.
-    currentInfoWindow = new google.maps.InfoWindow({ content: contentString });
-    currentInfoWindow.open(map, marker);
+        currentInfoWindow = new google.maps.InfoWindow({ content: contentString });
+        currentInfoWindow.open(map, marker);
+    }, 150); // brief pause
 }
+
 
 function zoomToStore(storeId) {
 

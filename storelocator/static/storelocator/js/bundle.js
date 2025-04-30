@@ -76296,6 +76296,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // Global variables for scene and materials
 var scene, goldMaterial;
+var scrollY = 0;
 
 // --------------------
 // Age Verification Modal
@@ -76315,6 +76316,14 @@ document.addEventListener('DOMContentLoaded', function () {
       window.location.href = 'https://www.google.com';
     });
   }
+});
+var timeout;
+window.addEventListener('scroll', function () {
+  document.body.classList.add('scrolling');
+  clearTimeout(timeout);
+  timeout = setTimeout(function () {
+    document.body.classList.remove('scrolling');
+  }, 100);
 });
 
 // --------------------
@@ -76340,11 +76349,28 @@ function updateSceneTheme() {
 function initializeThemeToggle() {
   var themeToggleCheckbox = document.getElementById("theme-toggle");
   var root = document.documentElement;
+  var notification = document.getElementById("theme-notification");
+  var notificationText = document.getElementById("notification-text");
   if (themeToggleCheckbox) {
     var setTheme = function setTheme(theme) {
       root.setAttribute("data-theme", theme);
       localStorage.setItem("theme", theme);
       updateSceneTheme();
+
+      // Show theme notification
+      if (notification && notificationText) {
+        notificationText.textContent = "Theme changed to ".concat(theme, " mode");
+        notification.style.opacity = "1";
+        notification.style.transform = "translateX(0)";
+        notification.style.pointerEvents = "auto";
+
+        // Hide notification after 3 seconds
+        setTimeout(function () {
+          notification.style.opacity = "0";
+          notification.style.transform = "translateX(30px)";
+          notification.style.pointerEvents = "none";
+        }, 3000);
+      }
     };
     var savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
@@ -76387,6 +76413,53 @@ function createGoldTexture() {
   return new three__WEBPACK_IMPORTED_MODULE_0__.CanvasTexture(canvas);
 }
 
+// Thumbnail gallery functionality
+document.addEventListener('DOMContentLoaded', function () {
+  var thumbnails = document.querySelectorAll('.cigar-thumbnail');
+  var featuredImage = document.querySelector('.featured-cigar');
+
+  // Store original featured image for reset
+  var originalFeatured = featuredImage ? featuredImage.src : '';
+  if (thumbnails.length > 0 && featuredImage) {
+    // Function to handle thumbnail selection
+    var selectThumbnail = function selectThumbnail(thumbnail) {
+      // Remove active class from all thumbnails
+      thumbnails.forEach(function (t) {
+        return t.classList.remove('active');
+      });
+
+      // Add active class to clicked thumbnail
+      thumbnail.classList.add('active');
+
+      // Swap images with animation
+      featuredImage.style.opacity = '0';
+      setTimeout(function () {
+        featuredImage.src = thumbnail.src;
+        featuredImage.style.opacity = '1';
+      }, 300);
+    }; // Click event for thumbnails
+    thumbnails.forEach(function (thumbnail) {
+      thumbnail.addEventListener('click', function () {
+        selectThumbnail(this);
+      });
+
+      // Keyboard accessibility
+      thumbnail.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectThumbnail(this);
+        }
+      });
+    });
+
+    // Preload images for smoother transitions
+    thumbnails.forEach(function (thumbnail) {
+      var img = new Image();
+      img.src = thumbnail.src;
+    });
+  }
+});
+
 // --------------------
 // Initialize Hero Section
 // --------------------
@@ -76398,11 +76471,11 @@ function initHeroSection() {
   }
   if (!three__WEBPACK_IMPORTED_MODULE_1__.WebGLRenderer) {
     console.error("WebGL is not supported in this browser.");
-    hero.innerHTML = "<p>Your browser does not support WebGL. Please update your browser or enable WebGL.</p>";
+    hero.innerHTML = "<p>We're sorry, but your browser doesn't support the full 3D experience on this page. Please update your browser or switch devices to enjoy our full features!</p>";
     return;
   }
   var isMobile = window.innerWidth < 768;
-  var goldCount = isMobile ? 3000 : 8000; // Increased particle count for both mobile and desktop devices
+  var goldCount = isMobile ? 1500 : 5000; // Increased particle count for both mobile and desktop devices
 
   var width = hero.clientWidth;
   var height = hero.clientHeight;
@@ -76482,7 +76555,10 @@ function initHeroSection() {
       if (goldArray[_i + 2] > 20) goldArray[_i + 2] = -20;
       if (goldArray[_i + 2] < -20) goldArray[_i + 2] = 20;
     }
-    goldParticles.geometry.attributes.position.needsUpdate = true;
+    if (renderer.info.render.frame % 2 === 0) {
+      // Only update positions every 2 frames (saves a lot)
+      goldParticles.geometry.attributes.position.needsUpdate = true;
+    }
     scene.rotation.y += delta * 0.03;
     renderer.render(scene, camera);
   }
@@ -76560,18 +76636,19 @@ function stepZoomWithCallback(targetZoom) {
   }, delay);
 }
 function openInfoWindow(marker) {
-  var store = marker.storeData;
-  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  var directionsUrl = isMobile ? "https://maps.apple.com/?daddr=".concat(store.latitude, ",").concat(store.longitude, "&dirflg=d") // Apple Maps for mobile
-  : "https://www.google.com/maps/dir/?api=1&destination=".concat(store.latitude, ",").concat(store.longitude); // Google Maps for desktop
-
-  var contentString = "\n        <div class=\"info-window\">\n            <h3>".concat(store.name, "</h3>\n            <p class=\"info-address\">").concat(store.address, "</p>\n            <p class=\"info-city\">").concat(store["city__name"], ", ").concat(store.city__state__abbreviation, " ").concat(store.zip_code, "</p>\n            <p class=\"info-phone\"><b>Phone:</b> ").concat(store.phone_number, "</p>\n            <p class=\"info-email\"><b>Email:</b> ").concat(store.email, "</p>\n            <p class=\"info-hours\"><b>Hours:</b> 8:00 AM - 1:00 AM</p>\n            <a href=\"").concat(directionsUrl, "\" target=\"_blank\" class=\"get-directions\">Get Directions</a>\n        </div>\n    ");
-
-  // Create and open the new info window.
-  currentInfoWindow = new google.maps.InfoWindow({
-    content: contentString
-  });
-  currentInfoWindow.open(map, marker);
+  if (currentInfoWindow) {
+    currentInfoWindow.close();
+  }
+  setTimeout(function () {
+    var store = marker.storeData;
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    var directionsUrl = isMobile ? "https://maps.apple.com/?daddr=".concat(store.latitude, ",").concat(store.longitude, "&dirflg=d") : "https://www.google.com/maps/dir/?api=1&destination=".concat(store.latitude, ",").concat(store.longitude);
+    var contentString = "\n            <div class=\"info-window fade-in\">\n                <h3>".concat(store.name, "</h3>\n                <p class=\"info-address\">").concat(store.address, "</p>\n                <p class=\"info-city\">").concat(store["city__name"], ", ").concat(store.city__state__abbreviation, " ").concat(store.zip_code, "</p>\n                <p class=\"info-phone\"><b>Phone:</b> ").concat(store.phone_number, "</p>\n                <p class=\"info-email\"><b>Email:</b> ").concat(store.email, "</p>\n                <p class=\"info-hours\"><b>Hours:</b> 8:00 AM - 1:00 AM</p>\n                <a href=\"").concat(directionsUrl, "\" target=\"_blank\" class=\"get-directions\">Get Directions</a>\n            </div>\n        ");
+    currentInfoWindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    currentInfoWindow.open(map, marker);
+  }, 150); // brief pause
 }
 function zoomToStore(storeId) {
   // Close any existing info window immediately.

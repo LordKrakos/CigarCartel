@@ -2,6 +2,8 @@ import * as THREE from 'three';
 
 // Global variables for scene and materials
 let scene, goldMaterial;
+let scrollY = 0;
+
 
 // --------------------
 // Age Verification Modal
@@ -24,6 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'https://www.google.com';
         });
     }
+});
+
+let timeout;
+window.addEventListener('scroll', () => {
+    document.body.classList.add('scrolling');
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        document.body.classList.remove('scrolling');
+    }, 100);
 });
 
 // --------------------
@@ -52,12 +63,29 @@ function updateSceneTheme() {
 function initializeThemeToggle() {
     const themeToggleCheckbox = document.getElementById("theme-toggle");
     const root = document.documentElement;
+    const notification = document.getElementById("theme-notification");
+    const notificationText = document.getElementById("notification-text");
 
     if (themeToggleCheckbox) {
         const setTheme = (theme) => {
             root.setAttribute("data-theme", theme);
             localStorage.setItem("theme", theme);
             updateSceneTheme();
+
+            // Show theme notification
+            if (notification && notificationText) {
+                notificationText.textContent = `Theme changed to ${theme} mode`;
+                notification.style.opacity = "1";
+                notification.style.transform = "translateX(0)";
+                notification.style.pointerEvents = "auto";
+
+                // Hide notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.opacity = "0";
+                    notification.style.transform = "translateX(30px)";
+                    notification.style.pointerEvents = "none";
+                }, 3000);
+            }
         };
 
         const savedTheme = localStorage.getItem("theme") || "light";
@@ -104,6 +132,54 @@ function createGoldTexture() {
     return new THREE.CanvasTexture(canvas);
 }
 
+// Thumbnail gallery functionality
+document.addEventListener('DOMContentLoaded', function () {
+    const thumbnails = document.querySelectorAll('.cigar-thumbnail');
+    const featuredImage = document.querySelector('.featured-cigar');
+
+    // Store original featured image for reset
+    const originalFeatured = featuredImage ? featuredImage.src : '';
+
+    if (thumbnails.length > 0 && featuredImage) {
+        // Function to handle thumbnail selection
+        function selectThumbnail(thumbnail) {
+            // Remove active class from all thumbnails
+            thumbnails.forEach(t => t.classList.remove('active'));
+
+            // Add active class to clicked thumbnail
+            thumbnail.classList.add('active');
+
+            // Swap images with animation
+            featuredImage.style.opacity = '0';
+            setTimeout(() => {
+                featuredImage.src = thumbnail.src;
+                featuredImage.style.opacity = '1';
+            }, 300);
+        }
+
+        // Click event for thumbnails
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function () {
+                selectThumbnail(this);
+            });
+
+            // Keyboard accessibility
+            thumbnail.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    selectThumbnail(this);
+                }
+            });
+        });
+
+        // Preload images for smoother transitions
+        thumbnails.forEach(thumbnail => {
+            const img = new Image();
+            img.src = thumbnail.src;
+        });
+    }
+});
+
 // --------------------
 // Initialize Hero Section
 // --------------------
@@ -116,12 +192,12 @@ function initHeroSection() {
 
     if (!THREE.WebGLRenderer) {
         console.error("WebGL is not supported in this browser.");
-        hero.innerHTML = "<p>Your browser does not support WebGL. Please update your browser or enable WebGL.</p>";
+        hero.innerHTML = "<p>We're sorry, but your browser doesn't support the full 3D experience on this page. Please update your browser or switch devices to enjoy our full features!</p>";
         return;
     }
 
     const isMobile = window.innerWidth < 768;
-    const goldCount = isMobile ? 3000 : 8000; // Increased particle count for both mobile and desktop devices
+    const goldCount = isMobile ? 1500 : 5000; // Increased particle count for both mobile and desktop devices
 
     const width = hero.clientWidth;
     const height = hero.clientHeight;
@@ -203,8 +279,12 @@ function initHeroSection() {
             if (goldArray[i + 1] < 0) goldArray[i + 1] = 30;
             if (goldArray[i + 2] > 20) goldArray[i + 2] = -20;
             if (goldArray[i + 2] < -20) goldArray[i + 2] = 20;
+
         }
-        goldParticles.geometry.attributes.position.needsUpdate = true;
+        if (renderer.info.render.frame % 2 === 0) { 
+            // Only update positions every 2 frames (saves a lot)
+            goldParticles.geometry.attributes.position.needsUpdate = true;
+        }
         scene.rotation.y += delta * 0.03;
         renderer.render(scene, camera);
     }
@@ -226,3 +306,4 @@ function initHeroSection() {
 }
 
 document.addEventListener('DOMContentLoaded', initHeroSection);
+    

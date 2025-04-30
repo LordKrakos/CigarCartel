@@ -9,39 +9,122 @@
 
 <main>
 
-    <section id="hero" role="region" aria-label="Hero section with animated particles">
-        <div class="hero-content">
+    <section id="hero" role="region" aria-label="Welcome to Cigar Cartel Store Locator">
+        
+        <canvas aria-hidden="true"></canvas>
+    
+        <div class="hero-container">
+            <div class="hero-content">
+        
+                <div class="hero-text">
+                    <!-- Logo -->
+                    <img
+                        src="{% static 'storelocator/images/logo.svg' %}"
+                        alt="Cigar Cartel Logo"
+                        class="brand-logo"
+                    />
+                    
+                    <h1 class="hero-title">
+                        Cigar Cartel
+                    </h1>
+                    
+                    <!-- Mobile cigar image (shows only on mobile) -->
+                    <img
+                        src="{% static 'storelocator/images/mobile1.jpg' %}"
+                        alt="Premium cigar selection"
+                        class="mobile-cigar"
+                    />
             
-            <h1 class="hero-title">
-                Thank you for visiting <span class="company-name">Cigar Cartel</span>
-            </h1>
-    
-            <ul>
-                <li>
-                    All of our walk-in humidors are located inside your local 419 Smoke Shop, across Central Florida.
-                </li>
-                <li>
-                    Each humidor offers 200 hand-picked cigars, curated by our certified in-house sommelier, Steven Riviera.
-                </li>
-                <li>
-                    We feature all major cigar brands, from local favorites to exclusive, hard-to-find selections.
-                </li>
-                <li>
-                    Freshness and excellent pricing are our pride—stop by and see for yourself!
-                </li>
-            </ul>
-    
-            <footer id="hero-footer">
-                <p>
-                    Find a store near you
-                </p>
-                <a href="#address-form" aria-label="Scroll to address form">
-                    <i class="arrow fa-solid fa-arrow-down"></i>
-                </a>
-            </footer>
-    
+                    <ul>
+                        <li>
+                            All of our walk-in humidors are located inside your local 419 Smoke Shop, across Central Florida.
+                        </li>
+                        <li>
+                            Each humidor offers 200 hand-picked cigars, curated by our certified in-house sommelier, Steven Riviera.
+                        </li>
+                        <li>
+                            We feature all major cigar brands, from local favorites to exclusive, hard-to-find selections.
+                        </li>
+                        <li>
+                            Freshness and excellent pricing are our pride—stop by and see for yourself!
+                        </li>
+                    </ul>
+                    
+                    <!-- Cigar divider -->
+                    <div class="cigar-divider" aria-hidden="true">
+                        <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
+        
+                            <line
+                                x1="10" y1="15"
+                                x2="290" y2="15">
+                            </line>
+        
+                            <circle
+                                cx="150" cy="15" r="10">
+                            </circle>
+                            
+                            <circle
+                                cx="150" cy="15" r="5">
+                            </circle>
+        
+                        </svg>
+                    </div>
+            
+                    <footer id="hero-footer">
+        
+                        <p>
+                            Find a store near you
+                        </p>
+                        <a href="#address-form" aria-label="Scroll to address form" id="scroll-down" class="pulse">
+                            <i class="arrow fa-solid fa-arrow-down"></i>
+                        </a>
+        
+                    </footer>
+        
+                </div>
+                
+                <!-- Desktop cigar images (shows only on desktop) -->
+                <div class="hero-images">
+        
+                    <!-- Featured cigar image - Replace with your own image -->
+                    <img
+                        src="{% static 'storelocator/images/variety1.jpg' %}"
+                        alt="Premium cigar selection"
+                        class="featured-cigar"
+                    />
+                    
+                    <!-- Cigar thumbnails - Replace with your own images -->
+                    <div class="cigar-thumbnails">
+        
+                        <img
+                            src="{% static 'storelocator/images/variety1.jpg' %}"
+                            alt="Cigar variety 1"
+                            class="cigar-thumbnail active"
+                            tabindex="0"
+                        />
+        
+                        <img
+                            src="{% static 'storelocator/images/variety2.jpg' %}"
+                            alt="Cigar variety 2"
+                            class="cigar-thumbnail"
+                            tabindex="0"
+                        />
+        
+                        <img
+                            src="{% static 'storelocator/images/variety3.jpg' %}"
+                            alt="Cigar variety 3"
+                            class="cigar-thumbnail"
+                            tabindex="0"
+                        />
+        
+                    </div>
+        
+                </div>
+        
+            </div>
         </div>
     </section>
+    
 
     <!-- Address Lookup Form -->
     <form id="address-form" role="search" data-url="{% url 'storelocator:index' %}" method="get">

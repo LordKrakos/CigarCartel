@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 
-<html data-theme="light" lang="en">
+<html data-theme="dark" lang="en">
 
     <head>
         <!-- Meta tags -->
@@ -77,7 +77,7 @@
                     <a href="{% url 'storelocator:index' %}">
                         <img
                             class="logo"
-                            src="{% static 'storelocator/images/logo.png' %}"
+                            src="{% static 'storelocator/images/logo.svg' %}"
                             alt="Cigar Cartel Logo"
                         />
                     </a>
@@ -97,6 +97,11 @@
 
                     <i class="fas fa-moon"></i>
                 </label>
+
+                <div id="theme-notification" class="theme-notification">
+                    <i class="fas fa-circle-info"></i>
+                    <span id="notification-text"></span>
+                </div>
 
             </div>
         </header>
