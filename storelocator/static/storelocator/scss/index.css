@@ -1,7 +1,13 @@
 @charset "UTF-8";
+.no-animations * {
+  animation: none !important;
+  transition: none !important;
+}
+
 #hero {
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -10,22 +16,20 @@
   background: var(--background);
 }
 #hero canvas {
-  position: fixed; /* Changed from fixed */
+  position: fixed;
   top: 0;
   width: 100%;
-  height: 100vh !important;
+  height: 100dvh !important;
   object-fit: cover;
-  z-index: 1;
 }
 #hero .hero-container {
-  position: relative;
   width: 100%;
-  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  z-index: 1;
 }
 #hero .hero-container .hero-content {
   display: flex;
@@ -34,7 +38,7 @@
   justify-content: center;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  gap: 2rem;
 }
 #hero .hero-container .hero-content .hero-text {
   display: flex;
@@ -61,20 +65,14 @@
 }
 #hero .hero-container .hero-content .hero-text .hero-title {
   width: 100%;
-  background: linear-gradient(0deg, var(--hero-title-primary), var(--hero-title-secondary) 70%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text; /* Non‑WebKit browsers */
-  color: transparent; /* fallback */
-  margin: 0 0 1rem 0;
-  font-size: clamp(2rem, 2vw, 5rem);
-  font-weight: 400;
-  font-family: "Playfair Display", serif;
-  text-align: center;
-  filter: drop-shadow(0.045rem 0.045rem 0.045rem var(--dust));
   position: relative;
-  display: inline-block;
-  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: clamp(1.67rem, 1.6vw, 3rem);
+  font-weight: 400;
 }
 #hero .hero-container .hero-content .hero-text .hero-title::after {
   content: "";
@@ -88,6 +86,16 @@
   transform-origin: center;
   animation: expandLine 1.5s ease-out forwards 0.5s;
 }
+#hero .hero-container .hero-content .hero-text .hero-title .company-name {
+  background: linear-gradient(0deg, var(--hero-title-primary), var(--hero-title-secondary) 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* Non‑WebKit browsers */
+  color: transparent; /* fallback */
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  filter: drop-shadow(0.045rem 0.045rem 0.045rem var(--dust));
+}
 #hero .hero-container .hero-content .hero-text .mobile-cigar {
   width: 100%;
   max-width: 300px;
@@ -96,9 +104,8 @@
   border-radius: 12px;
   box-shadow: 0px 0px 20px 1px var(--accent-shadow);
   border: 1px solid var(--border);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: var(--card);
   padding: 10px;
-  transition: var(--transition);
   object-fit: cover;
   aspect-ratio: 4/3;
 }
@@ -118,14 +125,12 @@
   margin: 0;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   position: relative;
-  transform: translateY(20px);
   line-height: 1.4;
 }
 #hero .hero-container .hero-content .hero-text .cigar-divider {
   width: 100%;
   max-width: 380px;
   height: 3rem;
-  margin: 2.2rem auto 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,8 +167,26 @@
   animation: bounce 1.5s infinite;
   color: var(--accent);
 }
-#hero .hero-container .hero-content .hero-images {
+#hero .hero-container .hero-content .images-and-deals {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+#hero .hero-container .hero-content .images-and-deals .hero-images {
   display: none;
+}
+#hero .hero-container .hero-content .images-and-deals .carousel {
+  width: 100%;
+  max-width: 600px;
+}
+#hero .hero-container .hero-content .images-and-deals .carousel-item img {
+  width: 100%;
+  border-radius: 0.9rem;
+  object-fit: cover;
+  aspect-ratio: 16/9;
 }
 
 #address-form {
@@ -203,12 +226,11 @@
 }
 #address-form button {
   background-color: var(--accent);
-  color: var(--text);
   border: none;
   padding: 0.6rem 0.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
-  font-size: clamp(0.72rem, 1vw, 1rem);
+  font-size: clamp(0.85rem, 1vw, 1rem);
   transition: background-color 0.3s;
 }
 #address-form button:hover {
@@ -268,7 +290,7 @@
   cursor: pointer;
 }
 .finder-layout .store-list .card:hover {
-  transform: translateX(-1px) translateY(-1px);
+  transform: translateX(-2px) translateY(-2px);
   box-shadow: 0.3rem 0.3rem 1rem var(--accent-shadow);
 }
 .finder-layout .store-list .card img {
@@ -295,11 +317,13 @@
 }
 .finder-layout .store-list .card button {
   margin: 0 16px 0 0;
-  will-change: background;
-  transition: background 0.2s ease;
+  border: none;
+  will-change: box-shadow;
+  transition: box-shadow 0.4s ease;
+  background: var(--accent);
 }
 .finder-layout .store-list .card button:hover {
-  background: #00e658;
+  box-shadow: 0.2rem 0.2rem 0.3rem var(--accent-shadow);
 }
 .finder-layout .map-container {
   position: sticky !important;
@@ -307,8 +331,8 @@
   order: 1;
   width: 100%;
   max-width: 500px;
-  min-height: 23rem;
-  max-height: 500px;
+  min-height: 22.5rem;
+  max-height: 400px;
   margin-bottom: 1rem;
   background: var(--border);
   border-radius: 0.6rem;
@@ -321,36 +345,42 @@
 
 @media (min-width: 992px) {
   .hero-container {
-    height: 100vh;
+    height: 100dvh;
   }
-  .hero-content {
+  .hero-container .hero-content {
     display: flex !important;
     flex-direction: row !important;
     align-items: center;
+    gap: 2rem;
   }
-  .hero-content .hero-text {
+  .hero-container .hero-content .hero-text {
     flex: 3;
     align-items: flex-start !important;
     text-align: left;
   }
-  .hero-content .hero-text .brand-logo {
+  .hero-container .hero-content .hero-text .brand-logo {
     display: block !important;
     max-width: 8rem;
     height: auto;
     border-radius: 50%;
-    transition: var(--transition);
     box-shadow: 0 0 12px 3px rgba(255, 204, 36, 0.2431372549);
   }
-  .hero-content .hero-text ul {
+  .hero-container .hero-content .hero-text ul {
     padding: 0 0 0 0.65rem !important;
   }
-  .hero-content .hero-text .mobile-cigar {
+  .hero-container .hero-content .hero-text .mobile-cigar {
     display: none;
   }
-  .hero-content .hero-text .cigar-divider {
+  .hero-container .hero-content .hero-text .cigar-divider {
     margin: 10px 0;
   }
-  .hero-images {
+  .hero-container .images-and-deals {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-container .hero-images {
     display: flex !important;
     flex-direction: column;
     flex: 2;
@@ -358,7 +388,7 @@
     align-items: center;
     justify-content: center;
   }
-  .hero-images .featured-cigar {
+  .hero-container .hero-images .featured-cigar {
     width: 100%;
     max-width: 400px;
     height: auto;
@@ -374,18 +404,18 @@
     border-color: var(--accent);
     box-shadow: 0 15px 40px var(--accent-shadow);
   }
-  .hero-images .featured-cigar:focus {
+  .hero-container .hero-images .featured-cigar:focus {
     outline: 2px solid var(--accent) !important;
     outline-offset: 3px !important;
   }
-  .hero-images .cigar-thumbnails {
+  .hero-container .hero-images .cigar-thumbnails {
     display: flex;
     gap: 15px;
     justify-content: center;
     animation: fadeIn 1s ease-out 0.8s forwards;
     opacity: 0;
   }
-  .hero-images .cigar-thumbnails .cigar-thumbnail {
+  .hero-container .hero-images .cigar-thumbnails .cigar-thumbnail {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -396,14 +426,14 @@
     background-color: rgba(0, 0, 0, 0.4);
     padding: 5px;
   }
-  .hero-images .cigar-thumbnails .cigar-thumbnail.active {
+  .hero-container .hero-images .cigar-thumbnails .cigar-thumbnail.active {
     border-color: var(--accent);
     box-shadow: 0 0 15px var(--accent-shadow);
   }
-  .hero-images .cigar-thumbnails .cigar-thumbnail:hover {
+  .hero-container .hero-images .cigar-thumbnails .cigar-thumbnail:hover {
     transform: translateY(-5px);
   }
-  .hero-images .cigar-thumbnails .cigar-thumbnail:focus {
+  .hero-container .hero-images .cigar-thumbnails .cigar-thumbnail:focus {
     outline: 2px solid var(--accent) !important;
     outline-offset: 3px !important;
   }

@@ -12,14 +12,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const ageModal = document.getElementById('age-modal');
     const ageYes = document.getElementById('ageYes');
     const ageNo = document.getElementById('ageNo');
+    const pageContent = document.getElementById('page-content'); // Reference to the page content
 
     if (ageModal) {
         ageModal.style.display = 'flex';
         document.body.classList.add('modal-active');
 
+        // Add the 'no-animations' class to pause animations
+        if (pageContent) {
+            pageContent.classList.add('no-animations');
+        }
+
         ageYes?.addEventListener('click', () => {
             ageModal.style.display = 'none';
             document.body.classList.remove('modal-active');
+
+            // Remove the 'no-animations' class to enable animations
+            if (pageContent) {
+                pageContent.classList.remove('no-animations');
+            }
         });
 
         ageNo?.addEventListener('click', () => {

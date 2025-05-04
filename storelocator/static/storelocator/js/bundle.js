@@ -76305,12 +76305,24 @@ document.addEventListener('DOMContentLoaded', function () {
   var ageModal = document.getElementById('age-modal');
   var ageYes = document.getElementById('ageYes');
   var ageNo = document.getElementById('ageNo');
+  var pageContent = document.getElementById('page-content'); // Reference to the page content
+
   if (ageModal) {
     ageModal.style.display = 'flex';
     document.body.classList.add('modal-active');
+
+    // Add the 'no-animations' class to pause animations
+    if (pageContent) {
+      pageContent.classList.add('no-animations');
+    }
     ageYes === null || ageYes === void 0 || ageYes.addEventListener('click', function () {
       ageModal.style.display = 'none';
       document.body.classList.remove('modal-active');
+
+      // Remove the 'no-animations' class to enable animations
+      if (pageContent) {
+        pageContent.classList.remove('no-animations');
+      }
     });
     ageNo === null || ageNo === void 0 || ageNo.addEventListener('click', function () {
       window.location.href = 'https://www.google.com';

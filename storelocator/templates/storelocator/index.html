@@ -7,7 +7,7 @@
 
 {% block body %}
 
-<main>
+<main id="page-content" class="no-animations">
 
     <section id="hero" role="region" aria-label="Welcome to Cigar Cartel Store Locator">
         
@@ -25,7 +25,7 @@
                     />
                     
                     <h1 class="hero-title">
-                        Cigar Cartel
+                        Thanks for visiting <span class="company-name">Cigar Cartel</span>
                     </h1>
                     
                     <!-- Mobile cigar image (shows only on mobile) -->
@@ -37,16 +37,16 @@
             
                     <ul>
                         <li>
-                            All of our walk-in humidors are located inside your local 419 Smoke Shop, across Central Florida.
+                            You'll find our exceptional walk-in humidors conveniently located within your local 419 Smoke Shops across Central Florida.
                         </li>
                         <li>
-                            Each humidor offers 200 hand-picked cigars, curated by our certified in-house sommelier, Steven Riviera.
+                            Each humidor is stocked with a wide array of popular brands and those sought-after, hard-to-find cigars.
                         </li>
                         <li>
-                            We feature all major cigar brands, from local favorites to exclusive, hard-to-find selections.
+                            Beyond selection, we're committed to providing you with the freshest cigars at the best possible prices.
                         </li>
                         <li>
-                            Freshness and excellent pricing are our pride—stop by and see for yourself!
+                            We also offer a comprehensive selection of torches, butane, cutters, and ashtrays, all priced affordably.
                         </li>
                     </ul>
                     
@@ -54,18 +54,11 @@
                     <div class="cigar-divider" aria-hidden="true">
                         <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
         
-                            <line
-                                x1="10" y1="15"
-                                x2="290" y2="15">
-                            </line>
+                            <line x1="10" y1="15" x2="290" y2="15"></line>
         
-                            <circle
-                                cx="150" cy="15" r="10">
-                            </circle>
+                            <circle cx="150" cy="15" r="10"></circle>
                             
-                            <circle
-                                cx="150" cy="15" r="5">
-                            </circle>
+                            <circle cx="150" cy="15" r="5"></circle>
         
                         </svg>
                     </div>
@@ -73,7 +66,7 @@
                     <footer id="hero-footer">
         
                         <p>
-                            Find a store near you
+                            Find your nearest location below
                         </p>
                         <a href="#address-form" aria-label="Scroll to address form" id="scroll-down" class="pulse">
                             <i class="arrow fa-solid fa-arrow-down"></i>
@@ -83,46 +76,118 @@
         
                 </div>
                 
-                <!-- Desktop cigar images (shows only on desktop) -->
-                <div class="hero-images">
-        
-                    <!-- Featured cigar image - Replace with your own image -->
-                    <img
-                        src="{% static 'storelocator/images/variety1.jpg' %}"
-                        alt="Premium cigar selection"
-                        class="featured-cigar"
-                    />
-                    
-                    <!-- Cigar thumbnails - Replace with your own images -->
-                    <div class="cigar-thumbnails">
-        
+                <div class="images-and-deals">
+
+                    <!-- Desktop cigar images (shows only on desktop) -->
+                    <div class="hero-images">
+            
+                        <!-- Featured cigar image - Replace with your own image -->
                         <img
                             src="{% static 'storelocator/images/variety1.jpg' %}"
-                            alt="Cigar variety 1"
-                            class="cigar-thumbnail active"
-                            tabindex="0"
+                            alt="Premium cigar selection"
+                            class="featured-cigar"
                         />
-        
-                        <img
-                            src="{% static 'storelocator/images/variety2.jpg' %}"
-                            alt="Cigar variety 2"
-                            class="cigar-thumbnail"
-                            tabindex="0"
-                        />
-        
-                        <img
-                            src="{% static 'storelocator/images/variety3.jpg' %}"
-                            alt="Cigar variety 3"
-                            class="cigar-thumbnail"
-                            tabindex="0"
-                        />
-        
+                        
+                        <!-- Cigar thumbnails - Replace with your own images -->
+                        <div class="cigar-thumbnails">
+            
+                            <img
+                                src="{% static 'storelocator/images/variety1.jpg' %}"
+                                alt="Cigar variety 1"
+                                class="cigar-thumbnail active"
+                                tabindex="0"
+                            />
+            
+                            <img
+                                src="{% static 'storelocator/images/variety2.jpg' %}"
+                                alt="Cigar variety 2"
+                                class="cigar-thumbnail"
+                                tabindex="0"
+                            />
+            
+                            <img
+                                src="{% static 'storelocator/images/variety3.jpg' %}"
+                                alt="Cigar variety 3"
+                                class="cigar-thumbnail"
+                                tabindex="0"
+                            />
+            
+                        </div>
+            
                     </div>
-        
+
+                    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+
+                        <div class="carousel-inner deals">
+
+                            <div class="carousel-item active">
+                                <img
+                                    src="{% static 'storelocator/images/birthday.png' %}"
+                                    alt="Birthday Treat Discount"
+                                />
+                            </div>
+
+                            <div class="carousel-item">
+                                <img
+                                    src="{% static 'storelocator/images/veterans.png' %}"
+                                    alt="Veterans Discount"
+                                />
+                            </div>
+
+                            <div class="carousel-item">
+                                <img
+                                    src="{% static 'storelocator/images/hero.png' %}"
+                                    alt="First Responders Discount"
+                                />
+                            </div>
+
+                            <div class="carousel-item">
+                                <img
+                                    src="{% static 'storelocator/images/disney.png' %}"
+                                    alt="First Responders Discount"
+                                />
+                            </div>
+
+                            <div class="carousel-item">
+                                <img
+                                    src="{% static 'storelocator/images/golf.png' %}"
+                                    alt="First Responders Discount"
+                                />
+                            </div>
+
+                            <div class="carousel-item">
+                                <img
+                                    src="{% static 'storelocator/images/wedding.png' %}"
+                                    alt="First Responders Discount"
+                                />
+                            </div>
+
+                            <div class="carousel-item">
+                                <img
+                                    src="{% static 'storelocator/images/newborn.png' %}"
+                                    alt="First Responders Discount"
+                                />
+                            </div>
+
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+
+                    </div>
+
                 </div>
         
             </div>
         </div>
+
     </section>
     
 
@@ -239,6 +304,11 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=geometry,marker&callback=initMap&vweekly"
         defer>
+    </script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js"
+        integrity="sha384-VQqxDN0EQCkWoxt/0vsQvZswzTHUVOImccYmSyhJTp7kGtPed0Qcx8rK9h9YEgx+"
+        crossorigin="anonymous">
     </script>
 {% endblock %}
 
