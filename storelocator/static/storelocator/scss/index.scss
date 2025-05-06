@@ -202,13 +202,21 @@
                 .carousel {
                     width: 100%;
                     max-width: 600px;
-                }
 
-                .carousel-item img {
-                    width: 100%;
-                    border-radius: 0.9rem;
-                    object-fit: cover;
-                    aspect-ratio: 16 / 9;
+                    .carousel-inner {
+                        border-radius: 0.9rem;
+
+                        .carousel-item {
+                            border-radius: 0.9rem;
+
+                            img {
+                                width: 100%;
+                                border-radius: 0.9rem;
+                                object-fit: cover;
+                                aspect-ratio: 16 / 9;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -405,7 +413,7 @@
 @media (min-width: 992px) {
 
     .hero-container{
-        height: 100dvh;
+        min-height: 100vh;
 
         .hero-content {
             display: flex !important;

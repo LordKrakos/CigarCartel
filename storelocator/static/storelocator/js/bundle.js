@@ -76296,7 +76296,6 @@ __webpack_require__.r(__webpack_exports__);
 
 // Global variables for scene and materials
 var scene, goldMaterial;
-var scrollY = 0;
 
 // --------------------
 // Age Verification Modal
@@ -76328,14 +76327,6 @@ document.addEventListener('DOMContentLoaded', function () {
       window.location.href = 'https://www.google.com';
     });
   }
-});
-var timeout;
-window.addEventListener('scroll', function () {
-  document.body.classList.add('scrolling');
-  clearTimeout(timeout);
-  timeout = setTimeout(function () {
-    document.body.classList.remove('scrolling');
-  }, 100);
 });
 
 // --------------------

@@ -182,7 +182,13 @@
   width: 100%;
   max-width: 600px;
 }
-#hero .hero-container .hero-content .images-and-deals .carousel-item img {
+#hero .hero-container .hero-content .images-and-deals .carousel .carousel-inner {
+  border-radius: 0.9rem;
+}
+#hero .hero-container .hero-content .images-and-deals .carousel .carousel-inner .carousel-item {
+  border-radius: 0.9rem;
+}
+#hero .hero-container .hero-content .images-and-deals .carousel .carousel-inner .carousel-item img {
   width: 100%;
   border-radius: 0.9rem;
   object-fit: cover;
@@ -345,7 +351,7 @@
 
 @media (min-width: 992px) {
   .hero-container {
-    height: 100dvh;
+    min-height: 100vh;
   }
   .hero-container .hero-content {
     display: flex !important;

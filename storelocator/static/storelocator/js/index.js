@@ -2,7 +2,6 @@ import * as THREE from 'three';
 
 // Global variables for scene and materials
 let scene, goldMaterial;
-let scrollY = 0;
 
 
 // --------------------
@@ -37,15 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'https://www.google.com';
         });
     }
-});
-
-let timeout;
-window.addEventListener('scroll', () => {
-    document.body.classList.add('scrolling');
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-        document.body.classList.remove('scrolling');
-    }, 100);
 });
 
 // --------------------
