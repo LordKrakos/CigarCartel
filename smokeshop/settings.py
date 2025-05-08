@@ -30,10 +30,9 @@ GOOGLE_MAPS_API_KEY = env('GOOGLE_MAPS_API_KEY')
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    "localhost",
     "419smokeshop.com",
     "www.419smokeshop.com",
     "storelocator-tt2a.onrender.com",

@@ -1,7 +1,6 @@
 import json
 from django import forms
 from django.http import JsonResponse
-from django.urls import reverse
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render
 from geopy.geocoders import GoogleV3

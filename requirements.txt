@@ -9,7 +9,6 @@ charset-normalizer==3.4.0
 click==8.1.7
 colorama==0.4.4
 cryptography==3.4.8
-cs50==9.3.4
 distro==1.7.0
 Django==5.1.6
 django-environ==0.12.0

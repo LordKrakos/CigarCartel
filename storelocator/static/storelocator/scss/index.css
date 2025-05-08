@@ -91,7 +91,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text; /* Non‑WebKit browsers */
-  color: transparent; /* fallback */
+  color: #000; /* fallback */
   margin: 0;
   font-family: "Playfair Display", serif;
   filter: drop-shadow(0.045rem 0.045rem 0.045rem var(--dust));
@@ -156,11 +156,10 @@
   border: none;
   text-decoration: none;
   background: transparent;
-  animation-delay: 0.8s;
 }
 #hero .hero-container .hero-content .hero-text #hero-footer p {
-  font-size: clamp(1.1rem, 1vw, 1.5rem);
   margin: 0;
+  font-size: clamp(1.1rem, 1vw, 1.5rem);
 }
 #hero .hero-container .hero-content .hero-text #hero-footer .arrow {
   font-size: clamp(1.5rem, 1vw, 2rem);
