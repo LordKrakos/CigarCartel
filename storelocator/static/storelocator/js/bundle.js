@@ -76328,6 +76328,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+document.addEventListener("DOMContentLoaded", function () {
+  var navbar = document.querySelector(".navbar");
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 50) {
+      // adjust threshold if needed
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+});
 
 // --------------------
 // Theme Toggle Functionality

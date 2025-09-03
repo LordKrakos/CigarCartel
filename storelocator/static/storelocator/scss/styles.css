@@ -1,6 +1,7 @@
 html[data-theme=light][data-theme=light],
 html[data-theme=dark][data-theme=light] {
   --background: #dedcdc;
+  --header: rgba(255, 255, 255, 0.7019607843);
   --text: #000;
   --card: #fff;
   --border: #e0e0e0;
@@ -15,11 +16,12 @@ html[data-theme=dark][data-theme=light] {
 html[data-theme=light][data-theme=dark],
 html[data-theme=dark][data-theme=dark] {
   --background: #101010;
+  --header: rgba(0, 0, 0, 0.7019607843);
   --text: #f1f1f1;
   --card: #000;
   --border: #001D3D;
   --accent: #28a745;
-  --accent-shadow: rgba(40, 167, 69, 0.4);
+  --accent-shadow: rgba(40, 167, 69, 0.2117647059);
   --toggler: #004DA0;
   --fog: #00f;
   --dust: #ffcc24;
@@ -40,10 +42,6 @@ body.modal-active {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   color: var(--text);
   width: 100%;
   font-family: "Roboto", sans-serif;
@@ -93,7 +91,6 @@ body #age-modal .modal-content .modal-footer .btn {
   will-change: transition;
   transition: background-color 0.3s;
 }
-body header,
 body footer {
   color: var(--text);
   width: 100%;
@@ -103,47 +100,82 @@ body footer {
   filter: drop-shadow(0 0.1rem 0.2rem var(--border));
 }
 body header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  max-height: 4rem;
+  width: 100%;
+  height: 5rem;
 }
-body header .container-fluid {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0;
-  max-width: min(100%, 1440px);
+body header .navbar {
+  height: var(--header-height);
   padding: 0;
+  background-color: transparent;
+  transition: background-color 0.7s ease;
+}
+body header .navbar.scrolled {
+  background-color: var(--header);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+body header .navbar .container-fluid {
+  max-width: 1500px;
   /* Custom theme toggler using Font Awesome icons */
 }
-body header .container-fluid .logo-container {
-  position: relative;
-  top: 1rem;
-  left: 0;
+body header .navbar .container-fluid .logo-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 4rem;
   max-width: 5rem;
-  height: auto;
 }
-body header .container-fluid .logo-container a {
+body header .navbar .container-fluid .logo-container a {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0.25rem solid var(--card);
   border-radius: 50%;
 }
-body header .container-fluid .logo-container a .logo {
+body header .navbar .container-fluid .logo-container a .logo {
   height: auto;
   width: 100%;
   object-fit: cover;
   aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: 0 0 6px 2px rgba(255, 204, 36, 0.2431372549);
 }
-body header .container-fluid .theme-toggle-label {
+body header .navbar .container-fluid .navbar-toggler:not(:focus-visible) {
+  outline: 1px solid var(--text);
+}
+body header .navbar .container-fluid .navbar-toggler:focus {
+  box-shadow: none;
+}
+body header .navbar .container-fluid .offcanvas {
+  color: var(--text);
+  height: 100vh;
+  background-color: var(--header);
+}
+body header .navbar .container-fluid .offcanvas .offcanvas-header {
+  border-bottom: 0.1rem solid var(--accent);
+  background-color: var(--background);
+}
+body header .navbar .container-fluid .offcanvas .offcanvas-header .btn-close {
+  filter: drop-shadow(0 0 0.1rem var(--text));
+}
+body header .navbar .container-fluid .offcanvas .offcanvas-body {
+  backdrop-filter: blur(6px);
+}
+body header .navbar .container-fluid .offcanvas .offcanvas-body .nav-link {
+  transition: color 0.3s;
+}
+body header .navbar .container-fluid .offcanvas .offcanvas-body .nav-link:hover {
+  color: var(--accent);
+}
+body header .navbar .container-fluid .offcanvas a {
+  color: var(--text);
+}
+body header .navbar .container-fluid .offcanvas .locations-toggle {
+  margin-bottom: 0.5rem;
+}
+body header .navbar .container-fluid .offcanvas .locations-list {
+  margin-bottom: 1rem;
+}
+body header .navbar .container-fluid .theme-toggle-label {
   position: relative;
   display: flex;
   align-items: center;
@@ -157,17 +189,17 @@ body header .container-fluid .theme-toggle-label {
   cursor: pointer;
   filter: drop-shadow(0 0 0.1rem var(--toggler));
 }
-body header .container-fluid .theme-toggle-label .fa-sun,
-body header .container-fluid .theme-toggle-label .fa-moon {
+body header .navbar .container-fluid .theme-toggle-label .fa-sun,
+body header .navbar .container-fluid .theme-toggle-label .fa-moon {
   font-size: 0.8rem;
 }
-body header .container-fluid .theme-toggle-label .fa-sun {
+body header .navbar .container-fluid .theme-toggle-label .fa-sun {
   color: #FFCC24; /* Sun color */
 }
-body header .container-fluid .theme-toggle-label .fa-moon {
+body header .navbar .container-fluid .theme-toggle-label .fa-moon {
   color: #004da0; /* Moon color */
 }
-body header .container-fluid .theme-toggle-label .slider {
+body header .navbar .container-fluid .theme-toggle-label .slider {
   position: absolute;
   top: 17%;
   left: 7%;
@@ -178,14 +210,14 @@ body header .container-fluid .theme-toggle-label .slider {
   transition: transform 0.3s ease;
   z-index: 2;
 }
-body header .container-fluid .theme-toggle-label .theme-toggle {
+body header .navbar .container-fluid .theme-toggle-label .theme-toggle {
   position: absolute;
   opacity: 0;
 }
-body header .container-fluid .theme-toggle-label .theme-toggle:checked ~ .slider {
+body header .navbar .container-fluid .theme-toggle-label .theme-toggle:checked ~ .slider {
   transform: translateX(2.04rem);
 }
-body header .container-fluid .theme-notification {
+body header .navbar .container-fluid .theme-notification {
   position: fixed;
   top: 80px;
   right: 20px;
@@ -205,7 +237,7 @@ body header .container-fluid .theme-notification {
   transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
 }
-body header .container-fluid .theme-notification .fa-circle-info {
+body header .navbar .container-fluid .theme-notification .fa-circle-info {
   color: var(--accent);
   font-size: 1.1rem;
 }
@@ -216,7 +248,6 @@ body main {
   justify-content: center;
   width: 100%;
   min-height: 100dvh;
-  padding-top: var(--header-height);
 }
 body footer {
   border-top: 1px solid var(--border);
