@@ -4,7 +4,74 @@
   transition: none !important;
 }
 
+.parallax-image-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+.parallax-image-container .para-image {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 #hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7rem;
+  width: 100%;
+  height: 100vh;
+}
+#hero .brand-logo {
+  display: block !important;
+  width: 37%;
+  height: auto;
+  border-radius: 50%;
+}
+#hero #hero-nav {
+  width: 70%;
+  max-width: 800px;
+  font-weight: bold;
+  border-radius: 2rem;
+  background-color: #000;
+}
+#hero #hero-nav .hero-nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-radius: 2rem;
+  box-shadow: inset 4px 2px 10px rgba(255, 255, 255, 0.3411764706);
+}
+#hero #hero-nav .hero-nav-links li {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+#hero #hero-nav .hero-nav-links li a {
+  color: #fff;
+  width: 100%;
+  display: block;
+  padding: 1rem;
+  font-size: 1.3rem;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+#hero #hero-nav .hero-nav-links li a:hover {
+  color: var(--accent);
+}
+
+#about {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -13,25 +80,17 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: var(--background);
+  background-color: var(--background);
 }
-#hero canvas {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100dvh !important;
-  object-fit: cover;
-}
-#hero .hero-container {
+#about .about-container {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  z-index: 1;
 }
-#hero .hero-container .hero-content {
+#about .about-container .about-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,7 +99,7 @@
   max-width: 1200px;
   gap: 2rem;
 }
-#hero .hero-container .hero-content .hero-text {
+#about .about-container .about-content .about-text {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,16 +113,13 @@
   border: 1px solid var(--border);
   box-shadow: 0 0 0.4rem var(--accent-shadow);
 }
-#hero .hero-container .hero-content .hero-text .brand-logo {
-  display: none;
-}
-#hero .hero-container .hero-content .hero-text ul,
-#hero .hero-container .hero-content .hero-text .hero-title,
-#hero .hero-container .hero-content .hero-text .scroll-link {
+#about .about-container .about-content .about-text ul,
+#about .about-container .about-content .about-text .about-title,
+#about .about-container .about-content .about-text .scroll-link {
   opacity: 0; /* start hidden */
   animation: fadeInUp 1s ease-out forwards;
 }
-#hero .hero-container .hero-content .hero-text .hero-title {
+#about .about-container .about-content .about-text .about-title {
   width: 100%;
   position: relative;
   display: flex;
@@ -74,7 +130,7 @@
   font-size: clamp(1.67rem, 1.6vw, 3rem);
   font-weight: 400;
 }
-#hero .hero-container .hero-content .hero-text .hero-title::after {
+#about .about-container .about-content .about-text .about-title::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -86,16 +142,17 @@
   transform-origin: center;
   animation: expandLine 1.5s ease-out forwards 0.5s;
 }
-#hero .hero-container .hero-content .hero-text .hero-title .company-name {
+#about .about-container .about-content .about-text .about-title .company-name {
   background: linear-gradient(0deg, var(--hero-title-primary), var(--hero-title-secondary) 70%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text; /* Non‑WebKit browsers */
   color: #000; /* fallback */
   margin: 0;
+  font-family: "Lobster", sans-serif;
   filter: drop-shadow(0.045rem 0.045rem 0.045rem var(--dust));
 }
-#hero .hero-container .hero-content .hero-text .mobile-cigar {
+#about .about-container .about-content .about-text .mobile-cigar {
   width: 100%;
   max-width: 300px;
   height: auto;
@@ -108,7 +165,7 @@
   object-fit: cover;
   aspect-ratio: 4/3;
 }
-#hero .hero-container .hero-content .hero-text ul {
+#about .about-container .about-content .about-text ul {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -119,32 +176,31 @@
   list-style: none;
   animation-delay: 0.5s;
 }
-#hero .hero-container .hero-content .hero-text ul li {
+#about .about-container .about-content .about-text ul li {
   color: var(--text);
   margin: 0;
   font-size: clamp(0.9rem, 2vw, 1.1rem);
   position: relative;
   line-height: 1.4;
 }
-#hero .hero-container .hero-content .hero-text .cigar-divider {
+#about .about-container .about-content .about-text .cigar-divider {
   width: 100%;
-  max-width: 380px;
   height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.7;
 }
-#hero .hero-container .hero-content .hero-text .cigar-divider line {
+#about .about-container .about-content .about-text .cigar-divider line {
   stroke: var(--dust);
   stroke-width: 1;
   stroke-dasharray: 1, 3;
 }
-#hero .hero-container .hero-content .hero-text .cigar-divider circle {
+#about .about-container .about-content .about-text .cigar-divider circle {
   fill: var(--accent-shadow);
   opacity: 0.5;
 }
-#hero .hero-container .hero-content .hero-text #hero-footer {
+#about .about-container .about-content .about-text #about-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -156,16 +212,16 @@
   text-decoration: none;
   background: transparent;
 }
-#hero .hero-container .hero-content .hero-text #hero-footer p {
+#about .about-container .about-content .about-text #about-footer p {
   margin: 0;
   font-size: clamp(1.1rem, 1vw, 1.5rem);
 }
-#hero .hero-container .hero-content .hero-text #hero-footer .arrow {
+#about .about-container .about-content .about-text #about-footer .arrow {
   font-size: clamp(1.5rem, 1vw, 2rem);
   animation: bounce 1.5s infinite;
   color: var(--accent);
 }
-#hero .hero-container .hero-content .images-and-deals {
+#about .about-container .about-content .images-and-deals {
   display: flex;
   flex: 2;
   flex-direction: column;
@@ -173,20 +229,20 @@
   justify-content: center;
   gap: 2rem;
 }
-#hero .hero-container .hero-content .images-and-deals .hero-images {
+#about .about-container .about-content .images-and-deals .about-images {
   display: none;
 }
-#hero .hero-container .hero-content .images-and-deals .carousel {
+#about .about-container .about-content .images-and-deals .carousel {
   width: 100%;
   max-width: 600px;
 }
-#hero .hero-container .hero-content .images-and-deals .carousel .carousel-inner {
+#about .about-container .about-content .images-and-deals .carousel .carousel-inner {
   border-radius: 0.9rem;
 }
-#hero .hero-container .hero-content .images-and-deals .carousel .carousel-inner .carousel-item {
+#about .about-container .about-content .images-and-deals .carousel .carousel-inner .carousel-item {
   border-radius: 0.9rem;
 }
-#hero .hero-container .hero-content .images-and-deals .carousel .carousel-inner .carousel-item img {
+#about .about-container .about-content .images-and-deals .carousel .carousel-inner .carousel-item img {
   width: 100%;
   border-radius: 0.9rem;
   object-fit: cover;
@@ -276,7 +332,6 @@
   width: 100%;
   height: 100%;
   padding: 0.7rem 3% 3%;
-  z-index: 2;
 }
 .finder-layout .store-list {
   order: 2;
@@ -348,43 +403,36 @@
 }
 
 @media (min-width: 992px) {
-  .hero-container {
+  .about-container {
     min-height: 100vh;
   }
-  .hero-container .hero-content {
+  .about-container .about-content {
     display: flex !important;
     flex-direction: row !important;
     align-items: center;
     gap: 2rem;
   }
-  .hero-container .hero-content .hero-text {
+  .about-container .about-content .about-text {
     flex: 3;
     align-items: flex-start !important;
     text-align: left;
   }
-  .hero-container .hero-content .hero-text .brand-logo {
-    display: block !important;
-    max-width: 8rem;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 0 12px 3px rgba(255, 204, 36, 0.2431372549);
-  }
-  .hero-container .hero-content .hero-text ul {
+  .about-container .about-content .about-text ul {
     padding: 0 0 0 0.65rem !important;
   }
-  .hero-container .hero-content .hero-text .mobile-cigar {
+  .about-container .about-content .about-text .mobile-cigar {
     display: none;
   }
-  .hero-container .hero-content .hero-text .cigar-divider {
+  .about-container .about-content .about-text .cigar-divider {
     margin: 10px 0;
   }
-  .hero-container .images-and-deals {
+  .about-container .images-and-deals {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
   }
-  .hero-container .hero-images {
+  .about-container .about-images {
     display: flex !important;
     flex-direction: column;
     flex: 2;
@@ -392,7 +440,7 @@
     align-items: center;
     justify-content: center;
   }
-  .hero-container .hero-images .featured-cigar {
+  .about-container .about-images .featured-cigar {
     width: 100%;
     max-width: 400px;
     height: auto;
@@ -408,18 +456,18 @@
     border-color: var(--accent);
     box-shadow: 0 15px 40px var(--accent-shadow);
   }
-  .hero-container .hero-images .featured-cigar:focus {
+  .about-container .about-images .featured-cigar:focus {
     outline: 2px solid var(--accent) !important;
     outline-offset: 3px !important;
   }
-  .hero-container .hero-images .cigar-thumbnails {
+  .about-container .about-images .cigar-thumbnails {
     display: flex;
     gap: 15px;
     justify-content: center;
     animation: fadeIn 1s ease-out 0.8s forwards;
     opacity: 0;
   }
-  .hero-container .hero-images .cigar-thumbnails .cigar-thumbnail {
+  .about-container .about-images .cigar-thumbnails .cigar-thumbnail {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -430,14 +478,14 @@
     background-color: rgba(0, 0, 0, 0.4);
     padding: 5px;
   }
-  .hero-container .hero-images .cigar-thumbnails .cigar-thumbnail.active {
+  .about-container .about-images .cigar-thumbnails .cigar-thumbnail.active {
     border-color: var(--accent);
     box-shadow: 0 0 15px var(--accent-shadow);
   }
-  .hero-container .hero-images .cigar-thumbnails .cigar-thumbnail:hover {
+  .about-container .about-images .cigar-thumbnails .cigar-thumbnail:hover {
     transform: translateY(-5px);
   }
-  .hero-container .hero-images .cigar-thumbnails .cigar-thumbnail:focus {
+  .about-container .about-images .cigar-thumbnails .cigar-thumbnail:focus {
     outline: 2px solid var(--accent) !important;
     outline-offset: 3px !important;
   }

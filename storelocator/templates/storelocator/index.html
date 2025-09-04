@@ -9,23 +9,50 @@
 
 <main id="page-content" class="no-animations">
 
-    <section id="hero" role="region" aria-label="Welcome to Cigar Cartel Store Locator">
-        
-        <canvas aria-hidden="true"></canvas>
-    
-        <div class="hero-container">
-            <div class="hero-content">
-        
-                <div class="hero-text">
-                    <!-- Logo -->
-                    <img
-                        src="{% static 'storelocator/images/logo.svg' %}"
-                        alt="Cigar Cartel Logo"
-                        class="brand-logo"
-                    />
-                    
-                    <h1 class="hero-title">
-                        Thanks for visiting <span class="company-name">Cigar Cartel</span>
+    <div class="parallax-image-container">
+        <img src="https://t4.ftcdn.net/jpg/01/71/13/85/240_F_171138532_HIf9rVIYyMbdPlpIfcK6scPtBWJp0OX7.jpg" alt="Hero Image" class="para-image" />
+    </div>
+
+    <section id="hero">
+
+        <!-- Logo -->
+        <img
+            src="{% static 'storelocator/images/logo.svg' %}"
+            alt="Cigar Cartel Logo"
+            class="brand-logo"
+        />
+
+        <nav id="hero-nav" role="navigation" aria-label="Main navigation">
+            <ul class="hero-nav-links">
+
+                <li>
+                    <a href="#about">About</a>
+                </li>
+
+                <li>
+                    <a href="#locations">Locations</a>
+                </li>
+
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+
+            </ul>
+        </nav>
+
+    </section>
+
+    <section id="about" role="region" aria-label="Welcome to Cigar Cartel Store Locator">
+        <div class="about-container">
+            <div class="about-content">
+
+                <div class="about-text">
+
+                    <h1 class="about-title">
+                        Thanks for visiting
+                        <span class="company-name">
+                            Cigar Cartel
+                        </span>
                     </h1>
                     
                     <!-- Mobile cigar image (shows only on mobile) -->
@@ -63,7 +90,7 @@
                         </svg>
                     </div>
             
-                    <footer id="hero-footer">
+                    <footer id="about-footer">
                         
                         <p>
                             Find your nearest location below
@@ -80,8 +107,8 @@
                 <div class="images-and-deals">
 
                     <!-- Desktop cigar images (shows only on desktop) -->
-                    <div class="hero-images">
-            
+                    <div class="about-images">
+
                         <!-- Featured cigar image - Replace with your own image -->
                         <img
                             src="{% static 'storelocator/images/variety1.jpg' %}"
@@ -188,7 +215,6 @@
         
             </div>
         </div>
-
     </section>
     
 

@@ -34,7 +34,7 @@ html[data-theme=dark][data-theme=dark] {
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  scroll-padding: calc(var(--header-height) + 1.7rem) 0 0 0;
+  scroll-padding: calc(var(--header-height)) 0 0 0;
 }
 
 body.modal-active {
@@ -54,7 +54,7 @@ body #age-modal {
   background: var(--background);
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 2000;
 }
 body #age-modal .modal-content {
   color: var(--text);
@@ -90,6 +90,14 @@ body #age-modal .modal-content .modal-footer .btn {
   font-size: clamp(0.8rem, 1vw, 1rem);
   will-change: transition;
   transition: background-color 0.3s;
+}
+body .hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
 }
 body footer {
   color: var(--text);
