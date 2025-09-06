@@ -16,7 +16,7 @@ class AddressSearchForm(forms.Form):
         widget=forms.TextInput(attrs={
             'id': 'address-input',
             'class': 'address-input',
-            'placeholder': 'Enter your address, city, state or zipcode',
+            'placeholder': 'Enter your address',
             'autocomplete': 'off',
             'aria-label': 'Search for a store'
         })
