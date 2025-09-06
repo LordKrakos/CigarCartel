@@ -64,15 +64,11 @@ def index(request):
         "city__name", "city__state__abbreviation"
     )
     stores = list(stores)
-    mid = len(stores) // 2
-    left_stores = stores[:mid]
-    right_stores = stores[mid:]
     stores_json = json.dumps(stores, cls=DjangoJSONEncoder)
     
     context = {
         "form": form,
-        "left_stores": left_stores,
-        "right_stores": right_stores,
+        "stores": stores,
         "stores_json": stores_json,
         "closest_store": closest_store
     }

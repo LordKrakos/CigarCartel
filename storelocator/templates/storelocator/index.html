@@ -63,32 +63,26 @@
                     />
             
                     <ul>
+
                         <li>
-                            You'll find our exceptional walk-in humidors conveniently located within your local 419 Smoke Shops across Central Florida.
+                            You can find our exceptional walk-in humidors conveniently located across Central Florida, inside of your local 419 Smoke Shops.
                         </li>
+
                         <li>
-                            Each humidor is stocked with a wide array of popular brands and those sought-after, hard-to-find cigars.
+                            Each humidor is stocked with the finest cigars, featuring a wide variety of popular cigar brands, including those sought-after, hard-to-find cigars.
                         </li>
+
                         <li>
-                            Beyond selection, we're committed to providing you with the freshest cigars at the best possible prices.
+                            At Cigar Cartel, we are committed to providing you with the finest cigars at the best possible prices. We inspect and hand-pick every cigar to ensure it meets the highest standards of quality and freshness.
                         </li>
+
                         <li>
-                            We also offer a comprehensive selection of torches, butane, cutters, and ashtrays, all priced affordably.
+                            We also offer a range of cigar accessories, including cutters, ashtrays, lighters, torches, butane, and humidification solutions, to enhance your smoking experience.
                         </li>
+
                     </ul>
                     
-                    <!-- Cigar divider -->
-                    <div class="cigar-divider">
-                        <svg viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg">
-        
-                            <line x1="10" y1="15" x2="290" y2="15"></line>
-        
-                            <circle cx="150" cy="15" r="10"></circle>
-                            
-                            <circle cx="150" cy="15" r="5"></circle>
-        
-                        </svg>
-                    </div>
+                    
             
                     <footer id="about-footer">
                         
@@ -216,106 +210,66 @@
             </div>
         </div>
     </section>
-    
 
-    <!-- Address Lookup Form -->
-    <form id="address-form" role="search" data-url="{% url 'storelocator:index' %}" method="get">
-        
-        {% csrf_token %}
-        {{ form }}
+    <section id="locations" role="region" aria-label="Store locator and map">
 
-        <button class="btn btn-primary" type="submit" aria-label="Find a store">
-            Find a store
-        </button>
+        <!-- Address Lookup Form -->
+        <form id="address-form" role="search" data-url="{% url 'storelocator:index' %}" method="get">
+            
+            {% csrf_token %}
+            {{ form }}
 
-    </form>
+            <button class="btn btn-primary" type="submit" aria-label="Find a store">
+                Find a store
+            </button>
 
-    <section class="finder-layout">
+        </form>
 
-        <aside class="store-list">
-            {% for store in left_stores %}
+        <div id="map" role="region" aria-label="Store locations map" loading="lazy">
+            <!-- Google Map will be rendered here -->
+        </div>
 
-                <div class="card mb-3" onclick="zoomToStore('{{ store.id }}');">
+    </section>
 
-                    <img
-                        src="{{ store.image }}"
-                        class="card-img-top"
-                        alt="{{ store.name }}"
-                        loading="lazy"
-                    />
+    <section class="store-list" role="region" aria-label="List of store locations">
+        {% for store in stores %}
 
-                    <div class="card-body">
+            <div class="card mb-3" onclick="zoomToStore('{{ store.id }}');">
 
-                        <h5 class="card-title">{{ store.name }}</h5>
+                <img
+                    src="{{ store.image }}"
+                    class="card-img-top"
+                    alt="{{ store.name }}"
+                    loading="lazy"
+                />
 
-                        <p class="card-text street-address">
-                            {{ store.address }}
-                        </p>
+                <div class="card-body">
 
-                        <p>
-                            {{ store.city__name }}, {{ store.city__state__abbreviation }} {{ store.zip_code }}
-                        </p>
+                    <h5 class="card-title">{{ store.name }}</h5>
 
-                    </div>
+                    <p class="card-text street-address">
+                        {{ store.address }}
+                    </p>
 
-                    <p class="btn-container d-inline-flex gap-1">
-                        <button class="btn btn-primary" type="button" aria-label="directions for {{ store.name }}" onclick="getDirections('{{ store.address }}');">
-                            Get directions
-                        </button>
+                    <p>
+                        {{ store.city__name }}, {{ store.city__state__abbreviation }} {{ store.zip_code }}
                     </p>
 
                 </div>
 
-            {% empty %}
+                <p class="btn-container d-inline-flex gap-1">
+                    <button class="btn btn-primary" type="button" aria-label="directions for {{ store.name }}" onclick="getDirections('{{ store.address }}');">
+                        Get directions
+                    </button>
+                </p>
 
-                <p>No stores found.</p>
+            </div>
 
-            {% endfor %}
-        </aside>
+        {% empty %}
 
-        <div id="map" class="map-container" loading="lazy"></div>
+            <p>No stores found.</p>
 
-        <aside class="store-list">
-            {% for store in right_stores %}
-
-                <div class="card mb-3" onclick="zoomToStore('{{ store.id }}');">
-
-                    <img
-                        src="{{ store.image }}"
-                        class="card-img-top" 
-                        alt="{{ store.name }}"
-                        loading="lazy"
-                    />
-
-                    <div class="card-body">
-
-                        <h5 class="card-title">{{ store.name }}</h5>
-
-                        <p class="card-text street-address">
-                            {{ store.address }}
-                        </p>
-
-                        <p>
-                            {{ store.city__name }}, {{ store.city__state__abbreviation }} {{ store.zip_code }}
-                        </p>
-                        
-                    </div>
-
-                    <p class="btn-container d-inline-flex gap-1">
-                        <button class="btn btn-primary" type="button" aria-label="directions for {{ store.name }}" onclick="getDirections('{{ store.address }}');">
-                            Get directions
-                        </button>
-                    </p>
-
-                </div>
-
-            {% empty %}
-
-                <p>No stores found.</p>
-                
-            {% endfor %}
-        </aside>
-
+        {% endfor %}
     </section>
 
     <!-- Embed store data as JSON -->
