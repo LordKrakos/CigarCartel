@@ -1,3 +1,5 @@
+// smokeshop/storelocator/static/storelocator/js/map.js
+
 // Global variables
 let map;
 let markers = [];
@@ -28,6 +30,16 @@ function createAdvancedMarker(store, AdvancedMarkerElement, map) {
     // Store properties for later lookup.
     marker.storeId = store.id;
     marker.storeData = store;
+
+    // 🔑 Make marker clickable
+    markerContent.style.cursor = "pointer"; // Show pointer cursor
+    markerContent.addEventListener("click", () => {
+        map.setCenter(marker.position);
+        stepZoomWithCallback(19, 250, () => {
+            currentStoreId = store.id;
+            openInfoWindow(marker);
+        });
+    });
     
     return marker;
 }
@@ -54,7 +66,7 @@ function openInfoWindow(marker) {
         const directionsUrl = isMobile
             ? `https://maps.apple.com/?daddr=${store.latitude},${store.longitude}&dirflg=d`
             : `https://www.google.com/maps/dir/?api=1&destination=${store.latitude},${store.longitude}`;
-
+            
         const contentString = `
             <div class="info-window fade-in">
                 <h3>${store.name}</h3>
@@ -62,11 +74,12 @@ function openInfoWindow(marker) {
                 <p class="info-city">${store["city__name"]}, ${store.city__state__abbreviation} ${store.zip_code}</p>
                 <p class="info-phone"><b>Phone:</b> ${store.phone_number}</p>
                 <p class="info-email"><b>Email:</b> ${store.email}</p>
-                <p class="info-hours"><b>Hours:</b> 8:00 AM - 1:00 AM</p>
+                <p class="info-hours"><b>Hours:</b> ${store.opening_hour} - ${store.closing_hour} </p>
                 <a href="${directionsUrl}" target="_blank" class="get-directions">Get Directions</a>
             </div>
         `;
 
+        
         currentInfoWindow = new google.maps.InfoWindow({ content: contentString });
         currentInfoWindow.open(map, marker);
     }, 150); // brief pause
@@ -88,7 +101,7 @@ function zoomToStore(storeId) {
             stepZoomWithCallback(12, 250, function() {
                 // After zooming out, center on the new marker and zoom in.
                 map.setCenter(marker.position);
-                stepZoomWithCallback(17, 300, function() {
+                stepZoomWithCallback(19, 300, function() {
                     currentStoreId = storeId;
                     openInfoWindow(marker);
                 });
@@ -97,7 +110,7 @@ function zoomToStore(storeId) {
             // If no store is currently selected, or if the same store is selected,
             // just center on it and zoom in.
             map.setCenter(marker.position);
-            stepZoomWithCallback(17, 250, function() {
+            stepZoomWithCallback(19, 250, function() {
                 currentStoreId = storeId;
                 openInfoWindow(marker);
             });
@@ -112,7 +125,7 @@ async function initMap() {
     // Default center (adjust as needed)
     const center = { lat: 28.28562, lng: -81.63381 };
     map = new Map(document.getElementById("map"), {
-        zoom: 11,
+        zoom: 10.5,
         center: center,
         mapTypeId: "hybrid",
         mapId: "map"

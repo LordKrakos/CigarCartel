@@ -33,8 +33,13 @@ html[data-theme=dark][data-theme=dark] {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
   scroll-padding: calc(var(--header-height)) 0 0 0;
+  scrollbar-width: 0;
+  -ms-overflow-style: none;
+}
+*::-webkit-scrollbar {
+  width: 0;
 }
 
 body.modal-active {

@@ -1,8 +1,4 @@
-import * as THREE from 'three';
-
-// Global variables for scene and materials
-let scene, goldMaterial;
-
+// smokeshop/storelocator/static/storelocator/js/index.js
 
 // --------------------
 // Age Verification Modal
@@ -155,4 +151,4 @@ document.addEventListener('DOMContentLoaded', function () {
             img.src = thumbnail.src;
         });
     }
-});  
+});

@@ -26,10 +26,11 @@ class City(models.Model):
 
 class Store(models.Model):
     name = models.CharField(max_length=100)
-    image = models.URLField(blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
     email = models.EmailField(blank=True)
     address = models.CharField(max_length=200)
+    opening_hour = models.TimeField(blank=True, null=True)
+    closing_hour = models.TimeField(blank=True, null=True)
     zip_code = models.CharField(max_length=20)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)

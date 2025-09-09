@@ -1,3 +1,5 @@
+<!-- smokeshop/storelocator/templates/storelocator/index.html -->
+
 {% extends "storelocator/layout.html" %}
 {% load static %}
 
@@ -220,13 +222,40 @@
             {{ form }}
 
             <button class="btn btn-primary" type="submit" aria-label="Find a store">
-                Find a store
+                Search
             </button>
 
         </form>
 
         <div id="map" role="region" aria-label="Store locations map" loading="lazy">
             <!-- Google Map will be rendered here -->
+        </div>
+
+        <div class="list-group">
+            {% for store in stores %}
+
+                <a class="list-group-item list-group-item-action" onclick="zoomToStore('{{ store.id }}');">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ store.name }}</h5>
+                        <small>
+                            <i class="fa-regular fa-clock"></i> {{ store.opening_hour }} - {{ store.closing_hour }}
+                        </small>
+                    </div>
+
+                    <p class="mb-1">{{ store.address }}</p>
+                    <p class="mb-1">{{ store.city__name }}, {{ store.city__state__abbreviation }} {{ store.zip_code }}</p>
+
+                    <small>
+                        <i class="fa-solid fa-phone"></i> {{ store.phone_number }}
+                    </small>
+                </a>
+
+            {% empty %}
+
+                <p>No stores found.</p>
+
+            {% endfor %}
+
         </div>
 
     </section>
@@ -283,7 +312,7 @@
 {% block scripts %}
     <script src="{% static 'storelocator/js/bundle.js' %}"></script>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=geometry,marker&callback=initMap&vweekly"
+        src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=geometry,marker&callback=initMap&v=weekly"
         defer>
     </script>
 
