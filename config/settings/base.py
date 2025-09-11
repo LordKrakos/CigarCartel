@@ -10,20 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
-import environ
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-# Initialize the environment
-env = environ.Env()
-# Read variables from the .env file located at the BASE_DIR
-environ.Env.read_env(BASE_DIR / '.env')
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
-# Now you can access your environment variables:
-GOOGLE_MAPS_API_KEY = env('GOOGLE_MAPS_API_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
 
 
 # Quick-start development settings - unsuitable for production

@@ -5,9 +5,8 @@ import os
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "419smokeshop.com",
-    "www.419smokeshop.com",
-    "storelocator-tt2a.onrender.com",
+    "cigarcartel.net",
+    "www.cigarcartel.net",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
