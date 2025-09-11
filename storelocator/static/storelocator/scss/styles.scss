@@ -385,5 +385,21 @@ body {
             margin: 0;
             font-size: 0.9rem;
         }
+
+        #contact-info {
+            font-size: 2rem;
+
+            a{
+                text-decoration: none;
+
+                .fa-instagram {
+                    color: #d6249f;
+
+                    &:hover {
+                        color: #fd5949;
+                    }
+                }
+            }
+        }
     }
 }

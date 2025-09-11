@@ -9,6 +9,7 @@ from django.conf import settings
 from datetime import time
 
 from .models import Store
+from .serializers import storeSerializer
 
 
 class AddressSearchForm(forms.Form):
@@ -24,12 +25,6 @@ class AddressSearchForm(forms.Form):
     )
 
 
-def format_time(t):
-    if t:
-        return t.strftime("%I:%M %p").lstrip("0")  # "08:00 AM" → "8:00 AM"
-    return None
-
-
 def index(request):
     form = AddressSearchForm(request.GET or None)
     closest_store = None
@@ -41,7 +36,7 @@ def index(request):
         if location:
             user_coords = (location.latitude, location.longitude)
             stores_qs = Store.objects.exclude(latitude__isnull=True, longitude__isnull=True).values(
-                "id", "name", "image", "phone_number", "email",
+                "id", "name", "phone_number", "email",
                 "address", "city__state", "zip_code", "latitude", "longitude",
                 "city__name", "city__state__abbreviation", "opening_hour", "closing_hour"
             )
@@ -62,19 +57,15 @@ def index(request):
     if request.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest":
         if form.errors:
             return JsonResponse({"errors": form.errors}, status=400)
-        return JsonResponse({"closest_store": closest_store})
+        return JsonResponse({
+            "closest_store": storeSerializer(closest_store) if closest_store else None
+        })
+
     
     # Otherwise, render the full page.
-    stores = Store.objects.all().values(
-        "id", "name", "phone_number", "email",
-        "address", "city__state", "zip_code", "latitude", "longitude",
-        "city__name", "city__state__abbreviation", "opening_hour", "closing_hour"
-    )
-    stores = list(stores)
-    for store in stores:
-        store['opening_hour'] = format_time(store.get('opening_hour'))
-        store['closing_hour'] = format_time(store.get('closing_hour'))
-    stores_json = json.dumps(stores, cls=DjangoJSONEncoder)
+    stores = Store.objects.all()
+    stores_list = [storeSerializer(store) for store in stores]  # serialize each store
+    stores_json = json.dumps(stores_list, cls=DjangoJSONEncoder)
     
     context = {
         "form": form,

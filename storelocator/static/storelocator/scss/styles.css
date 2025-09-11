@@ -272,5 +272,17 @@ body footer p {
   margin: 0;
   font-size: 0.9rem;
 }
+body footer #contact-info {
+  font-size: 2rem;
+}
+body footer #contact-info a {
+  text-decoration: none;
+}
+body footer #contact-info a .fa-instagram {
+  color: #d6249f;
+}
+body footer #contact-info a .fa-instagram:hover {
+  color: #fd5949;
+}
 
 /*# sourceMappingURL=styles.css.map */

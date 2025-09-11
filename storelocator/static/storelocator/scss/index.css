@@ -84,7 +84,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   overflow: hidden;
   background-color: var(--background);
 }
@@ -103,7 +103,7 @@
   justify-content: center;
   width: 100%;
   max-width: 1200px;
-  gap: 5rem;
+  gap: 2rem;
 }
 #about .about-container .about-content .about-text {
   display: flex;
@@ -111,10 +111,10 @@
   align-items: center;
   justify-content: space-evenly;
   padding: 1rem;
-  width: 90%;
+  width: 100%;
   max-width: 600px;
   height: 100%;
-  min-height: 850px;
+  min-height: 800px;
   border-radius: 1rem;
   background: var(--card);
   box-shadow: 0 0 0.4rem var(--accent-shadow);
@@ -132,7 +132,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: clamp(2.5rem, 2vw, 3rem);
+  font-size: clamp(2.4rem, 2vw, 3rem);
   font-weight: 400;
 }
 #about .about-container .about-content .about-text .about-title .company-name {
@@ -145,19 +145,6 @@
   font-family: "Lobster", sans-serif;
   filter: drop-shadow(0.045rem 0.045rem 0.045rem var(--dust));
 }
-#about .about-container .about-content .about-text .mobile-cigar {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  margin: 0;
-  border-radius: 12px;
-  box-shadow: 0px 0px 20px 1px var(--accent-shadow);
-  border: 1px solid var(--border);
-  background-color: var(--card);
-  padding: 10px;
-  object-fit: cover;
-  aspect-ratio: 4/3;
-}
 #about .about-container .about-content .about-text ul {
   display: flex;
   flex-direction: column;
@@ -166,7 +153,7 @@
   gap: 0.7rem;
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 0.65rem;
   list-style: none;
   animation-delay: 0.5s;
 }
@@ -174,7 +161,7 @@
   content: "";
   width: 100%;
   height: 2px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   background: linear-gradient(90deg, transparent, var(--dust), transparent);
   transform: scaleX(0);
   transform-origin: center;
@@ -184,7 +171,7 @@
   content: "";
   width: 100%;
   height: 2px;
-  margin-top: 2rem;
+  margin-top: 1rem;
   background: linear-gradient(90deg, transparent, var(--dust), transparent);
   transform: scaleX(0);
   transform-origin: center;
@@ -193,7 +180,7 @@
 #about .about-container .about-content .about-text ul li {
   color: var(--text);
   margin: 0;
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-size: clamp(1rem, 2vw, 1.2rem);
   position: relative;
   line-height: 1.4;
 }
@@ -202,7 +189,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
+  gap: 1rem;
   margin: 0;
   padding: 0;
   border: none;
@@ -210,8 +197,7 @@
   background: transparent;
 }
 #about .about-container .about-content .about-text #about-footer p {
-  margin: 0;
-  font-size: clamp(1.4rem, 1vw, 1.5rem);
+  font-size: clamp(1.45rem, 1vw, 1.5rem);
 }
 #about .about-container .about-content .about-text #about-footer .arrow {
   font-size: clamp(1.7rem, 2vw, 2rem);
@@ -333,7 +319,7 @@
 #locator-map #map {
   width: 95%;
   max-width: 800px;
-  height: 500px;
+  height: 400px;
   margin-bottom: 1rem;
   background: var(--border);
   border-radius: 0.5rem 0.5rem 0 0;
@@ -348,7 +334,7 @@
   top: -32px;
   width: 95%;
   max-width: 800px;
-  max-height: 225px;
+  height: 221px;
   overflow-y: auto;
   border-radius: 0 0 0.5rem 0.5rem;
   box-shadow: 0 0 0.4rem var(--accent-shadow);
@@ -384,20 +370,25 @@
   margin: 0 !important;
 }
 #locator-map .list-group .list-group-item p {
-  font-size: clamp(0.9rem, 0.5vw, 1rem);
+  font-size: 0.9rem;
 }
 
-.store-list {
+.locations {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.5rem;
   width: 100%;
   height: 100%;
-  padding: 0.7rem 3% 3%;
+  padding: 3%;
+  background-color: var(--background);
 }
-.store-list .card {
+.locations .card {
   position: relative;
+  width: 95%;
+  max-width: 1000px;
+  height: auto;
   background: var(--card);
   border: 0.01rem solid var(--border);
   border-radius: 0.5rem;
@@ -406,44 +397,49 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
-.store-list .card:hover {
-  transform: translateX(-2px) translateY(-2px);
-  box-shadow: 0.3rem 0.3rem 1rem var(--accent-shadow);
+.locations .card .carousel-control-prev,
+.locations .card .carousel-control-next {
+  margin: 0;
+  background-color: transparent;
 }
-.store-list .card img {
+.locations .card img {
   width: 100%;
-  height: 200px;
+  height: 600px;
+  aspect-ratio: 16/9;
   object-fit: cover;
-  border-radius: 6px 6px 0 0;
+  border-radius: 6px;
 }
-.store-list .card .card-title {
+.locations .card .card-title {
+  font-size: 3rem;
   color: var(--accent);
   margin: 0;
 }
-.store-list .card p,
-.store-list .card .street-address {
+.locations .card p,
+.locations .card .street-address {
   color: var(--text);
   font-size: clamp(0.7rem, 0.5vw, 1rem);
 }
-.store-list .card .street-address {
+.locations .card .street-address {
   margin: 0;
 }
-.store-list .card .btn-container {
+.locations .card .btn-container {
   display: flex;
   justify-content: right;
 }
-.store-list .card button {
-  margin: 0 16px 0 0;
+.locations .card button {
+  margin: 0;
   border: none;
+  font-size: 1.3rem;
+  font-weight: 500;
   will-change: box-shadow;
   transition: box-shadow 0.4s ease;
   background: var(--accent);
 }
-.store-list .card button:hover {
+.locations .card button:hover {
   box-shadow: 0.2rem 0.2rem 0.3rem var(--accent-shadow);
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1260px) {
   .about-container {
     min-height: 100vh;
   }
@@ -457,6 +453,8 @@
     flex: 3;
     align-items: flex-start !important;
     text-align: left;
+    min-width: 500px !important;
+    min-height: 845px !important;
   }
   .about-container .about-content .about-text ul {
     padding: 0 0 0 0.65rem !important;
@@ -530,24 +528,8 @@
     outline: 2px solid var(--accent) !important;
     outline-offset: 3px !important;
   }
-  .finder-layout {
-    align-items: start;
-    flex-direction: row;
-    gap: 1rem;
-  }
-  .finder-layout .store-list:first-of-type {
-    order: 1;
-    width: 30%;
-  }
-  .finder-layout .map-container {
-    top: calc(var(--header-height) + 0.5rem);
-    order: 2;
-    width: 40%;
-    /* Adjust other properties if needed */
-  }
-  .finder-layout .store-list:last-of-type {
-    order: 3;
-    width: 30%;
+  #locator-map .list-group {
+    height: 233px;
   }
 }
 @keyframes expandLine {

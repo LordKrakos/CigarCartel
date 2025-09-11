@@ -11,9 +11,8 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://419smokeshop.com",
-    "https://www.419smokeshop.com",
-    "https://storelocator-tt2a.onrender.com",
+    "https://cigarcartel.net",
+    "https://www.cigarcartel.net",
 ]
 
 # Security best practices

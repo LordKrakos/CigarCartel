@@ -9,9 +9,8 @@
         <!-- Meta tags -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Find your nearest Cigar Cartel store.">
-        <meta name="keywords" content="Cigar Cartel, store locator, cigars, tobacco">
-        <meta name="author" content="Joseph Krakos Jr.">
+        <meta name="description" content="Find premium cigars at Cigar Cartel locations in Orlando, Kissimmee, Davenport, and Haines City, FL. Visit our walk-in humidors today.">
+        <meta name="author" content="Joseph Krakos Jr">
 
         <!-- Manifest -->
         <link rel="manifest" href="{% static 'storelocator/favicon/manifest.json' %}">
@@ -156,35 +155,27 @@
                             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">About</a>
+                                    <a class="nav-link" href="#about">About</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Contact</a>
+                                    <a class="nav-link" href="#locator-map">Map</a>
                                 </li>
 
-                                <li class="locations nav-item dropdown">
+                                <li class="locations-drop nav-item dropdown">
 
                                     <a class="locations-toggle nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Locations
                                     </a>
 
                                     <ul class="locations-list dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                                        {% for store in stores %}
 
-                                        <li>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                        </li>
-                                        
-                                        <li>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                        </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#{{ store.name }}">{{ store.name }}</a>
+                                            </li>
 
-                                        <li><hr class="dropdown-divider"></li>
-
-                                        <li>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </li>
-
+                                        {% endfor %}
                                     </ul>
 
                                 </li>
@@ -221,8 +212,18 @@
         {% endblock %}
 
         <footer>
-            <div class="container">
-                <p>&copy; 2025 Cigar Cartel</p>
+            <p>&copy; 2025 Cigar Cartel</p>
+
+            <div id="contact-info">
+
+                <a href="https://www.instagram.com/cigarcartelfl/" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="https://www.facebook.com/Cigarcartel/" target="_blank">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+
             </div>
         </footer>
 

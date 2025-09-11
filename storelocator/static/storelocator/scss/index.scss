@@ -94,7 +94,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     overflow: hidden;
     background-color: var(--background);
 
@@ -113,7 +113,7 @@
             justify-content: center;
             width: 100%;
             max-width: 1200px;
-            gap: 5rem;
+            gap: 2rem;
 
             .about-text {
                 display: flex;
@@ -121,10 +121,10 @@
                 align-items: center;
                 justify-content: space-evenly;
                 padding: 1rem;
-                width: 90%;
+                width: 100%;
                 max-width: 600px;
                 height: 100%;
-                min-height: 850px;
+                min-height: 800px;
                 border-radius: 1rem;
                 background: var(--card);
                 box-shadow: 0 0 0.4rem var(--accent-shadow);
@@ -143,7 +143,7 @@
                     align-items: center;
                     justify-content: center;
                     text-align: center;
-                    font-size: clamp(2.5rem, 2vw, 3rem);
+                    font-size: clamp(2.4rem, 2vw, 3rem);
                     font-weight: 400;
 
                     .company-name {
@@ -159,20 +159,6 @@
                         ;
                     }
                 }
-
-                .mobile-cigar {
-                    width: 100%;
-                    max-width: 300px;
-                    height: auto;
-                    margin: 0;
-                    border-radius: 12px;
-                    box-shadow: 0px 0px 20px 1px var(--accent-shadow);
-                    border: 1px solid var(--border);
-                    background-color: var(--card);
-                    padding: 10px;
-                    object-fit: cover;
-                    aspect-ratio: 4 / 3;
-                }
         
                 ul {
                     display: flex;
@@ -182,7 +168,7 @@
                     gap: 0.7rem;
                     height: 100%;
                     margin: 0;
-                    padding: 0;
+                    padding: 0 0 0 0.65rem;
                     list-style: none;
                     animation-delay: 0.5s;
 
@@ -190,7 +176,7 @@
                         content: '';
                         width: 100%;
                         height: 2px;
-                        margin-bottom: 2rem;
+                        margin-bottom: 1rem;
                         background: linear-gradient(90deg, transparent, var(--dust), transparent);
                         transform: scaleX(0);
                         transform-origin: center;
@@ -201,7 +187,7 @@
                         content: '';
                         width: 100%;
                         height: 2px;
-                        margin-top: 2rem;
+                        margin-top: 1rem;
                         background: linear-gradient(90deg, transparent, var(--dust), transparent);
                         transform: scaleX(0);
                         transform-origin: center;
@@ -211,7 +197,7 @@
                     li {
                         color: var(--text);
                         margin: 0;
-                        font-size: clamp(0.9rem, 2vw, 1.1rem);
+                        font-size: clamp(1rem, 2vw, 1.2rem);
                         position: relative;
                         line-height: 1.4;
                     }
@@ -222,7 +208,7 @@
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    gap: 0.3rem;
+                    gap: 1rem;
                     margin: 0;
                     padding: 0;
                     border: none;
@@ -230,8 +216,7 @@
                     background: transparent;
             
                     p {
-                        margin: 0;
-                        font-size: clamp(1.4rem, 1vw, 1.5rem);
+                        font-size: clamp(1.45rem, 1vw, 1.5rem);
                     }
 
                     .arrow {
@@ -376,7 +361,7 @@
     #map {
         width: 95%;
         max-width: 800px;
-        height: 500px;
+        height: 400px;
         margin-bottom: 1rem;
         background: var(--border);
         border-radius: 0.5rem 0.5rem 0 0;
@@ -393,7 +378,7 @@
         top: -32px;
         width: 95%;
         max-width: 800px;
-        max-height: 225px;
+        height: 221px;
         overflow-y: auto;
         border-radius: 0 0 0.5rem 0.5rem;
         box-shadow: 0 0 0.4rem var(--accent-shadow);
@@ -434,23 +419,28 @@
             }
 
             p {
-                font-size: clamp(0.9rem, 0.5vw, 1rem);
+                font-size: 0.9rem;
             }
         }
     }
 }
 
-.store-list {
+.locations {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1.5rem;
     width: 100%;
     height: 100%;
-    padding: 0.7rem 3% 3%;
+    padding: 3%;
+    background-color: var(--background);
 
     .card {
         position: relative;
+        width: 95%;
+        max-width: 1000px;
+        height: auto;
         background: var(--card);
         border: 0.01rem solid var(--border);
         border-radius: 0.5rem;
@@ -459,19 +449,22 @@
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         cursor: pointer;
 
-        &:hover {
-            transform: translateX(-2px) translateY(-2px);
-            box-shadow: 0.30rem 0.30rem 1rem var(--accent-shadow);
+        .carousel-control-prev,
+        .carousel-control-next {
+            margin: 0;
+            background-color: transparent;
         }
 
         img {
             width: 100%;
-            height: 200px;
+            height: 600px;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
-            border-radius: 6px 6px 0 0;
+            border-radius: 6px;
         }
 
         .card-title {
+            font-size: 3rem;
             color: var(--accent);
             margin: 0;
         }
@@ -492,8 +485,10 @@
         }
 
         button {
-            margin: 0 16px 0 0;
+            margin:0;
             border: none;
+            font-size: 1.3rem;
+            font-weight: 500;
             will-change: box-shadow;
             transition: box-shadow 0.4s ease;
             background: var(--accent);
@@ -511,7 +506,7 @@
 // ----------------------
   
 // For tablets/desktops (min-width: 64rem ≈ 1024px)
-@media (min-width: 992px) {
+@media (min-width: 1260px) {
 
     .about-container{
         min-height: 100vh;
@@ -526,6 +521,8 @@
                 flex: 3;
                 align-items: flex-start !important;
                 text-align: left;
+                min-width: 500px !important;
+                min-height: 845px !important;
     
                 ul {
                     padding: 0 0 0 0.65rem !important;
@@ -614,27 +611,9 @@
         }
     }
 
-    .finder-layout {
-        align-items: start;
-        flex-direction: row;
-        gap: 1rem; // adjust gap as needed
-        
-        // Assume the first ".store-list" is the left column and the second is the right.
-        .store-list:first-of-type {
-            order: 1;
-            width: 30%;
-        }
-        
-        .map-container {
-            top: calc(var(--header-height) + 0.5rem);
-            order: 2;
-            width: 40%;
-            /* Adjust other properties if needed */
-        }
-        
-        .store-list:last-of-type {
-            order: 3;
-            width: 30%;
+    #locator-map {
+        .list-group {
+            height: 233px;
         }
     }
 }

@@ -26,6 +26,9 @@ class City(models.Model):
 
 class Store(models.Model):
     name = models.CharField(max_length=100)
+    main_image = models.ImageField(upload_to="store_images/", blank=True, null=True)
+    primary_image = models.ImageField(upload_to="store_images/", blank=True, null=True)
+    secondary_image = models.ImageField(upload_to="store_images/", blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True)
     email = models.EmailField(blank=True)
     address = models.CharField(max_length=200)
