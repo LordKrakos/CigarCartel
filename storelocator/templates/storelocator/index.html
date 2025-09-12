@@ -268,15 +268,15 @@
                         <div class="carousel-inner">
 
                             <div class="carousel-item active">
-                                <img src="{{ store.main_image.url }}" class="d-block w-100" alt="Main">
+                                <img src="{{ store.main_image.url }}" class="d-block w-100" alt="Main {{ store.name }}">
                             </div>
 
                             <div class="carousel-item">
-                                <img src="{{ store.primary_image.url }}" class="d-block w-100" alt="Primary">
+                                <img src="{{ store.primary_image.url }}" class="d-block w-100" alt="Primary {{ store.name }}">
                             </div>
 
                             <div class="carousel-item">
-                                <img src="{{ store.secondary_image.url }}" class="d-block w-100" alt="Secondary">
+                                <img src="{{ store.secondary_image.url }}" class="d-block w-100" alt="Secondary {{ store.name }}">
                             </div>
 
                         </div>
@@ -319,7 +319,7 @@
     </section>
 
     <!-- Embed store data as JSON -->
-    <script type="application/json" id="stores-data">
+    <script id="stores-data" type="application/json">
         {{ stores_json|safe }}
     </script>
 

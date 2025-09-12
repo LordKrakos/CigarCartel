@@ -218,14 +218,16 @@ function stepZoomWithCallback(targetZoom) {
   }, delay);
 }
 function openInfoWindow(marker) {
+  console.log("Opening info window for:", marker.storeData);
   if (currentInfoWindow) {
     currentInfoWindow.close();
   }
   setTimeout(function () {
     var store = marker.storeData;
+    console.log("Marker data:", marker.storeData);
     var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     var directionsUrl = isMobile ? "https://maps.apple.com/?daddr=".concat(store.latitude, ",").concat(store.longitude, "&dirflg=d") : "https://www.google.com/maps/dir/?api=1&destination=".concat(store.latitude, ",").concat(store.longitude);
-    var contentString = "\n            <div class=\"info-window fade-in\">\n                <h3>".concat(store.name, "</h3>\n                <p class=\"info-address\">").concat(store.address, "</p>\n                <p class=\"info-city\">").concat(store["city__name"], ", ").concat(store.city__state__abbreviation, " ").concat(store.zip_code, "</p>\n                <p class=\"info-phone\"><b>Phone:</b> ").concat(store.phone_number, "</p>\n                <p class=\"info-email\"><b>Email:</b> ").concat(store.email, "</p>\n                <p class=\"info-hours\"><b>Hours:</b> ").concat(store.opening_hour, " - ").concat(store.closing_hour, " </p>\n                <a href=\"").concat(directionsUrl, "\" target=\"_blank\" class=\"get-directions\">Get Directions</a>\n            </div>\n        ");
+    var contentString = "\n            <div class=\"info-window fade-in\">\n                <h3>".concat(store.name, "</h3>\n                <p class=\"info-address\">").concat(store.address, "</p>\n                <p class=\"info-city\">").concat(store.city_name, ", ").concat(store.state_abbreviation, " ").concat(store.zip_code, "</p>\n                <p class=\"info-phone\"><b>Phone:</b> ").concat(store.phone_number, "</p>\n                <p class=\"info-email\"><b>Email:</b> ").concat(store.email, "</p>\n                <p class=\"info-hours\"><b>Hours:</b> ").concat(store.opening_hour, " - ").concat(store.closing_hour, " </p>\n                <a href=\"").concat(directionsUrl, "\" target=\"_blank\" class=\"get-directions\">Get Directions</a>\n            </div>\n        ");
     currentInfoWindow = new google.maps.InfoWindow({
       content: contentString
     });
@@ -296,13 +298,14 @@ function _initMap() {
 
           // Parse store data once and create markers.
           storesDataGlobal = JSON.parse(document.getElementById("stores-data").textContent);
+          console.log("Parsed storesDataGlobal:", storesDataGlobal);
           storesDataGlobal.forEach(function (store) {
             if (store.latitude && store.longitude) {
               var marker = createAdvancedMarker(store, AdvancedMarkerElement, map);
               markers.push(marker);
             }
           });
-        case 12:
+        case 13:
         case "end":
           return _context.stop();
       }

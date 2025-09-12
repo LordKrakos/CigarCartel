@@ -57,11 +57,13 @@ function stepZoomWithCallback(targetZoom, delay = 150, callback) {
 }
 
 function openInfoWindow(marker) {
+    console.log("Opening info window for:", marker.storeData);
     if (currentInfoWindow) {
         currentInfoWindow.close();
     }
     setTimeout(() => {
         const store = marker.storeData;
+        console.log("Marker data:", marker.storeData);
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const directionsUrl = isMobile
             ? `https://maps.apple.com/?daddr=${store.latitude},${store.longitude}&dirflg=d`
@@ -71,7 +73,7 @@ function openInfoWindow(marker) {
             <div class="info-window fade-in">
                 <h3>${store.name}</h3>
                 <p class="info-address">${store.address}</p>
-                <p class="info-city">${store["city__name"]}, ${store.city__state__abbreviation} ${store.zip_code}</p>
+                <p class="info-city">${store.city_name}, ${store.state_abbreviation} ${store.zip_code}</p>
                 <p class="info-phone"><b>Phone:</b> ${store.phone_number}</p>
                 <p class="info-email"><b>Email:</b> ${store.email}</p>
                 <p class="info-hours"><b>Hours:</b> ${store.opening_hour} - ${store.closing_hour} </p>
@@ -133,6 +135,7 @@ async function initMap() {
 
     // Parse store data once and create markers.
     storesDataGlobal = JSON.parse(document.getElementById("stores-data").textContent);
+    console.log("Parsed storesDataGlobal:", storesDataGlobal);
     storesDataGlobal.forEach(function(store) {
         if (store.latitude && store.longitude) {
             const marker = createAdvancedMarker(store, AdvancedMarkerElement, map);

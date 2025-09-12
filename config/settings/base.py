@@ -1,3 +1,5 @@
+# smokeshop/config/settings/base.py
+
 """
 Django settings for smokeshop project.
 
@@ -11,11 +13,18 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / ".env")  # 👈 loads smokeshop/.env
+
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env("SECRET_KEY")
+GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY")
 SECRET_KEY = os.environ.get('SECRET_KEY')
 GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
 
@@ -27,9 +36,8 @@ GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "419smokeshop.com",
-    "www.419smokeshop.com",
-    "storelocator-tt2a.onrender.com",
+    "cigarcartel.net",
+    "www.cigarcartel.net",
 ]
 
 # Application definition
@@ -87,7 +95,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 
 # Password validation

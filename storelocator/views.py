@@ -30,24 +30,29 @@ def index(request):
     closest_store = None
 
     if form.is_valid() and form.cleaned_data.get('address'):
+
         address = form.cleaned_data['address']
         geolocator = GoogleV3(api_key=settings.GOOGLE_MAPS_API_KEY)
         location = geolocator.geocode(address)
+
         if location:
+
             user_coords = (location.latitude, location.longitude)
-            stores_qs = Store.objects.exclude(latitude__isnull=True, longitude__isnull=True).values(
-                "id", "name", "phone_number", "email",
-                "address", "city__state", "zip_code", "latitude", "longitude",
-                "city__name", "city__state__abbreviation", "opening_hour", "closing_hour"
-            )
+            stores_qs = Store.objects.exclude(latitude__isnull=True, longitude__isnull=True)
             min_distance = float("inf")
+
             for store in stores_qs:
+
+                storeSerializer(store)
+
                 try:
-                    store_coords = (float(store['latitude']), float(store['longitude']))
+                    store_coords = (float(store.latitude), float(store.longitude))
                 except (TypeError, ValueError):
                     continue
+
                 curr_distance = geopy_distance(user_coords, store_coords).meters
                 if curr_distance < min_distance:
+
                     min_distance = curr_distance
                     closest_store = store
         else:
@@ -61,16 +66,15 @@ def index(request):
             "closest_store": storeSerializer(closest_store) if closest_store else None
         })
 
-    
     # Otherwise, render the full page.
     stores = Store.objects.all()
     stores_list = [storeSerializer(store) for store in stores]  # serialize each store
     stores_json = json.dumps(stores_list, cls=DjangoJSONEncoder)
-    
+
     context = {
         "form": form,
         "stores": stores,
         "stores_json": stores_json,
-        "closest_store": closest_store
+        "closest_store": storeSerializer(closest_store) if closest_store else None,
     }
     return render(request, "storelocator/index.html", context)

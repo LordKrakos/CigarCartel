@@ -1,4 +1,4 @@
-# config/settings/dev.py
+# smokeshop/config/settings/dev.py
 
 from .base import *
 
@@ -8,14 +8,6 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1"
 ]
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 # Example: Enable Django Debug Toolbar if you want
 # INSTALLED_APPS += ["debug_toolbar"]
