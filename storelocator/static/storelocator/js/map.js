@@ -57,13 +57,11 @@ function stepZoomWithCallback(targetZoom, delay = 150, callback) {
 }
 
 function openInfoWindow(marker) {
-    console.log("Opening info window for:", marker.storeData);
     if (currentInfoWindow) {
         currentInfoWindow.close();
     }
     setTimeout(() => {
         const store = marker.storeData;
-        console.log("Marker data:", marker.storeData);
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const directionsUrl = isMobile
             ? `https://maps.apple.com/?daddr=${store.latitude},${store.longitude}&dirflg=d`
