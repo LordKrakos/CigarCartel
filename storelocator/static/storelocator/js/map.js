@@ -133,7 +133,6 @@ async function initMap() {
 
     // Parse store data once and create markers.
     storesDataGlobal = JSON.parse(document.getElementById("stores-data").textContent);
-    console.log("Parsed storesDataGlobal:", storesDataGlobal);
     storesDataGlobal.forEach(function(store) {
         if (store.latitude && store.longitude) {
             const marker = createAdvancedMarker(store, AdvancedMarkerElement, map);

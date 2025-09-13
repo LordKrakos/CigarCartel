@@ -296,14 +296,13 @@ function _initMap() {
 
           // Parse store data once and create markers.
           storesDataGlobal = JSON.parse(document.getElementById("stores-data").textContent);
-          console.log("Parsed storesDataGlobal:", storesDataGlobal);
           storesDataGlobal.forEach(function (store) {
             if (store.latitude && store.longitude) {
               var marker = createAdvancedMarker(store, AdvancedMarkerElement, map);
               markers.push(marker);
             }
           });
-        case 13:
+        case 12:
         case "end":
           return _context.stop();
       }
