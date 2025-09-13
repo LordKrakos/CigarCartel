@@ -5,6 +5,8 @@ from .base import *
 # Disable debug mode in production
 DEBUG = False
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # Allowed hosts for your domain
 ALLOWED_HOSTS = [
     "cigarcartel.net",
