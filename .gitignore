@@ -14,6 +14,7 @@ db.sqlite3
 *.pot
 *.py[co]
 *.sqlite3
+media/
 staticfiles/
 
 # Do not ignore custom static files
