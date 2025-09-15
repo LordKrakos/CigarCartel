@@ -104,7 +104,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 1rem;
+        padding: 1rem 0.5rem;
 
         .about-content {
             display: flex;
@@ -124,7 +124,7 @@
                 width: 100%;
                 max-width: 600px;
                 height: 100%;
-                min-height: 800px;
+                min-height: 770px;
                 border-radius: 1rem;
                 background: var(--card);
                 box-shadow: 0 0 0.4rem var(--accent-shadow);
@@ -143,7 +143,7 @@
                     align-items: center;
                     justify-content: center;
                     text-align: center;
-                    font-size: clamp(2.4rem, 2vw, 3rem);
+                    font-size: clamp(2rem, 2vw, 3rem);
                     font-weight: 400;
 
                     .company-name {
@@ -208,7 +208,7 @@
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    gap: 1rem;
+                    gap: 0.3rem;
                     margin: 0;
                     padding: 0;
                     border: none;
@@ -216,7 +216,7 @@
                     background: transparent;
             
                     p {
-                        font-size: clamp(1.45rem, 1vw, 1.5rem);
+                        font-size: clamp(1.2rem, 1vw, 1.5rem);
                     }
 
                     .arrow {
@@ -310,7 +310,7 @@
         gap: 0.5rem;
         width: 95%;
         max-width: 845px;
-        margin: 1rem 0 0 0;
+        margin: 0;
         z-index: 2;
 
         div {
@@ -324,7 +324,7 @@
                 padding: 0.5rem;
                 border: 1.5px solid var(--border);
                 border-radius: 0.5rem;
-                font-size: clamp(0.9rem, 1vw, 1.1rem);
+                font-size: clamp(1rem, 1vw, 1.1rem);
                 background-color: var(--card);
                 will-change: transition;
                 transition: border-color 0.3s;
@@ -361,11 +361,15 @@
     #map {
         width: 95%;
         max-width: 800px;
-        height: 400px;
+        height: 376px;
         margin-bottom: 1rem;
         background: var(--border);
         border-radius: 0.5rem 0.5rem 0 0;
         z-index: 2;
+
+        .gm-style-iw {
+            min-width: 266px !important;
+        }
     }
     
     .marker-icon {
@@ -378,7 +382,7 @@
         top: -32px;
         width: 95%;
         max-width: 800px;
-        height: 221px;
+        height: 196px;
         overflow-y: auto;
         border-radius: 0 0 0.5rem 0.5rem;
         box-shadow: 0 0 0.4rem var(--accent-shadow);
@@ -391,14 +395,21 @@
         }
 
         .list-group-item {
+            color: var(--text);
             border: none;
             border-bottom: 1px solid var(--border);
+            background-color: var(--background);
             transition: background-color 0.3s, color 0.3s;
 
             &:hover {
                 background-color: var(--accent);
                 color: var(--card);
                 cursor: pointer;
+
+                h5 {
+                    color: var(--card);
+                    transition: background-color 0.3s, color 0.3s;
+                }
             }
 
             &:last-child {
@@ -406,20 +417,38 @@
             }
 
             h5 {
+                color: var(--accent);
                 margin: 0;
                 font-size: clamp(1rem, 1.5vw, 1.3rem);
             }
 
             small {
                 font-size: clamp(0.7rem, 0.5vw, 1rem);
-            }
 
-            p:first-of-type {
-                margin: 0 !important;
+                a {
+                    text-decoration: none;
+                }
+
+                .fa-phone {
+                    color: var(--bs-blue);
+                }
+
+                .fa-clock {
+                    color: var(--bs-red);
+                }
             }
 
             p {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
+                line-height: 1.2;
+
+                &:first-of-type {
+                    margin: 0 !important;
+                }
+
+                &:last-of-type {
+                    margin-bottom: 4px !important;
+                }
             }
         }
     }
@@ -612,8 +641,12 @@
     }
 
     #locator-map {
+        #map {
+            height: 400px;
+        }
+
         .list-group {
-            height: 233px;
+            height: 210px;
         }
     }
 }

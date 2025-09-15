@@ -227,7 +227,7 @@
         <div class="list-group">
             {% for store in stores %}
 
-                <a class="list-group-item list-group-item-action" onclick="zoomToStore('{{ store.id }}');">
+                <div class="list-group-item list-group-item-action" onclick="zoomToStore('{{ store.id }}');">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ store.name }}</h5>
                         <small>
@@ -239,9 +239,9 @@
                     <p class="mb-1">{{ store.city.name }}, {{ store.city.state.abbreviation }} {{ store.zip_code }}</p>
 
                     <small>
-                        <i class="fa-solid fa-phone"></i> {{ store.phone_number }}
+                        <i class="fa-solid fa-phone"></i> <a href="tel:{{ store.phone_number }}">{{ store.phone_number }}</a>
                     </small>
-                </a>
+                </div>
 
             {% empty %}
 
