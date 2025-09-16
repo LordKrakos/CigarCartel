@@ -221,6 +221,7 @@ html[data-theme=dark][data-theme=dark] {
   align-items: center;
   justify-content: center;
   gap: 0.3rem;
+  width: 100%;
   margin: 0;
   padding: 0;
   border: none;
