@@ -2,7 +2,7 @@
 html[data-theme=light][data-theme=light],
 html[data-theme=dark][data-theme=light] {
   --background: #dedcdc;
-  --header: rgba(255, 255, 255, 0.7019607843);
+  --header: rgba(255, 255, 255, 0.3254901961);
   --text: #000;
   --card: #fff;
   --border: #b5b5b5;
@@ -39,11 +39,11 @@ html[data-theme=dark][data-theme=dark] {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100dvw;
+  height: 100dvh;
   overflow: hidden;
   z-index: -1;
-  filter: blur(4px);
+  filter: blur(0.25rem);
 }
 .parallax-image-container .para-image {
   position: fixed;
@@ -58,8 +58,8 @@ html[data-theme=dark][data-theme=dark] {
   align-items: center;
   justify-content: center;
   gap: 7rem;
-  width: 100%;
-  height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
 }
 #hero .brand-logo {
   display: block !important;
@@ -70,7 +70,7 @@ html[data-theme=dark][data-theme=dark] {
   border-radius: 50%;
 }
 #hero #hero-nav {
-  width: 90%;
+  width: 95dvw;
   max-width: 1000px;
   border-radius: 2rem;
   background-color: #000;
@@ -653,8 +653,8 @@ body {
   background-color: var(--background);
 }
 body #age-modal {
-  width: 100%;
-  height: 100%;
+  width: 100svw;
+  height: 100svh;
   background: var(--background);
   align-items: center;
   justify-content: center;
@@ -663,19 +663,20 @@ body #age-modal {
 body #age-modal .modal-content {
   color: var(--text);
   padding: 0.5rem;
-  border-radius: 10px;
+  border-radius: 0.3rem;
   background: var(--card);
-  box-shadow: 0 0 1rem 0.3rem var(--accent-shadow);
+  box-shadow: 0 0 0.3rem 0.03rem var(--accent-shadow);
 }
 body #age-modal .modal-content .modal-header {
-  border-bottom: 0.1rem solid var(--accent);
+  padding: 0.5rem;
+  border-bottom: 0.05rem solid var(--accent);
 }
 body #age-modal .modal-content .modal-header h5 {
-  font-size: clamp(1.3rem, 3vw, 1.5rem);
+  font-size: clamp(1.3rem, 3svw, 1.5rem);
   margin-bottom: 0;
 }
 body #age-modal .modal-content p {
-  font-size: clamp(1rem, 1vw, 1.2rem);
+  font-size: clamp(1rem, 1svw, 1.2rem);
   text-align: center;
   margin: 0;
 }
@@ -684,32 +685,21 @@ body #age-modal .modal-content .modal-footer {
   align-items: center;
   justify-content: flex-end;
   margin: 0;
-  border-top: 0.1rem solid var(--accent);
+  padding: 0.9rem 0.5rem 0.5rem;
+  border-top: 0.05rem solid var(--accent);
 }
 body #age-modal .modal-content .modal-footer .btn {
-  color: var(--text);
+  color: #FFF;
+  margin: 0;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3rem;
   cursor: pointer;
-  font-size: clamp(0.8rem, 1vw, 1rem);
+  font-size: clamp(0.85rem, 1svw, 1rem);
   will-change: transition;
   transition: background-color 0.3s;
 }
-body .hero-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-}
-body footer {
-  color: var(--text);
-  width: 100%;
-  background: var(--card);
-  padding: 0 1rem;
-  z-index: 1000;
-  filter: drop-shadow(0 0.1rem 0.2rem var(--border));
+body #age-modal .modal-content .modal-footer .btn:first-of-type {
+  margin-right: 0.5rem;
 }
 body header {
   width: 100%;
@@ -723,8 +713,8 @@ body header .navbar {
 }
 body header .navbar.scrolled {
   background-color: var(--header);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(0.5rem);
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.4);
 }
 body header .navbar .container-fluid {
   max-width: 1700px;
@@ -749,17 +739,17 @@ body header .navbar .container-fluid .logo-container a .logo {
   object-fit: cover;
   aspect-ratio: 1;
   border-radius: 50%;
-  box-shadow: 0 0 6px 2px rgba(255, 204, 36, 0.2431372549);
+  box-shadow: 0 0 0.3rem 0.02rem rgba(255, 204, 36, 0.2431372549);
 }
 body header .navbar .container-fluid .navbar-toggler:not(:focus-visible) {
-  outline: 1px solid var(--text);
+  outline: 0.01rem solid var(--text);
 }
 body header .navbar .container-fluid .navbar-toggler:focus {
   box-shadow: none;
 }
 body header .navbar .container-fluid .offcanvas {
   color: var(--text);
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--header);
 }
 body header .navbar .container-fluid .offcanvas .offcanvas-header {
@@ -770,7 +760,7 @@ body header .navbar .container-fluid .offcanvas .offcanvas-header .btn-close {
   filter: drop-shadow(0 0 0.1rem var(--text));
 }
 body header .navbar .container-fluid .offcanvas .offcanvas-body {
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(0.5rem);
 }
 body header .navbar .container-fluid .offcanvas .offcanvas-body .nav-link {
   transition: color 0.3s;
@@ -786,6 +776,14 @@ body header .navbar .container-fluid .offcanvas .locations-toggle {
 }
 body header .navbar .container-fluid .offcanvas .locations-list {
   margin-bottom: 1rem;
+  background-color: var(--card);
+}
+body header .navbar .container-fluid .offcanvas .locations-list .dropdown-item {
+  color: var(--text);
+}
+body header .navbar .container-fluid .offcanvas .locations-list .dropdown-item:hover {
+  background-color: var(--accent);
+  color: var(--background);
 }
 body header .navbar .container-fluid .theme-toggle-label {
   position: relative;
@@ -831,8 +829,8 @@ body header .navbar .container-fluid .theme-toggle-label .theme-toggle:checked ~
 }
 body header .navbar .container-fluid .theme-notification {
   position: fixed;
-  top: 80px;
-  right: 20px;
+  top: 0.03rem;
+  right: 0;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -858,29 +856,32 @@ body main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 100dvw;
   min-height: 100dvh;
 }
-body footer {
-  border-top: 1px solid var(--border);
+body #footer {
+  color: var(--text);
+  width: 100%;
+  background: var(--card);
+  border-top: 0.05rem solid var(--border);
   border-bottom: none;
   text-align: center;
-  padding: 2rem 0;
+  padding: 0.5rem 0;
 }
-body footer p {
+body #footer p {
   margin: 0;
   font-size: 0.9rem;
 }
-body footer #contact-info {
+body #footer #contact-info {
   font-size: 2rem;
 }
-body footer #contact-info a {
+body #footer #contact-info a {
   text-decoration: none;
 }
-body footer #contact-info a .fa-instagram {
+body #footer #contact-info a .fa-instagram {
   color: #d6249f;
 }
-body footer #contact-info a .fa-instagram:hover {
+body #footer #contact-info a .fa-instagram:hover {
   color: #fd5949;
 }
 
