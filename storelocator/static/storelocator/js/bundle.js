@@ -230,6 +230,15 @@ function openInfoWindow(marker) {
       content: contentString
     });
     currentInfoWindow.open(map, marker);
+
+    // Dynamically center the map after the info window is rendered
+    google.maps.event.addListenerOnce(currentInfoWindow, "domready", function () {
+      var iwOuter = document.querySelector(".gm-style-iw");
+      if (iwOuter) {
+        var iwHeight = iwOuter.offsetHeight; // height of info window
+        map.panBy(0, -iwHeight); // shift map up so info window is centered
+      }
+    });
   }, 150); // brief pause
 }
 function zoomToStore(storeId) {

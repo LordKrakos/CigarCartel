@@ -60,13 +60,14 @@ function openInfoWindow(marker) {
     if (currentInfoWindow) {
         currentInfoWindow.close();
     }
+
     setTimeout(() => {
         const store = marker.storeData;
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         const directionsUrl = isMobile
             ? `https://maps.apple.com/?daddr=${store.latitude},${store.longitude}&dirflg=d`
             : `https://www.google.com/maps/dir/?api=1&destination=${store.latitude},${store.longitude}`;
-            
+
         const contentString = `
             <div class="info-window fade-in">
                 <h3>${store.name}</h3>
@@ -79,11 +80,21 @@ function openInfoWindow(marker) {
             </div>
         `;
 
-        
         currentInfoWindow = new google.maps.InfoWindow({ content: contentString });
         currentInfoWindow.open(map, marker);
+
+        // Dynamically center the map after the info window is rendered
+        google.maps.event.addListenerOnce(currentInfoWindow, "domready", () => {
+            const iwOuter = document.querySelector(".gm-style-iw");
+            if (iwOuter) {
+                const iwHeight = iwOuter.offsetHeight; // height of info window
+                map.panBy(0, -iwHeight); // shift map up so info window is centered
+            }
+        });
+
     }, 150); // brief pause
 }
+
 
 
 function zoomToStore(storeId) {
