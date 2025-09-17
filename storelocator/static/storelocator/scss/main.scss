@@ -23,7 +23,7 @@ body.modal-active {
 
 body {
     color: var(--text);
-    width: 100%;
+    width: 100dvw;
     font-family: 'Roboto', sans-serif;
     transition: background 0.3s, color 0.3s;
     background-color: var(--background);
@@ -292,7 +292,7 @@ body {
     // ----------------------
     #footer {
         color: var(--text);
-        width: 100%;
+        width: 100dvw;
         background: var(--card);
         border-top: 0.05rem solid var(--border);
         border-bottom: none;

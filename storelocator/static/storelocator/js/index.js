@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const navbar = document.querySelector(".navbar");
 
     window.addEventListener("scroll", function () {
-        if (window.scrollY > 50) { // adjust threshold if needed
+        if (window.scrollY > 30) { // adjust threshold if needed
             navbar.classList.add("scrolled");
         } else {
             navbar.classList.remove("scrolled");

@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener("DOMContentLoaded", function () {
   var navbar = document.querySelector(".navbar");
   window.addEventListener("scroll", function () {
-    if (window.scrollY > 50) {
+    if (window.scrollY > 30) {
       // adjust threshold if needed
       navbar.classList.add("scrolled");
     } else {

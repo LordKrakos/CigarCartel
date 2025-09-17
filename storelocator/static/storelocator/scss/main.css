@@ -47,8 +47,8 @@ html[data-theme=dark][data-theme=dark] {
 }
 .parallax-image-container .para-image {
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 100dvw;
+  height: 100dvh;
   object-fit: cover;
 }
 
@@ -63,7 +63,7 @@ html[data-theme=dark][data-theme=dark] {
 }
 #hero .brand-logo {
   display: block !important;
-  width: 60%;
+  width: 60dvw;
   min-width: 300px;
   max-width: 600px;
   height: auto;
@@ -83,7 +83,7 @@ html[data-theme=dark][data-theme=dark] {
   padding: 0;
   list-style: none;
   border-radius: 2rem;
-  box-shadow: inset 4px 2px 10px rgba(255, 255, 255, 0.3411764706);
+  box-shadow: inset 0.25rem 0.125rem 0.73rem rgba(255, 255, 255, 0.3411764706);
 }
 #hero #hero-nav .hero-nav-links li {
   width: 100%;
@@ -104,8 +104,8 @@ html[data-theme=dark][data-theme=dark] {
   color: var(--accent);
 }
 #hero #hero-nav .hero-nav-links li:nth-child(2) {
-  border-left: 1.7px solid rgba(209, 209, 209, 0.1607843137);
-  border-right: 1.7px solid rgba(209, 209, 209, 0.1607843137);
+  border-left: 0.08rem solid rgba(209, 209, 209, 0.1607843137);
+  border-right: 0.08rem solid rgba(209, 209, 209, 0.1607843137);
 }
 
 #about {
@@ -114,8 +114,8 @@ html[data-theme=dark][data-theme=dark] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  min-height: 100vh;
+  width: 100dvw;
+  min-height: 100dvh;
   overflow: hidden;
   background-color: var(--background);
 }
@@ -141,7 +141,7 @@ html[data-theme=dark][data-theme=dark] {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  padding: 1rem;
+  padding: 0.5rem;
   width: 100%;
   max-width: 600px;
   height: 100%;
@@ -158,12 +158,13 @@ html[data-theme=dark][data-theme=dark] {
 }
 #about .about-container .about-content .about-text .about-title {
   width: 100%;
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: clamp(2rem, 2vw, 3rem);
+  font-size: clamp(2.4rem, 2vw, 3rem);
   font-weight: 400;
 }
 #about .about-container .about-content .about-text .about-title .company-name {
@@ -229,6 +230,7 @@ html[data-theme=dark][data-theme=dark] {
   background: transparent;
 }
 #about .about-container .about-content .about-text #about-footer p {
+  margin: 0;
   font-size: clamp(1.2rem, 1vw, 1.5rem);
 }
 #about .about-container .about-content .about-text #about-footer .arrow {
@@ -296,8 +298,8 @@ html[data-theme=dark][data-theme=dark] {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  width: 100%;
-  min-height: 100vh;
+  width: 100dvw;
+  min-height: 100dvh;
   padding: 1rem 0;
 }
 #locator-map #address-form {
@@ -351,14 +353,13 @@ html[data-theme=dark][data-theme=dark] {
 #locator-map #map {
   width: 95%;
   max-width: 800px;
-  height: 376px;
-  margin-bottom: 1rem;
+  height: 40dvh;
   background: var(--border);
   border-radius: 0.5rem 0.5rem 0 0;
   z-index: 2;
 }
 #locator-map #map .gm-style-iw {
-  min-width: 266px !important;
+  min-width: 300px !important;
 }
 #locator-map .marker-icon {
   color: red;
@@ -366,10 +367,10 @@ html[data-theme=dark][data-theme=dark] {
 }
 #locator-map .list-group {
   position: relative;
-  top: -32px;
+  top: -16px;
   width: 95%;
   max-width: 800px;
-  height: 196px;
+  height: 12.2rem;
   overflow-y: auto;
   border-radius: 0 0 0.5rem 0.5rem;
   box-shadow: 0 0 0.4rem var(--accent-shadow);
@@ -583,11 +584,8 @@ html[data-theme=dark][data-theme=dark] {
     outline: 2px solid var(--accent) !important;
     outline-offset: 3px !important;
   }
-  #locator-map #map {
-    height: 400px;
-  }
   #locator-map .list-group {
-    height: 210px;
+    height: 13.03rem;
   }
 }
 @keyframes expandLine {
@@ -648,7 +646,7 @@ body.modal-active {
 
 body {
   color: var(--text);
-  width: 100%;
+  width: 100dvw;
   font-family: "Roboto", sans-serif;
   transition: background 0.3s, color 0.3s;
   background-color: var(--background);
@@ -862,7 +860,7 @@ body main {
 }
 body #footer {
   color: var(--text);
-  width: 100%;
+  width: 100dvw;
   background: var(--card);
   border-top: 0.05rem solid var(--border);
   border-bottom: none;
