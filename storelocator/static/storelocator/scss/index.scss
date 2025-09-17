@@ -124,7 +124,6 @@
                 width: 100%;
                 max-width: 600px;
                 height: 100%;
-                min-height: 770px;
                 border-radius: 1rem;
                 background: var(--card);
                 box-shadow: 0 0 0.4rem var(--accent-shadow);
@@ -139,12 +138,13 @@
                 .about-title {
                     width: 100%;
                     margin: 0;
+                    padding: 1.2rem 0;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
                     text-align: center;
-                    font-size: clamp(2.4rem, 2vw, 3rem);
+                    font-size: clamp(2.3rem, 2vw, 3rem);
                     font-weight: 400;
 
                     .company-name {
@@ -199,6 +199,7 @@
                         color: var(--text);
                         margin: 0;
                         font-size: clamp(1rem, 2vw, 1.2rem);
+                        font-weight: 350;
                         position: relative;
                         line-height: 1.4;
                     }
@@ -212,7 +213,7 @@
                     gap: 0.3rem;
                     width: 100%;
                     margin: 0;
-                    padding: 0;
+                    padding: 1.2rem 0;
                     border: none;
                     text-decoration: none;
                     background: transparent;
@@ -269,7 +270,7 @@
 .info-window {
     font-family: 'Roboto', sans-serif;
     color: #333;
-    padding: 1rem;
+    padding: 0.8rem;
 
     h3 {
         font-size: clamp(1rem, 1vw, 1.5rem);
@@ -371,6 +372,19 @@
 
         .gm-style-iw {
             min-width: 300px !important;
+        }
+
+        .gm-style-iw-ch {
+            padding: 0;
+            height: 0;
+        }
+
+        .gm-style-iw-c {
+            padding: 0;
+        }
+
+        .gm-ui-hover-effect {
+            height: 0 !important;
         }
     }
     
@@ -528,6 +542,14 @@
                 box-shadow: 0.2rem 0.2rem 0.3rem var(--accent-shadow);
             }
         }
+    }
+}
+
+
+@media (min-width: 700px) {
+
+    .about-text {
+        max-width: 500px !important;
     }
 }
 
