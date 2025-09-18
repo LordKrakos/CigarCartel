@@ -143,7 +143,7 @@ html[data-theme=dark][data-theme=dark] {
   justify-content: space-evenly;
   padding: 0.5rem;
   width: 100%;
-  max-width: 600px;
+  max-width: 390px;
   height: 100%;
   border-radius: 1rem;
   background: var(--card);
@@ -164,7 +164,7 @@ html[data-theme=dark][data-theme=dark] {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: clamp(2.3rem, 2vw, 3rem);
+  font-size: clamp(2rem, 2vw, 3rem);
   font-weight: 400;
 }
 #about .about-container .about-content .about-text .about-title .company-name {
@@ -189,21 +189,10 @@ html[data-theme=dark][data-theme=dark] {
   list-style: none;
   animation-delay: 0.5s;
 }
-#about .about-container .about-content .about-text ul::before {
+#about .about-container .about-content .about-text ul::before, #about .about-container .about-content .about-text ul::after {
   content: "";
   width: 100%;
-  height: 2px;
-  margin-bottom: 1rem;
-  background: linear-gradient(90deg, transparent, var(--dust), transparent);
-  transform: scaleX(0);
-  transform-origin: center;
-  animation: expandLine 3.5s ease-out forwards 0.5s;
-}
-#about .about-container .about-content .about-text ul::after {
-  content: "";
-  width: 100%;
-  height: 2px;
-  margin-top: 1rem;
+  height: 0.2dvh;
   background: linear-gradient(90deg, transparent, var(--dust), transparent);
   transform: scaleX(0);
   transform-origin: center;
@@ -235,7 +224,7 @@ html[data-theme=dark][data-theme=dark] {
   font-size: clamp(1.2rem, 1vw, 1.5rem);
 }
 #about .about-container .about-content .about-text #about-footer .arrow {
-  font-size: clamp(1.7rem, 2vw, 2rem);
+  font-size: clamp(1.6rem, 2vw, 2rem);
   animation: bounce 1.5s infinite;
   color: var(--accent);
 }
@@ -271,6 +260,8 @@ html[data-theme=dark][data-theme=dark] {
   font-family: "Roboto", sans-serif;
   color: #333;
   padding: 0.8rem;
+  font-weight: 400;
+  font-size: clamp(0.7rem, 0.5vw, 1rem);
 }
 .info-window h3 {
   font-size: clamp(1rem, 1vw, 1.5rem);
@@ -278,19 +269,31 @@ html[data-theme=dark][data-theme=dark] {
   margin: 0;
 }
 .info-window p b {
-  font-size: clamp(0.7rem, 0.5vw, 1rem);
   color: var(--accent);
-}
-.info-window .info-city {
-  font-size: clamp(0.7rem, 0.5vw, 1rem);
-  margin-bottom: 7px;
+  font-weight: 500;
 }
 .info-window .info-address,
+.info-window .info-city,
 .info-window .info-phone,
 .info-window .info-email,
 .info-window .info-hours {
-  font-size: clamp(0.7rem, 0.5vw, 1rem);
-  margin: 2.3px 0;
+  margin: 0;
+}
+.info-window .info-address {
+  margin-top: 2px;
+}
+.info-window .info-city {
+  margin-bottom: 7px;
+}
+.info-window .info-phone,
+.info-window .info-email {
+  margin-bottom: 2px;
+}
+.info-window .info-hours {
+  margin-bottom: 9px;
+}
+.info-window .get-directions {
+  font-size: clamp(0.8rem, 1vw, 1rem);
 }
 
 #locator-map {
@@ -301,7 +304,6 @@ html[data-theme=dark][data-theme=dark] {
   gap: 1rem;
   width: 100dvw;
   min-height: 100dvh;
-  padding: 1rem 0;
 }
 #locator-map #address-form {
   display: flex;
@@ -321,7 +323,7 @@ html[data-theme=dark][data-theme=dark] {
 #locator-map #address-form div .address-input {
   flex: 1;
   color: var(--text);
-  padding: 0.5rem;
+  padding: 0.35rem;
   border: 1.5px solid var(--border);
   border-radius: 0.5rem;
   font-size: clamp(1rem, 1vw, 1.1rem);
@@ -341,7 +343,7 @@ html[data-theme=dark][data-theme=dark] {
 #locator-map #address-form button {
   background-color: var(--accent);
   border: none;
-  padding: 0.6rem 1rem;
+  padding: 0.45rem 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
   font-size: clamp(0.9rem, 1vw, 1.1rem);
@@ -361,6 +363,10 @@ html[data-theme=dark][data-theme=dark] {
 }
 #locator-map #map .gm-style-iw {
   min-width: 300px !important;
+  min-height: 145px !important;
+}
+#locator-map #map .gm-style-iw-d {
+  min-height: 150px !important;
 }
 #locator-map #map .gm-style-iw-ch {
   padding: 0;
