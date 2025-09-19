@@ -187,7 +187,7 @@
                     li {
                         color: var(--text);
                         margin: 0;
-                        font-size: clamp(1rem, 2vw, 1.2rem);
+                        font-size: clamp(1rem, 1.15vw, 1.2rem);
                         font-weight: 350;
                         position: relative;
                         line-height: 1.4;
@@ -222,7 +222,6 @@
 
             .images-and-deals {
                 display: flex;
-                flex: 2;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -384,6 +383,7 @@
 
         .gm-style-iw-d {
             min-height: 150px !important;
+            padding-bottom: 0 !important;
         }
 
         .gm-style-iw-ch {
@@ -557,15 +557,6 @@
     }
 }
 
-
-@media (min-width: 700px) {
-
-    .about-text {
-        max-width: 500px !important;
-    }
-}
-
-
 // ----------------------
 // Responsive adjustments for larger devices
 // ----------------------
@@ -574,7 +565,7 @@
 @media (min-width: 1260px) {
 
     .about-container{
-        min-height: 100vh;
+        min-height: 100dvh;
 
         .about-content {
             display: flex !important;

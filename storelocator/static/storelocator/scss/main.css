@@ -201,7 +201,7 @@ html[data-theme=dark][data-theme=dark] {
 #about .about-container .about-content .about-text ul li {
   color: var(--text);
   margin: 0;
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: clamp(1rem, 1.15vw, 1.2rem);
   font-weight: 350;
   position: relative;
   line-height: 1.4;
@@ -230,7 +230,6 @@ html[data-theme=dark][data-theme=dark] {
 }
 #about .about-container .about-content .images-and-deals {
   display: flex;
-  flex: 2;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -367,6 +366,7 @@ html[data-theme=dark][data-theme=dark] {
 }
 #locator-map #map .gm-style-iw-d {
   min-height: 150px !important;
+  padding-bottom: 0 !important;
 }
 #locator-map #map .gm-style-iw-ch {
   padding: 0;
@@ -512,14 +512,9 @@ html[data-theme=dark][data-theme=dark] {
   box-shadow: 0.2rem 0.2rem 0.3rem var(--accent-shadow);
 }
 
-@media (min-width: 700px) {
-  .about-text {
-    max-width: 500px !important;
-  }
-}
 @media (min-width: 1260px) {
   .about-container {
-    min-height: 100vh;
+    min-height: 100dvh;
   }
   .about-container .about-content {
     display: flex !important;

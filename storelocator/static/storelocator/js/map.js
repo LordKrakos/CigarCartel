@@ -71,7 +71,7 @@ function openInfoWindow(marker) {
         const contentString = `
             <div class="info-window fade-in">
                 <h3>${store.name}</h3>
-                <p class="info-address">${store.address}</p>
+                <p class="info-address">${store.address},</p>
                 <p class="info-city">${store.city_name}, ${store.state_abbreviation} ${store.zip_code}</p>
                 <p class="info-phone"><b>Phone:</b> ${store.phone_number}</p>
                 <p class="info-email"><b>Email:</b> ${store.email}</p>
