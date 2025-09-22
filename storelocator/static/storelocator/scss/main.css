@@ -31,6 +31,7 @@ html[data-theme=dark][data-theme=dark] {
 }
 
 .no-animations * {
+  display: none;
   animation: none !important;
   transition: none !important;
 }
@@ -376,7 +377,9 @@ html[data-theme=dark][data-theme=dark] {
   padding: 0;
 }
 #locator-map #map .gm-ui-hover-effect {
-  height: 0 !important;
+  position: absolute !important;
+  top: 0;
+  right: 0;
 }
 #locator-map .marker-icon {
   color: red;
@@ -453,8 +456,8 @@ html[data-theme=dark][data-theme=dark] {
   justify-content: center;
   gap: 1.5rem;
   width: 100%;
-  height: 100%;
-  padding: 3%;
+  min-height: 100dvh;
+  padding: 2rem 0;
   background-color: var(--background);
 }
 .locations .card {
@@ -462,6 +465,7 @@ html[data-theme=dark][data-theme=dark] {
   width: 95%;
   max-width: 1000px;
   height: auto;
+  margin: 0 !important;
   background: var(--card);
   border: 0.01rem solid var(--border);
   border-radius: 0.5rem;
@@ -470,36 +474,59 @@ html[data-theme=dark][data-theme=dark] {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
+.locations .card .carousel-item img {
+  width: 100%;
+  height: 40dvh;
+  max-height: 600px;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
 .locations .card .carousel-control-prev,
 .locations .card .carousel-control-next {
   margin: 0;
   background-color: transparent;
 }
-.locations .card img {
-  width: 100%;
-  height: 600px;
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  border-radius: 6px;
+.locations .card .location-name-hours {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
 }
-.locations .card .card-title {
-  font-size: 3rem;
+.locations .card .location-name-hours .card-title {
+  font-size: clamp(1.2rem, 1.2vw, 1.7rem);
   color: var(--accent);
   margin: 0;
 }
-.locations .card p,
-.locations .card .street-address {
+.locations .card .location-name-hours .hours {
   color: var(--text);
-  font-size: clamp(0.7rem, 0.5vw, 1rem);
+  font-size: clamp(0.8rem, 0.65vw, 1rem);
 }
-.locations .card .street-address {
+.locations .card .location-name-hours .hours .fa-clock {
+  color: var(--bs-red);
+}
+.locations .card .location-address p {
+  color: var(--text);
+  margin: 0;
+  font-size: clamp(0.85rem, 0.65vw, 1rem);
+  line-height: 1.3;
+}
+.locations .card .location-contact-directions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin: 0;
 }
-.locations .card .btn-container {
-  display: flex;
-  justify-content: right;
+.locations .card .location-contact-directions .contact {
+  align-self: self-end;
 }
-.locations .card button {
+.locations .card .location-contact-directions .contact .fa-phone {
+  color: var(--bs-success);
+}
+.locations .card .location-contact-directions .contact a {
+  text-decoration: none;
+}
+.locations .card .location-contact-directions .directions {
   margin: 0;
   border: none;
   font-size: 1.3rem;
@@ -508,7 +535,8 @@ html[data-theme=dark][data-theme=dark] {
   transition: box-shadow 0.4s ease;
   background: var(--accent);
 }
-.locations .card button:hover {
+.locations .card .location-contact-directions .directions:hover {
+  color: var(--bs-red);
   box-shadow: 0.2rem 0.2rem 0.3rem var(--accent-shadow);
 }
 

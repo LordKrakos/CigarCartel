@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block title %}
-  Cigar Cartel Store Locator
+  Cigar Cartel
 {% endblock %}
 
 {% block body %}
@@ -256,59 +256,69 @@
     <section id="locations" class="locations" role="region" aria-label="List of store locations">
         {% for store in stores %}
 
-            <div id="{{ store.name }}" class="card text-center">
+            <div id="{{ store.name }}" class="card mb-3">
 
-                <div class="card-header">
-                    <h2 class="card-title">{{ store.name }}</h2>
+                <div id="carouselExampleFade{{ store.id }}" class="carousel slide carousel-fade">
+
+                    <div class="carousel-inner">
+
+                        <div class="carousel-item active">
+                            <img src="{{ store.main_image.url }}" class="store-image" alt="Main {{ store.name }}">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="{{ store.primary_image.url }}" class="store-image" alt="Primary {{ store.name }}">
+                        </div>
+
+                        <div class="carousel-item">
+                            <img src="{{ store.secondary_image.url }}" class="store-image" alt="Secondary {{ store.name }}">
+                        </div>
+
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade{{ store.id }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade{{ store.id }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+
                 </div>
 
                 <div class="card-body">
-                    <div id="carouselExampleFade{{ store.id }}" class="carousel slide carousel-fade">
 
-                        <div class="carousel-inner">
+                    <div class="location-name-hours">
+                        <h5 class="card-title">{{ store.name }}</h5>
 
-                            <div class="carousel-item active">
-                                <img src="{{ store.main_image.url }}" class="d-block w-100" alt="Main {{ store.name }}">
-                            </div>
-
-                            <div class="carousel-item">
-                                <img src="{{ store.primary_image.url }}" class="d-block w-100" alt="Primary {{ store.name }}">
-                            </div>
-
-                            <div class="carousel-item">
-                                <img src="{{ store.secondary_image.url }}" class="d-block w-100" alt="Secondary {{ store.name }}">
-                            </div>
-
-                        </div>
-
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade{{ store.id }}" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade{{ store.id }}" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-
+                        <small class="hours">
+                            <i class="fa-regular fa-clock"></i> {{ store.opening_hour }} - {{ store.closing_hour }}
+                        </small>
                     </div>
-                </div>
 
-                <div class="card-footer text-body-secondary">
+                    <div class="location-address">
+                        <p>{{ store.address }},</p>
+                        <p>{{ store.city.name }}, {{ store.city.state.abbreviation }} {{ store.zip_code }}</p>
+                    </div>
 
-                    <p class="btn-container d-inline-flex gap-1">
+                    <p class="location-contact-directions">
+                        <small class="contact">
+                            <i class="fa-solid fa-phone"></i> <a href="tel:{{ store.phone_number }}">{{ store.phone_number }}</a>
+                        </small>
+
                         <button
-                            class="btn btn-primary"
+                            class="btn btn-primary directions"
                             type="button"
                             aria-label="directions for {{ store.name }}"
                             onclick="getDirections('{{ store.address }}');"
                         >
-                            Directions
+                            <i class="fa-solid fa-route"></i>
                         </button>
                     </p>
 
                 </div>
-
             </div>
 
         {% empty %}
@@ -340,3 +350,5 @@
     >
     </script>
 {% endblock %}
+
+
