@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Gold shimmer sweep on company name
     const company = document.querySelector(".company-name");
 
-    gsap.fromTo(".company-name",
+    gsap.fromTo(company,
         { backgroundPosition: "400% center" },   // start left edge
         {
             backgroundPosition: "100% center",   // sweep to right

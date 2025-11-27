@@ -12884,7 +12884,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   // Gold shimmer sweep on company name
   var company = document.querySelector(".company-name");
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.fromTo(".company-name", {
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.fromTo(company, {
     backgroundPosition: "400% center"
   },
   // start left edge
