@@ -1,112 +1,115 @@
 // smokeshop/storelocator/static/storelocator/js/index.js
 
-// --------------------
-// Age Verification Modal
-// --------------------
-document.addEventListener('DOMContentLoaded', () => {
-    const ageModal = document.getElementById('age-modal');
-    const ageYes = document.getElementById('ageYes');
-    const ageNo = document.getElementById('ageNo');
-    const pageContent = document.getElementById('page-content'); // Reference to the page content
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 
-    if (ageModal) {
-        ageModal.style.display = 'flex';
-        document.body.classList.add('modal-active');
+// Register GSAP's ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
-        // Add the 'no-animations' class to pause animations
-        if (pageContent) {
-            pageContent.classList.add('no-animations');
+// Scroll-triggered panel animations
+// ----------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Retrieve all panels
+    const panels = gsap.utils.toArray('.sub-panel');
+    // Get the total number of panels
+    const totalPanels = panels.length;
+
+    // Create a timeline
+    const tl = gsap.timeline({
+
+        // Configure ScrollTrigger
+        scrollTrigger: {
+            // Set the element that triggers the animation
+            trigger: '#about',
+            // Define the start and end points for the animation
+            start: 'top 64px',
+            // Calculate the end point based on the number of panels
+            end: () => `+=${window.innerHeight * totalPanels}`,
+            // Pin the trigger element during the animation
+            pin: true,
+            // Add spacing to the pinned element
+            pinSpacing: true,
+            // Enable scrubbing for smooth scrolling
+            scrub: 1.2,
         }
 
-        ageYes?.addEventListener('click', () => {
-            ageModal.style.display = 'none';
-            document.body.classList.remove('modal-active');
+    });
 
-            // Remove the 'no-animations' class to enable animations
-            if (pageContent) {
-                pageContent.classList.remove('no-animations');
-            }
-        });
+    // Animate each panel sequentially
+    panels.forEach((panel, i) => {
 
-        ageNo?.addEventListener('click', () => {
-            window.location.href = 'https://www.google.com';
-        });
-    }
-});
+        tl.from(panel, {
+            xPercent: i % 2 === 0 ? -100 : 100,
+            opacity: 0,
+            delay: 0.3,
+        }, i); // add at index so it progresses panel-by-panel
 
-document.addEventListener("DOMContentLoaded", function () {
-    const navbar = document.querySelector(".navbar");
-
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 30) { // adjust threshold if needed
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
     });
 });
 
-// --------------------
-// Theme Toggle Functionality
-// --------------------
-function initializeThemeToggle() {
-    const themeToggleCheckbox = document.getElementById("theme-toggle");
-    const root = document.documentElement;
-    const notification = document.getElementById("theme-notification");
-    const notificationText = document.getElementById("notification-text");
 
-    if (themeToggleCheckbox) {
-        const setTheme = (theme) => {
-            root.setAttribute("data-theme", theme);
-            localStorage.setItem("theme", theme);
+// About Section Text Animations
+// ------------------------------
+document.addEventListener("DOMContentLoaded", () => {
 
-            // Show theme notification
-            if (notification && notificationText) {
-                notificationText.textContent = `Theme changed to ${theme} mode`;
-                notification.style.opacity = "1";
-                notification.style.transform = "translateX(0)";
-                notification.style.pointerEvents = "auto";
+    // Gold shimmer sweep on company name
+    const company = document.querySelector(".company-name");
 
-                // Hide notification after 3 seconds
-                setTimeout(() => {
-                    notification.style.opacity = "0";
-                    notification.style.transform = "translateX(30px)";
-                    notification.style.pointerEvents = "none";
-                }, 3000);
+    gsap.fromTo(".company-name",
+        { backgroundPosition: "400% center" },   // start left edge
+        {
+            backgroundPosition: "100% center",   // sweep to right
+            duration: 15,                        // elegant, slow
+            ease: "power1.inOut",
+            repeat: -1,                          // infinite loop
+            delay: 10,                           // brief pause
+
+            scrollTrigger: {
+                trigger: ".company-name",
+                start: "top 85%",                // start when in view
+                end: "bottom 10%",
+                toggleActions: "play pause resume pause",
+                once: false,                     // keeps looping
             }
-        };
+        }
+    );
 
-        const savedTheme = localStorage.getItem("theme") || "light";
-        setTheme(savedTheme);
-        themeToggleCheckbox.checked = savedTheme === "dark";
 
-        themeToggleCheckbox.addEventListener("change", () => {
-            const newTheme = themeToggleCheckbox.checked ? "dark" : "light";
-            setTheme(newTheme);
-        });
-    }
-}
+    // 3. Line-by-line reveal for each <li>
+    document.fonts.ready.then(() => {
+        const listItems = gsap.utils.toArray("#thanks .split-text");
+        if (listItems.length > 0) {
 
-document.addEventListener('DOMContentLoaded', initializeThemeToggle);
+            listItems.forEach((item) => {
+                const splitWords = new SplitText(item, { type: "words" });
 
-// --------------------
-// Update CSS Variable for Header Height
-// --------------------
-function updateHeaderHeight() {
-    const header = document.querySelector('header');
-    if (header) {
-        const headerHeight = header.offsetHeight;
-        document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
-    }
-}
+                gsap.from(splitWords.words, {
+                    yPercent: 'random([-100, 100])',
+                    autoAlpha: 0,
+                    stagger: {
+                        amount: 3,
+                        from: 'random'
+                    },
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 85%",
+                        toggleActions: "restart pause reverse pause",
+                    }
+                });
+            });
+        }
+    });
 
-window.addEventListener('resize', updateHeaderHeight);
-document.addEventListener('DOMContentLoaded', updateHeaderHeight);
+    // 4. Gentle fade for the footer CTA
+    
+});
 
-// --------------------
+
 // Thumbnail gallery functionality
-// --------------------
-document.addEventListener('DOMContentLoaded', function () {
+// --------------------------------
+document.addEventListener("DOMContentLoaded", () => {
     const thumbnails = document.querySelectorAll('.cigar-thumbnail');
     const featuredImage = document.querySelector('.featured-cigar');
 
@@ -123,11 +126,21 @@ document.addEventListener('DOMContentLoaded', function () {
             thumbnail.classList.add('active');
 
             // Swap images with animation
-            featuredImage.style.opacity = '0';
-            setTimeout(() => {
-                featuredImage.src = thumbnail.src;
-                featuredImage.style.opacity = '1';
-            }, 300);
+            gsap.to(featuredImage, {
+                opacity: 0,
+                duration: 0.7,
+                filter: 'blur(5px)',
+
+                onComplete: () => {
+                    featuredImage.src = thumbnail.src;
+
+                    gsap.to(featuredImage, {
+                        opacity: 1,
+                        duration: 0.7,
+                        filter: 'blur(0px)',
+                    });
+                }
+            });
         }
 
         // Click event for thumbnails

@@ -1,32 +1,61 @@
-// ----------------------
-// Theme Color Palettes
-// ----------------------
+// smokeshop/storelocator/static/storelocator/scss/themes.scss
 
-// Light Color Palette
-$light-background: #dedcdc;
-$light-header: #ffffff53;
+$gold-dark: #8d6b1f;
+$gold-mid: #d4af37;
+$gold-light: #f8e9a1;
+$gold-bright: #fffce8;
+$gold-shadow: #00000059;
+
+$sapphire-dark: #1f3c8f;
+$sapphire-mid: #4a6ea9;
+$sapphire-light: #8ab8e6;
+$sapphire-bright: #cfe6ff;
+$sapphire-shadow: #0000001a;
+
+// ---------------------
+// Theme Color Palettes
+// ---------------------
+
+/* Light Color Palette */
+
+// Base colors
 $light-text: #000;
-$light-card: #fff;
 $light-border: #b5b5b5;
+$light-background: #dedcdc;
 $light-accent: #004DA0;
 $light-accent-shadow: #004c9e66;
+
+// Header color
+$light-header: #ffffff53;
+$light-offcanvas-header: #FFF;
+
+// Store card colors
+$light-card: #fff;
+
+// Theme toggler colors
 $light-toggler: #ffcc24;
-$light-fog: #fff700;
-$light-dust: #000000;
+$light-toggler-bg: #6b6b6b;
+
 $light-hero-title-primary: #fff;
 $light-hero-title-secondary: #000;
 
-// Dark Color Palette
-$dark-background: #101010;
-$dark-header: #000000b3;
+/* Dark Color Palette */
+
+// Base colors
 $dark-text: #f1f1f1;
+$dark-border: #000;
+$dark-background: #101010;
+$dark-accent: #ebc650;
+$dark-accent-shadow: #ffcc2448;
+
+//
+$dark-header: #000000b3;
+$dark-offcanvas-header: #000;
+
 $dark-card: #000;
-$dark-border: #001D3D;
-$dark-accent: #28a745;
-$dark-accent-shadow: #28a74536;
+
 $dark-toggler: #004DA0;
-$dark-fog: #00f;
-$dark-dust: #ffcc24;
+$dark-toggler-bg: #000000;
 $dark-hero-title-primary: #ffcc24;
 $dark-hero-title-secondary: #000;
 
@@ -36,31 +65,43 @@ $themes: (
     light: (
         background: $light-background,
         header: $light-header,
+        offcanvas-header: $light-offcanvas-header,
         text: $light-text,
         card: $light-card,
         border: $light-border,
         accent: $light-accent,
         accent-shadow: $light-accent-shadow,
         toggler: $light-toggler,
-        fog: $light-fog,
-        dust: $light-dust,
+        toggler-bg: $light-toggler-bg,
         hero-title-primary: $light-hero-title-primary,
-        hero-title-secondary: $light-hero-title-secondary
+        hero-title-secondary: $light-hero-title-secondary,
+
+        gs-dark: $sapphire-dark,
+        gs-mid: $sapphire-mid,
+        gs-light: $sapphire-light,
+        gs-bright: $sapphire-bright,
+        gs-shadow: $sapphire-shadow
     ),
     // Dark Theme
     dark: (
         background: $dark-background,
         header: $dark-header,
+        offcanvas-header: $dark-offcanvas-header,
         text: $dark-text,
         card: $dark-card,
         border: $dark-border,
         accent: $dark-accent,
         accent-shadow: $dark-accent-shadow,
         toggler: $dark-toggler,
-        fog: $dark-fog,
-        dust: $dark-dust,
+        toggler-bg: $dark-toggler-bg,
         hero-title-primary: $dark-hero-title-primary,
-        hero-title-secondary: $dark-hero-title-secondary
+        hero-title-secondary: $dark-hero-title-secondary,
+
+        gs-dark: $gold-dark,
+        gs-mid: $gold-mid,
+        gs-light: $gold-light,
+        gs-bright: $gold-bright,
+        gs-shadow: $gold-shadow
     )
 );
 

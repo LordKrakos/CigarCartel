@@ -23,8 +23,6 @@ env = environ.Env()
 environ.Env.read_env(BASE_DIR / ".env")  # 👈 loads smokeshop/.env
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
-GOOGLE_MAPS_API_KEY = env("GOOGLE_MAPS_API_KEY")
 SECRET_KEY = os.environ.get('SECRET_KEY')
 GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
 
@@ -35,15 +33,17 @@ GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    "cigarcartel.net",
-    "www.cigarcartel.net",
-]
+ALLOWED_HOSTS = []
 
 # Application definition
-
 INSTALLED_APPS = [
+    # Local apps
     'storelocator',
+
+    # 3rd party apps
+    'django.contrib.sitemaps',
+
+    # Default django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,9 +53,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

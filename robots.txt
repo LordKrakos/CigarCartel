@@ -1,0 +1,27 @@
+# robots.txt for Cigar Cartel Store Locator
+# This file controls how search engine bots crawl your site
+
+User-agent: *
+# --- Block admin and sensitive areas ---
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /login/
+Disallow: /logout/
+Disallow: /register/
+Disallow: /api/
+
+# --- Allow main site content ---
+Allow: /
+
+# --- Prevent indexing of static assets and development files ---
+Disallow: /static/
+Disallow: /media/
+Disallow: /__pycache__/
+Disallow: /tmp/
+Disallow: /scripts/
+
+# --- Optional: Block query parameters (e.g., filters or tracking) ---
+Disallow: /*?*
+
+# --- Sitemap for better SEO ---
+Sitemap: https://cigarcartel.com/sitemap.xml

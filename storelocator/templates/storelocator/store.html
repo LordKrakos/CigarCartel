@@ -1,0 +1,115 @@
+<!-- smokeshop/storelocator/templates/storelocator/store.html -->
+
+{% extends "storelocator/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ store.name }} | Cigar Cartel
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'storelocator/scss/store.css' %}">
+{% endblock %}
+
+{% block body %}
+<main id="page-content">
+
+    <h1>{{ store.name }}</h1>
+    <p>{{ store.description }}</p>
+    <div class="store-details">
+        <p><strong>Address:</strong> {{ store.address }}</p>
+        <p><strong>Phone:</strong>
+            <small>
+                <i class="fa-solid fa-phone"></i> <a href="tel:{{ store.phone_number }}">{{ store.phone_number }}</a>
+            </small>
+        </p>
+        <p><strong>Hours:</strong>
+            <i class="fa-regular fa-clock"></i> {{ store.opening_hour }} - {{ store.closing_hour }}
+        </p>
+    </div>
+    <div id="store-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ store.main_image.url }}" class="d-block w-100" alt="Main image of {{ store.name }}" loading="lazy">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ store.primary_image.url }}" class="d-block w-100" alt="Primary image of {{ store.name }}" loading="lazy">
+            </div>
+            <div class="carousel-item">
+                <img src="{{ store.secondary_image.url }}" class="d-block w-100" alt="Secondary image of {{ store.name }}" loading="lazy">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#store-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#store-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <h2>Store Location</h2>
+    <section id="locator-map" role="region" aria-label="Store locator map">
+
+        <!-- Address Lookup Form -->
+        <form id="address-form" role="search" data-url="{% url 'storelocator:index' %}" method="get">
+            
+            {% csrf_token %}
+            {{ form }}
+
+            <button class="btn btn-primary" type="submit" aria-label="Find a store">
+                Search
+            </button>
+
+        </form>
+
+        <div id="map" role="region" aria-label="Store locations map" loading="lazy">
+            <!-- Google Map will be rendered here -->
+        </div>
+
+        <div class="list-group">
+            {% for store in stores %}
+
+                <div class="list-group-item list-group-item-action" onclick="zoomToStore('{{ store.id }}');">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ store.name }}</h5>
+                        <small>
+                            <i class="fa-regular fa-clock"></i> {{ store.opening_hour }} - {{ store.closing_hour }}
+                        </small>
+                    </div>
+
+                    <p class="mb-1">{{ store.address }},</p>
+                    <p class="mb-1">{{ store.city.name }}, {{ store.city.state.abbreviation }} {{ store.zip_code }}</p>
+
+                    <small>
+                        <i class="fa-solid fa-phone"></i> <a href="tel:{{ store.phone_number }}">{{ store.phone_number }}</a>
+                    </small>
+                </div>
+
+            {% empty %}
+
+                <p>No stores found.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+
+    <!-- Embed store data as JSON -->
+    <script id="stores-data" type="application/json">
+        {{ stores_json|safe }}
+    </script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+        {{ structured_data_json|safe }}
+    </script>
+
+{% endblock %}

@@ -1,18 +1,20 @@
-.no-animations * {
-    display: none;
-    animation: none !important;
-    transition: none !important;
+// smokeshop/storelocator/static/storelocator/scss/index.scss
+
+:root {
+  --gold-dark: #8d6b1f;
+  --gold-mid: #d4af37;
+  --gold-light: #f8e9a1;
+  --gold-bright: #fffce8;  // specular highlight
 }
 
 .parallax-image-container {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100dvw;
     height: 100dvh;
     overflow: hidden;
     z-index: -1;
-    filter: blur(0.25rem);
+    filter: blur(3px) brightness(0.7) contrast(1.2);
 
     .para-image {
         position: fixed;
@@ -28,23 +30,18 @@
     align-items: center;
     justify-content: center;
     gap: 7rem;
-    width: 100dvw;
-    height: 100dvh;
+    width: 100%;
+    height: calc(100dvh - var(--header-height));
 
     .brand-logo {
-        display: block !important;
-        width: 60dvw;
-        min-width: 300px;
+        width: 80dvw;
         max-width: 600px;
         height: auto;
-        border-radius: 50%;
     }
 
     #hero-nav {
         width: 95dvw;
         max-width: 1000px;
-        border-radius: 2rem;
-        background-color: #000;
 
         .hero-nav-links {
             display: flex;
@@ -54,6 +51,7 @@
             padding: 0;
             list-style: none;
             border-radius: 2rem;
+            background-color: #000;
             box-shadow: inset 0.25rem 0.125rem 0.73rem #ffffff57;
 
             li {
@@ -85,169 +83,229 @@
     }
 }
 
+.main-panel {
+    width: 100dvw;
+    min-height: calc(100dvh - var(--header-height));
+}
+
 // ----------------------
 // Store Finder Base Layout (Mobile first)
 // ----------------------
 #about {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100dvw;
-    min-height: 100dvh;
     overflow: hidden;
-    background-color: var(--background);
 
-    .about-container {
+    #panel-wrapper {
+        position: relative;
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem 0.5rem;
+        height: 100%;
 
-        .about-content {
+        section {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 1200px;
-            gap: 2rem;
+            height: calc(100dvh - var(--header-height));
+            background-color: var(--background);
+        }
 
-            .about-text {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-evenly;
-                padding: 0.5rem;
+        #thanks {
+            padding: 0 0.5rem;
+            background: var(--card);
+            flex-direction: column;
+
+            .about-title {
                 width: 100%;
-                max-width: 390px;
                 height: 100%;
-                border-radius: 1rem;
-                background: var(--card);
-                box-shadow: 0 0 0.4rem var(--accent-shadow);
-
-                ul,
-                .about-title,
-                .scroll-link {
-                    opacity: 0; /* start hidden */
-                    animation: fadeInUp 1s ease-out forwards;
-                }
-
-                .about-title {
-                    width: 100%;
-                    margin: 0;
-                    padding: 1.2rem 0;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    text-align: center;
-                    font-size: clamp(2rem, 2vw, 3rem);
-                    font-weight: 400;
-
-                    .company-name {
-                        background: linear-gradient(0deg, var(--hero-title-primary), var(--hero-title-secondary) 70%);
-                        -webkit-background-clip: text;
-                        -webkit-text-fill-color: transparent;
-                        background-clip: text; /* Non‑WebKit browsers */
-                        color: #000; /* fallback */
-                        margin: 0;
-                        font-family: "Lobster", sans-serif;
-                        filter:
-                            drop-shadow(0.045rem 0.045rem 0.045rem var(--dust))
-                        ;
-                    }
-                }
-        
-                ul {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    justify-content: center;            
-                    gap: 0.7rem;
-                    height: 100%;
-                    margin: 0;
-                    padding: 0 0 0 0.65rem;
-                    list-style: none;
-                    animation-delay: 0.5s;
-
-                    &::before,
-                    &::after {
-                        content: '';
-                        width: 100%;
-                        height: 0.2dvh;
-                        background: linear-gradient(90deg, transparent, var(--dust), transparent);
-                        transform: scaleX(0);
-                        transform-origin: center;
-                        animation: expandLine 3.5s ease-out forwards 0.5s;
-                    }
-
-                    li {
-                        color: var(--text);
-                        margin: 0;
-                        font-size: clamp(1rem, 1.15vw, 1.2rem);
-                        font-weight: 350;
-                        position: relative;
-                        line-height: 1.4;
-                    }
-                }
-
-                #about-footer {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 0.3rem;
-                    width: 100%;
-                    margin: 0;
-                    padding: 1.2rem 0;
-                    border: none;
-                    text-decoration: none;
-                    background: transparent;
-            
-                    p {
-                        margin: 0;
-                        font-size: clamp(1.2rem, 1vw, 1.5rem);
-                    }
-
-                    .arrow {
-                        font-size: clamp(1.6rem, 2vw, 2rem);
-                        animation: bounce 1.5s infinite;
-                        color: var(--accent);
-                    }
-                }
-            }
-
-            .images-and-deals {
+                margin: 0;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: 2rem;
+                text-align: center;
+                font-size: clamp(2.3rem, 6vw, 4rem);
+                font-weight: 400;
 
-                .about-images {
-                    display: none;
+                .company-name {
+                    /* Premium multi-stop metallic gradient */
+                    background: linear-gradient(
+                        90deg,
+                        var(--gs-dark) 0%,
+                        var(--gs-mid) 20%,
+                        var(--gs-light) 49%,
+                        var(--gs-bright) 50%,
+                        var(--gs-light) 51%,
+                        var(--gs-mid) 80%,
+                        var(--gs-dark) 100%
+                    );
+
+                    background-size: 300%;  /* needed for sweep */
+                    background-position: 0% center;
+
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+
+                    font-family: "Lobster", sans-serif;
+                    font-weight: 400;
+
+                    /* optional: subtle emboss for a premium feel */
+                    text-shadow: 1px 2px 2.5px var(--gs-shadow), 1px 2px 2.5px var(--gs-shadow);
                 }
 
-                .carousel {
+                &::after {
+                    content: '';
                     width: 100%;
-                    max-width: 600px;
+                    height: 0.2dvh;
+                    position: relative;
+                    top: 10%;
+                    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+                }
+            }
 
-                    .carousel-inner {
+            ul {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;            
+                gap: 0.7rem;
+                height: 100%;
+                margin: 0;
+                padding: 0 0.65rem;
+                list-style: none;
+
+                li {
+                    color: var(--text);
+                    margin: 0;
+                    font-size: clamp(1.03rem, 2.7vw, 1.55rem);
+                    font-weight: 350;
+                    position: relative;
+                    max-width: 700px;
+                }
+            }
+
+            #about-footer {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 0.3rem;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                border: none;
+                text-decoration: none;
+
+                &::before {
+                    content: '';
+                    width: 100%;
+                    height: 0.2dvh;
+                    position: relative;
+                    bottom: 10%;
+                    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+                }
+        
+                p {
+                    margin: 0;
+                    font-size: clamp(1.4rem, 3.3vw, 2rem);
+                }
+
+                .arrow {
+                    font-size: clamp(1.6rem, 2vw, 2rem);
+                    animation: bounce 1.5s infinite;
+                    color: var(--accent);
+                }
+            } 
+        }
+
+        #featured-images {
+
+            .wrapper {
+                display: flex;
+                flex: 2;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+
+                .ft-cigar-wrapper {
+                    width: 90%;
+                    max-width: 650px;
+                    outline: 0.1rem solid var(--accent);
+                    border: 0.6rem solid var(--border);
+                    border-radius: 0.7rem;
+                    box-shadow: 0 15px 40px var(--accent-shadow);
+
+                    .featured-cigar {
+                        width: 100%;
+                        max-height: 350px;
+                        object-fit: cover;
+                        aspect-ratio: 16 / 9;
+                        border-radius: calc(0.7rem / 3);
+
+                        &:focus {
+                            outline: 2px solid var(--accent) !important;
+                            outline-offset: 3px !important;
+                        }
+                    }
+                }
+
+                .cigar-thumbnails {
+                    display: flex;
+                    gap: 15px;
+                    justify-content: center;
+
+                    .cigar-thumbnail {
+                        width: 100px;
+                        height: 100px;
+                        object-fit: cover;
+                        border-radius: 8px;
+                        border: 1px solid var(--border);
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+                        background-color: rgba(0, 0, 0, 0.4);
+                        padding: 5px;
+
+                        &.active {
+                            border-color: var(--accent);
+                            box-shadow: 0 0 15px var(--accent-shadow);
+                        }
+
+                        &:hover {
+                            transform: translateY(-5px);
+                        }
+
+                        &:focus {
+                            outline: 2px solid var(--accent) !important;
+                            outline-offset: 3px !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        #discounts {
+
+            .carousel {
+                width: 100%;
+                max-width: 600px;
+
+                .carousel-inner {
+                    border-radius: 0.9rem;
+
+                    .carousel-item {
                         border-radius: 0.9rem;
 
-                        .carousel-item {
+                        img {
+                            width: 100%;
                             border-radius: 0.9rem;
-
-                            img {
-                                width: 100%;
-                                border-radius: 0.9rem;
-                                object-fit: cover;
-                                aspect-ratio: 16 / 9;
-                            }
+                            object-fit: cover;
+                            aspect-ratio: 16 / 9;
                         }
                     }
                 }
@@ -256,470 +314,26 @@
     }
 }
 
-.info-window {
-    font-family: 'Roboto', sans-serif;
-    color: #333;
-    padding: 0.8rem;
-    font-weight: 400;
-    font-size: clamp(0.7rem, 0.5vw, 1rem);
-
-    h3 {
-        font-size: clamp(1rem, 1vw, 1.5rem);
-        color: var(--accent);
-        margin: 0;
-    }
-
-    p b {
-        color: var(--accent);
-        font-weight: 500;
-    }
-
-    .info-address,
-    .info-city,
-    .info-phone,
-    .info-email,
-    .info-hours {
-        margin: 0;
-    }
-
-    .info-address {
-        margin-top: 2px;
-    }
-
-    .info-city {
-        margin-bottom: 7px;
-    }
-
-    .info-phone,
-    .info-email {
-        margin-bottom: 2px;
-    }
-
-    .info-hours {
-        margin-bottom: 9px;
-    }
-
-    .get-directions {
-        font-size: clamp(0.8rem, 1vw, 1rem);
-    }
-
-}
-
-#locator-map {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    width: 100dvw;
-    min-height: 100dvh;
-
-    #address-form {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        width: 95%;
-        max-width: 845px;
-        margin: 0;
-        z-index: 2;
-
-        div {
-            display: flex;
-            width: 80%;
-            max-width: 800px;
-
-            .address-input {
-                flex: 1;
-                color: var(--text);
-                padding: 0.35rem;
-                border: 1.5px solid var(--border);
-                border-radius: 0.5rem;
-                font-size: clamp(1rem, 1vw, 1.1rem);
-                background-color: var(--card);
-                will-change: transition;
-                transition: border-color 0.3s;
-        
-                &:focus {
-                    outline: none;
-                    border-color: var(--accent);
-                    box-shadow: 0 0 0.2rem var(--accent-shadow);
-                }
-                
-                &::placeholder {
-                    color: var(--text);
-                    opacity: 0.6;
-                }
-            }
-        }
-
-        button {
-            background-color: var(--accent);
-            border: none;
-            padding: 0.45rem 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: clamp(0.9rem, 1vw, 1.1rem);
-            transition: background-color 0.3s;
-
-            &:hover {
-                background-color: var(--accent);
-                box-shadow: 0.2rem 0.2rem 0.3rem var(--accent-shadow);
-            }
-        }
-    }
-
-    #map {
-        width: 95%;
-        max-width: 800px;
-        height: 40dvh;
-        background: var(--border);
-        border-radius: 0.5rem 0.5rem 0 0;
-        z-index: 2;
-
-        .gm-style-iw {
-            min-width: 300px !important;
-            min-height: 145px !important;
-        }
-
-        .gm-style-iw-d {
-            min-height: 150px !important;
-            padding-bottom: 0 !important;
-        }
-
-        .gm-style-iw-ch {
-            padding: 0;
-            height: 0;
-        }
-
-        .gm-style-iw-c {
-            padding: 0;
-        }
-
-        .gm-ui-hover-effect {
-            position: absolute !important;
-            top: 0;
-            right: 0;
-        }
-    }
-    
-    .marker-icon {
-        color: red;
-        height: 2rem;
-    }
-
-    .list-group {
-        position: relative;
-        top: -16px;
-        width: 95%;
-        max-width: 800px;
-        height: 12.2rem;
-        overflow-y: auto;
-        border-radius: 0 0 0.5rem 0.5rem;
-        box-shadow: 0 0 0.4rem var(--accent-shadow);
-        background: var(--card);
-        z-index: 2;
-        scrollbar-width: 0; // Firefox
-        -ms-overflow-style: none;  // IE and Edge
-        &::-webkit-scrollbar {
-            width: 0;  // Chrome, Safari, Opera
-        }
-
-        .list-group-item {
-            color: var(--text);
-            border: none;
-            border-bottom: 1px solid var(--border);
-            background-color: var(--background);
-            transition: background-color 0.3s, color 0.3s;
-
-            &:hover {
-                background-color: var(--accent);
-                color: var(--card);
-                cursor: pointer;
-
-                h5 {
-                    color: var(--card);
-                    transition: background-color 0.3s, color 0.3s;
-                }
-            }
-
-            &:last-child {
-                border-bottom: none;
-            }
-
-            h5 {
-                color: var(--accent);
-                margin: 0;
-                font-size: clamp(1rem, 1.5vw, 1.3rem);
-            }
-
-            small {
-                font-size: clamp(0.7rem, 0.5vw, 1rem);
-
-                a {
-                    text-decoration: none;
-                }
-
-                .fa-phone {
-                    color: var(--bs-blue);
-                }
-
-                .fa-clock {
-                    color: var(--bs-red);
-                }
-            }
-
-            p {
-                font-size: 0.8rem;
-                line-height: 1.2;
-
-                &:first-of-type {
-                    margin: 0 !important;
-                }
-
-                &:last-of-type {
-                    margin-bottom: 4px !important;
-                }
-            }
-        }
-    }
-}
-
-.locations {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    width: 100%;
-    min-height: 100dvh;
-    padding: 2rem 0;
-    background-color: var(--background);
-
-    .card {
-        position: relative;
-        width: 95%;
-        max-width: 1000px;
-        height: auto;
-        margin: 0 !important;
-        background: var(--card);
-        border: 0.01rem solid var(--border);
-        border-radius: 0.5rem;
-        box-shadow: 0.10rem 0.10rem 0.4rem var(--accent-shadow);
-        will-change: transform, box-shadow;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        cursor: pointer;
-
-        .carousel-item {
-            img {
-                width: 100%;
-                height: 40dvh;
-                max-height: 600px;
-                aspect-ratio: 16 / 9;
-                object-fit: cover;
-                border-radius: 0.5rem 0.5rem 0 0;
-            }
-        }
-
-        .carousel-control-prev,
-        .carousel-control-next {
-            margin: 0;
-            background-color: transparent;
-        }
-
-        .location-name-hours {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 0.25rem;
-
-            .card-title {
-                font-size: clamp(1.2rem, 1.2vw, 1.7rem);
-                color: var(--accent);
-                margin: 0;
-            }
-
-            .hours {
-                color: var(--text);
-                font-size: clamp(0.8rem, 0.65vw, 1rem);
-
-                .fa-clock {
-                    color: var(--bs-red);
-                }
-            }
-        }
-
-        .location-address {
-            p {
-                color: var(--text);
-                margin: 0;
-                font-size: clamp(0.85rem, 0.65vw, 1rem);
-                line-height: 1.3;
-            }
-        }
-
-        .location-contact-directions {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 0;
-            
-            .contact {
-                align-self: self-end;
-
-                .fa-phone {
-                    color: var(--bs-success);
-                }
-
-                a {
-                    text-decoration: none;
-                }
-            }
-
-            .directions {
-                margin:0;
-                border: none;
-                font-size: 1.3rem;
-                font-weight: 500;
-                will-change: box-shadow;
-                transition: box-shadow 0.4s ease;
-                background: var(--accent);
-
-                &:hover {
-                    color: var(--bs-red);
-                    box-shadow: 0.2rem 0.2rem 0.3rem var(--accent-shadow);
-                }
-            }
-
-        }
-    }
-}
 
 // ----------------------
-// Responsive adjustments for larger devices
+// Responsive adjustments
 // ----------------------
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+}
+
+
+/* Small Desktop */
+@media (min-width: 1024px) and (max-width: 1439px) {
   
-// For tablets/desktops (min-width: 64rem ≈ 1024px)
-@media (min-width: 1260px) {
-
-    .about-container{
-        min-height: 100dvh;
-
-        .about-content {
-            display: flex !important;
-            flex-direction: row !important;
-            align-items: center;
-            gap: 2rem;
-
-            .about-text {
-                flex: 3;
-                align-items: flex-start !important;
-                text-align: left;
-                min-width: 500px !important;
-                min-height: 845px !important;
-    
-                ul {
-                    padding: 0 0 0 0.65rem !important;
-                }
-    
-                .mobile-cigar {
-                    display: none;
-                }
-    
-                .cigar-divider {
-                    margin: 10px 0;
-                }
-            }
-        }
-
-        .images-and-deals {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .about-images {
-            display: flex !important;
-            flex-direction: column;
-            flex: 2;
-            gap: 1rem;
-            align-items: center;
-            justify-content: center;
-    
-            .featured-cigar {
-                width: 600px;
-                height: auto;
-                max-height: 350px;
-                border-radius: 12px;
-                border: 1px solid var(--border);
-                transition: transform 0.3s ease;
-                animation: fadeIn 1s ease-out 0.5s forwards;
-                background-color: rgba(0, 0, 0, 0.4);
-                padding: 10px;
-                object-fit: cover;
-                aspect-ratio: 4 / 3;
-                cursor: pointer;
-                border-color: var(--accent);
-                box-shadow: 0 15px 40px var(--accent-shadow);
-    
-                &:focus {
-                    outline: 2px solid var(--accent) !important;
-                    outline-offset: 3px !important;
-                }
-            }
-    
-            .cigar-thumbnails {
-                display: flex;
-                gap: 15px;
-                justify-content: center;
-                animation: fadeIn 1s ease-out 0.8s forwards;
-                opacity: 0;
-    
-                .cigar-thumbnail {
-                    width: 100px;
-                    height: 100px;
-                    object-fit: cover;
-                    border-radius: 8px;
-                    border: 1px solid var(--border);
-                    transition: all 0.3s ease;
-                    cursor: pointer;
-                    background-color: rgba(0, 0, 0, 0.4);
-                    padding: 5px;
-    
-                    &.active {
-                        border-color: var(--accent);
-                        box-shadow: 0 0 15px var(--accent-shadow);
-                    }
-    
-                    &:hover {
-                        transform: translateY(-5px);
-                    }
-    
-                    &:focus {
-                        outline: 2px solid var(--accent) !important;
-                        outline-offset: 3px !important;
-                    }
-                }
-            }
-        }
-    }
-
-    #locator-map {
-
-        .list-group {
-            height: 13.03rem;
-        }
-    }
 }
 
-@keyframes expandLine {
-    0% {
-        transform: scaleX(0);
-    }
-    100% {
-        transform: scaleX(1);
-    }
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+    
 }
 
 @keyframes bounce {
@@ -732,20 +346,4 @@
     60% {
         transform: translateY(5px);
     }
-}
-
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }

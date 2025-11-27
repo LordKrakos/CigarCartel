@@ -1,0 +1,182 @@
+<!-- smokeshop/storelocator/templates/storelocator/city_stores.html -->
+
+{% extends "storelocator/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ city.name }} | Cigar Cartel
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'storelocator/scss/city_stores.css' %}">
+{% endblock %}
+
+{% block description %}
+    Discover premium cigars at Cigar Cartel in {{ city.name }} — your go-to cigar shops in {{ city.name }} with premium cigars, humidors, and accessories.
+{% endblock %}
+
+{% block body %}
+<main id="page-content">
+
+    <h1 class="page-title">Cigar Cartel in {{ city.name }}</h1>
+
+    <section id="locations" role="region" aria-label="List of store locations">
+        <div class="card-container">
+
+            {% for store in stores %}
+
+                <div id="{{ store.name }}" class="card">
+
+                    <div id="carouselExampleFade{{ store.id }}" class="carousel slide carousel-fade">
+
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+                                <img
+                                    src="{{ store.main_image.url }}"
+                                    class="store-image"
+                                    alt="Main {{ store.name }}"
+                                    loading="lazy"
+                                />
+                            </div>
+
+                            <div class="carousel-item">
+                                <img
+                                    src="{{ store.primary_image.url }}"
+                                    class="store-image"
+                                    alt="Primary {{ store.name }}"
+                                    loading="lazy"
+                                />
+                            </div>
+
+                            <div class="carousel-item">
+                                <img
+                                    src="{{ store.secondary_image.url }}"
+                                    class="store-image"
+                                    alt="Secondary {{ store.name }}"
+                                    loading="lazy"
+                                />
+                            </div>
+
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade{{ store.id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade{{ store.id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="location-name-hours">
+                            <a href="{% url 'storelocator:store' store.city.state.slug store.city.slug store.slug %}">
+                                <h5 class="card-title">{{ store.name }}</h5>
+                            </a>
+
+                            <small class="hours">
+                                <i class="fa-regular fa-clock"></i> {{ store.opening_hour }} - {{ store.closing_hour }}
+                            </small>
+                        </div>
+
+                        <div class="location-address">
+                            <p>{{ store.address }},</p>
+                            <p>{{ store.city.name }}, {{ store.city.state.abbreviation }} {{ store.zip_code }}</p>
+                        </div>
+
+                        <p class="location-contact-directions">
+                            <small class="contact">
+                                <i class="fa-solid fa-phone"></i> <a href="tel:{{ store.phone_number }}">{{ store.phone_number }}</a>
+                            </small>
+
+                            <button
+                                class="btn btn-primary directions"
+                                type="button"
+                                aria-label="directions for {{ store.name }}"
+                                onclick="getDirections('{{ store.address }}');"
+                            >
+                                <i class="fa-solid fa-route"></i>
+                            </button>
+                        </p>
+
+                    </div>
+                </div>
+
+            {% empty %}
+
+                <p>No stores found.</p>
+
+            {% endfor %}
+
+        </div>
+    </section>
+    
+    <section id="locator-map" role="region" aria-label="Store locator map">
+
+        <!-- Address Lookup Form -->
+        <form id="address-form" role="search" data-url="{% url 'storelocator:index' %}" method="get">
+            
+            {% csrf_token %}
+            {{ form }}
+
+            <button class="btn btn-primary" type="submit" aria-label="Find a store">
+                Search
+            </button>
+
+        </form>
+
+        <div id="map" role="region" aria-label="Store locations map" loading="lazy">
+            <!-- Google Map will be rendered here -->
+        </div>
+
+        <div class="list-group">
+            
+            {% for store in stores %}
+
+                <div class="list-group-item list-group-item-action" onclick="zoomToStore('{{ store.id }}');">
+
+                    <div class="d-flex w-100 justify-content-between">
+
+                        <h5 class="mb-1">{{ store.name }}</h5>
+
+                        <small>
+                            <i class="fa-regular fa-clock"></i> {{ store.opening_hour }} - {{ store.closing_hour }}
+                        </small>
+
+                    </div>
+
+                    <p class="mb-1">{{ store.address }},</p>
+                    <p class="mb-1">{{ store.city.name }}, {{ store.city.state.abbreviation }} {{ store.zip_code }}</p>
+
+                    <small>
+                        <i class="fa-solid fa-phone"></i> <a href="tel:{{ store.phone_number }}">{{ store.phone_number }}</a>
+                    </small>
+
+                </div>
+
+            {% empty %}
+
+                <p>No stores found.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+    <!-- Embed store data as JSON -->
+    <script id="stores-data" type="application/json">
+        {{ stores_json|safe }}
+    </script>
+{% endblock %}
+
+

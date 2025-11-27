@@ -1,0 +1,194 @@
+.info-window {
+  font-family: "Roboto", sans-serif;
+  color: #333;
+  padding: 0.8rem;
+  font-weight: 400;
+  font-size: clamp(0.7rem, 0.5vw, 1rem);
+}
+.info-window h3 {
+  font-size: clamp(1rem, 1vw, 1.5rem);
+  color: var(--accent);
+  margin: 0;
+}
+.info-window p b {
+  color: var(--accent);
+  font-weight: 500;
+}
+.info-window .info-address,
+.info-window .info-city,
+.info-window .info-phone,
+.info-window .info-email,
+.info-window .info-hours {
+  margin: 0;
+}
+.info-window .info-address {
+  margin-top: 2px;
+}
+.info-window .info-city {
+  margin-bottom: 7px;
+}
+.info-window .info-phone,
+.info-window .info-email {
+  margin-bottom: 2px;
+}
+.info-window .info-hours {
+  margin-bottom: 9px;
+}
+.info-window .get-directions {
+  font-size: clamp(0.8rem, 1vw, 1rem);
+}
+
+#locator-map {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100dvw;
+  min-height: 100dvh;
+}
+#locator-map #address-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 95%;
+  max-width: 845px;
+  margin: 0;
+  z-index: 2;
+}
+#locator-map #address-form div {
+  display: flex;
+  width: 80%;
+  max-width: 800px;
+}
+#locator-map #address-form div .address-input {
+  flex: 1;
+  color: var(--text);
+  padding: 0.35rem;
+  border: 1.5px solid var(--border);
+  border-radius: 0.5rem;
+  font-size: clamp(1rem, 1vw, 1.1rem);
+  background-color: var(--card);
+  will-change: transition;
+  transition: border-color 0.3s;
+}
+#locator-map #address-form div .address-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0.2rem var(--accent-shadow);
+}
+#locator-map #address-form div .address-input::placeholder {
+  color: var(--text);
+  opacity: 0.6;
+}
+#locator-map #address-form button {
+  background-color: var(--accent);
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 1vw, 1.1rem);
+  transition: background-color 0.3s;
+}
+#locator-map #address-form button:hover {
+  background-color: var(--accent);
+  box-shadow: 0.2rem 0.2rem 0.3rem var(--accent-shadow);
+}
+#locator-map #map {
+  width: 95%;
+  max-width: 800px;
+  height: 40dvh;
+  background: var(--border);
+  border-radius: 0.5rem 0.5rem 0 0;
+  z-index: 2;
+}
+#locator-map #map .gm-style-iw {
+  min-width: 300px !important;
+  min-height: 145px !important;
+}
+#locator-map #map .gm-style-iw-d {
+  min-height: 150px !important;
+  padding-bottom: 0 !important;
+}
+#locator-map #map .gm-style-iw-ch {
+  padding: 0;
+  height: 0;
+}
+#locator-map #map .gm-style-iw-c {
+  padding: 0;
+}
+#locator-map #map .gm-ui-hover-effect {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+}
+#locator-map .marker-icon {
+  color: red;
+  height: 2rem;
+}
+#locator-map .list-group {
+  position: relative;
+  top: -16px;
+  width: 95%;
+  max-width: 800px;
+  height: 12.2rem;
+  overflow-y: auto;
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: 0 0 0.4rem var(--accent-shadow);
+  background: var(--card);
+  z-index: 2;
+  scrollbar-width: 0;
+  -ms-overflow-style: none;
+}
+#locator-map .list-group::-webkit-scrollbar {
+  width: 0;
+}
+#locator-map .list-group .list-group-item {
+  color: var(--text);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--background);
+  transition: background-color 0.3s, color 0.3s;
+}
+#locator-map .list-group .list-group-item:hover {
+  background-color: var(--accent);
+  color: var(--card);
+  cursor: pointer;
+}
+#locator-map .list-group .list-group-item:hover h5 {
+  color: var(--card);
+  transition: background-color 0.3s, color 0.3s;
+}
+#locator-map .list-group .list-group-item:last-child {
+  border-bottom: none;
+}
+#locator-map .list-group .list-group-item h5 {
+  color: var(--accent);
+  margin: 0;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+}
+#locator-map .list-group .list-group-item small {
+  font-size: clamp(0.7rem, 0.5vw, 1rem);
+}
+#locator-map .list-group .list-group-item small a {
+  text-decoration: none;
+}
+#locator-map .list-group .list-group-item small .fa-phone {
+  color: var(--bs-blue);
+}
+#locator-map .list-group .list-group-item small .fa-clock {
+  color: var(--bs-red);
+}
+#locator-map .list-group .list-group-item p {
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+#locator-map .list-group .list-group-item p:first-of-type {
+  margin: 0 !important;
+}
+#locator-map .list-group .list-group-item p:last-of-type {
+  margin-bottom: 4px !important;
+}
+
+/*# sourceMappingURL=map.css.map */

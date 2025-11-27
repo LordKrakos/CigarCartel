@@ -1,0 +1,127 @@
+@charset "UTF-8";
+#locations {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100%;
+  min-height: 100%;
+  padding: 1rem;
+  background-color: var(--background);
+}
+#locations .card-container {
+  display: grid;
+  grid-template-rows: auto;
+  place-items: center;
+  max-width: 1580px;
+  gap: 1.5rem;
+}
+#locations .card-container .card {
+  position: relative;
+  max-width: 495px;
+  height: 100%;
+  margin: 0;
+  background: var(--card);
+  border: 0.01rem solid var(--border);
+  border-radius: 0.5rem;
+  box-shadow: 0.1rem 0.1rem 0.4rem var(--accent-shadow);
+}
+#locations .card-container .card .carousel-item {
+  display: block;
+}
+#locations .card-container .card .carousel-item img {
+  max-width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+#locations .card-container .card .carousel-control-prev,
+#locations .card-container .card .carousel-control-next {
+  margin: 0;
+  background-color: transparent;
+}
+#locations .card-container .card .card-body {
+  padding: 0.6rem;
+}
+#locations .card-container .card .location-name-hours {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+#locations .card-container .card .location-name-hours a {
+  text-decoration: none;
+}
+#locations .card-container .card .location-name-hours a .card-title {
+  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  background: linear-gradient(0deg, var(--gs-dark) 0%, var(--gs-mid) 20%, var(--gs-mid) 40%, var(--gs-light) 50%, var(--gs-mid) 60%, var(--gs-mid) 80%, var(--gs-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* Non‑WebKit browsers */
+  color: #000; /* fallback */
+  margin: 0;
+  font-family: "Lobster", sans-serif;
+  text-shadow: 1px 2px 2px var(--gs-shadow), 1px 2px 2px var(--gs-shadow);
+}
+#locations .card-container .card .location-name-hours .hours {
+  color: var(--text);
+  font-size: clamp(0.65rem, 0.65vw, 0.8rem);
+}
+#locations .card-container .card .location-name-hours .hours .fa-clock {
+  color: var(--bs-red);
+}
+#locations .card-container .card .location-address p {
+  color: var(--text);
+  margin: 0;
+  font-size: clamp(0.75rem, 0.8vw, 0.8rem);
+  line-height: 1.3;
+}
+#locations .card-container .card .location-contact-directions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+#locations .card-container .card .location-contact-directions .contact {
+  font-size: 0.8rem;
+  align-self: self-end;
+}
+#locations .card-container .card .location-contact-directions .contact .fa-phone {
+  color: var(--bs-success);
+}
+#locations .card-container .card .location-contact-directions .contact a {
+  text-decoration: none;
+}
+#locations .card-container .card .location-contact-directions .directions {
+  margin: 0;
+  border: none;
+  font-size: clamp(1.2rem, 0.8vw, 0.8rem);
+  font-weight: 500;
+  will-change: box-shadow;
+  transition: box-shadow 0.4s ease;
+  background: linear-gradient(180deg, var(--gs-mid) 0%, var(--gs-dark) 20%, var(--gs-dark) 40%, var(--gs-dark) 50%, var(--gs-dark) 60%, var(--gs-light) 80%, var(--gs-mid) 100%);
+}
+#locations .card-container .card .location-contact-directions .directions:hover {
+  color: var(--bs-green);
+  box-shadow: 0.2rem 0.2rem 0.3rem var(--accent-shadow);
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* Small Desktops */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* Large Desktop */
+@media (min-width: 1440px) {
+  .card-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/*# sourceMappingURL=store_cards.css.map */

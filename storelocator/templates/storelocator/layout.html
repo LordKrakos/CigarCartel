@@ -50,18 +50,19 @@
             rel="stylesheet"
             integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
             crossorigin="anonymous"
-        >
-
+        />
+        
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link
             href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lobster&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
             rel="stylesheet"
-        >
+        />
 
         <!-- Custom Scss -->
         <link rel="stylesheet" href="{% static 'storelocator/scss/main.css' %}">
+        {% block styles %}{% endblock %}
 
         <title>{% block title %}{% endblock %}</title>
 
@@ -69,15 +70,14 @@
         <script
             src="https://kit.fontawesome.com/8f5b2d3aa3.js"
             crossorigin="anonymous"
-            data-search-pseudo-elements
-        >
+            data-search-pseudo-elements>
         </script>
          
     </head>
 
     <body>
 
-        <div id="age-modal" class="modal" tabindex="-1">
+        <div id="verification-modal" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
 
@@ -86,17 +86,21 @@
                     </div>
 
                     <div class="modal-body">
-                        <p>You must be at least 21 years of age or older to access this site.</p>
+                        <p>
+                            You must be at least 21 years of age or older to access this site.
+                        </p>
                     </div>
 
                     <footer class="modal-footer">
-                        <button id="ageYes" type="button" class="btn btn-primary" data-bs-dismiss="modal">
+
+                        <button id="yes" type="button" class="btn btn-primary" data-bs-dismiss="modal">
                             I am 21+
                         </button>
 
-                        <button id="ageNo" type="button" class="btn btn-secondary">
+                        <button id="no" type="button" class="btn btn-secondary">
                             I am under 21
                         </button>
+
                     </footer>
 
                 </div>
@@ -127,7 +131,13 @@
                         aria-label="Toggle navigation"
                     >
                         <svg class="navbar-toggler-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-                            <path stroke="var(--accent)" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.3" d="M4 7h22M4 15h22M4 23h22"/>
+                            <path
+                                stroke="var(--gs-mid)"
+                                stroke-linecap="round"
+                                stroke-miterlimit="10"
+                                stroke-width="2"
+                                d="M4 7h22M4 15h22M4 23h22"
+                            />
                         </svg>
                     </button>
 
@@ -154,7 +164,7 @@
                             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#about">About</a>
+                                    <a class="nav-link" href="{% url 'storelocator:index' %}">Home</a>
                                 </li>
 
                                 <li class="nav-item">
@@ -168,12 +178,12 @@
                                     </a>
 
                                     <ul class="locations-list dropdown-menu dropdown-menu-dark dropdown-menu-end">
-                                        {% for store in stores %}
-
+                                        {% for city in cities %}
                                             <li>
-                                                <a class="dropdown-item" href="#{{ store.name }}">{{ store.name }}</a>
+                                                <a class="dropdown-item" href="{% url 'storelocator:city_stores' city.state.slug city.slug %}">
+                                                    {{ city.name }}, {{ city.state.abbreviation }}
+                                                </a>
                                             </li>
-
                                         {% endfor %}
                                     </ul>
 
@@ -182,27 +192,28 @@
                             </ul>
 
                             <label class="theme-toggle-label" for="theme-toggle">
+
                                 <input
                                     id="theme-toggle"
-                                    name="theme-toggle"
                                     class="theme-toggle"
                                     type="checkbox"
                                 />
 
-                                <i class="fas fa-sun"></i>
+                                <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                    <!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                    <path
+                                        id="themePath"
+                                        fill="currentColor"
+                                        d="M210.2 53.9C217.6 50.8 226 51.7 232.7 56.1L320.5 114.3L408.3 56.1C415 51.7 423.4 50.9 430.8 53.9C438.2 56.9 443.4 63.5 445 71.3L465.9 174.5L569.1 195.4C576.9 197 583.5 202.4 586.5 209.7C589.5 217 588.7 225.5 584.3 232.2L526.1 320L584.3 407.8C588.7 414.5 589.5 422.9 586.5 430.3C583.5 437.7 576.9 443.1 569.1 444.6L465.8 465.4L445 568.7C443.4 576.5 438 583.1 430.7 586.1C423.4 589.1 414.9 588.3 408.2 583.9L320.4 525.7L232.6 583.9C225.9 588.3 217.5 589.1 210.1 586.1C202.7 583.1 197.3 576.5 195.8 568.7L175 465.4L71.7 444.5C63.9 442.9 57.3 437.5 54.3 430.2C51.3 422.9 52.1 414.4 56.5 407.7L114.7 320L56.5 232.2C52.1 225.5 51.3 217.1 54.3 209.7C57.3 202.3 63.9 196.9 71.7 195.4L175 174.6L195.9 71.3C197.5 63.5 202.9 56.9 210.2 53.9zM239.6 320C239.6 275.6 275.6 239.6 320 239.6C364.4 239.6 400.4 275.6 400.4 320C400.4 364.4 364.4 400.4 320 400.4C275.6 400.4 239.6 364.4 239.6 320zM448.4 320C448.4 249.1 390.9 191.6 320 191.6C249.1 191.6 191.6 249.1 191.6 320C191.6 390.9 249.1 448.4 320 448.4C390.9 448.4 448.4 390.9 448.4 320z"
+                                    />
+                                </svg>
 
-                                <span class="slider"></span>
-
-                                <i class="fas fa-moon"></i>
                             </label>
-
-                            <div id="theme-notification" class="theme-notification">
-                                <i class="fas fa-circle-info"></i>
-                                <span id="notification-text"></span>
-                            </div>
                             
                         </div>
+
                     </div>
+
                 </div>
             </nav>
         </header>
@@ -211,6 +222,7 @@
         {% endblock %}
 
         <footer id="footer">
+
             <p>&copy; 2025 Cigar Cartel</p>
 
             <div id="contact-info">
@@ -224,10 +236,26 @@
                 </a>
 
             </div>
+            
         </footer>
 
-        {% block scripts %}
-        {% endblock %}
+        <script
+            src="{% static 'storelocator/js/bundle.js' %}">
+        </script>
+
+        <script
+            async
+            src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=geometry,marker&callback=initMap&v=weekly&loading=async"
+            defer>
+        </script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous">
+        </script>
+
+        {% block scripts %}{% endblock %}
     </body>
 
 </html>

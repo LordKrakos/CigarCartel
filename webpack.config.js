@@ -1,14 +1,18 @@
 const path = require('path');
 
 module.exports = {
+
     entry: [
+        './storelocator/static/storelocator/js/base.js',
         './storelocator/static/storelocator/js/index.js',
-        './storelocator/static/storelocator/js/map.js'
+        './storelocator/static/storelocator/js/map.js',
     ],
+
     output: {
         filename: 'bundle.js', // All code will be bundled into one file called bundle.js
         path: path.resolve(__dirname, 'storelocator/static/storelocator/js/')
     },
+
     module: {
         rules: [
             {
@@ -23,6 +27,7 @@ module.exports = {
             }
         ]
     },
+    
     devtool: 'source-map',
     mode: 'development'
 };

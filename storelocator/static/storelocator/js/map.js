@@ -33,12 +33,16 @@ function createAdvancedMarker(store, AdvancedMarkerElement, map) {
 
     // 🔑 Make marker clickable
     markerContent.style.cursor = "pointer"; // Show pointer cursor
+
     markerContent.addEventListener("click", () => {
+
         map.setCenter(marker.position);
+
         stepZoomWithCallback(19, 250, () => {
             currentStoreId = store.id;
             openInfoWindow(marker);
         });
+        
     });
     
     return marker;
