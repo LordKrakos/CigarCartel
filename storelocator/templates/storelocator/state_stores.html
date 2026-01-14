@@ -1,27 +1,26 @@
-<!-- smokeshop/storelocator/templates/storelocator/city_stores.html -->
- 
+<!-- smokeshop/storelocator/templates/storelocator/state_stores.html -->
 {% extends "storelocator/layout.html" %}
 {% load static %}
 
 {% block title %}
-    Cigar Cartel in {{ city.name }}, {{ state.abbreviation }} | Premium Cigars
+    Cigar Cartel in {{ state.name }} | Premium Cigars
 {% endblock %}
 
 {% block meta %}
-    <meta name="description" content="Discover premium cigars at Cigar Cartel in {{ city.name }}, {{ state.abbreviation }}. Visit our walk-in humidors for the finest cigar selection and accessories.">
-    <meta name="keywords" content="cigars {{ city.name }}, cigar shop {{ city.name }}, {{ state.name }}, humidor, premium cigars">
+    <meta name="description" content="Discover premium cigars at Cigar Cartel in {{ state.name }}. Visit our walk-in humidors for the finest cigar selection and accessories.">
+    <meta name="keywords" content="cigars in {{ state.name }}, humidor, premium cigars">
 {% endblock %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'storelocator/scss/city_stores.css' %}">
+    <link rel="stylesheet" href="{% static 'storelocator/scss/state_stores.css' %}">
 {% endblock %}
 
 {% block nav %}
     <ul class="locations-list dropdown-menu dropdown-menu-dark dropdown-menu-end">
-        {% for store in stores %}
+        {% for city in cities %}
             <li>
-                <a class="dropdown-item" href="{% url 'storelocator:store' state.slug city.slug store.slug %}">
-                    {{ store.name }}
+                <a class="dropdown-item" href="{% url 'storelocator:city_stores' state.slug city.slug %}">
+                    {{ city.name }}, {{ state.abbreviation }}
                 </a>
             </li>
         {% endfor %}
@@ -38,19 +37,15 @@
                 <a href="{% url 'storelocator:index' %}">Home</a>
             </li>
 
-            <li class="breadcrumb-item">
-                <a href="{% url 'storelocator:state_stores' state.slug %}">{{ state.abbreviation }}</a>
-            </li>
-
             <li class="breadcrumb-item active" aria-current="page">
-                {{ city.name }}
+                {{ state.abbreviation }}
             </li>
 
         </ol>
     </nav>
 
     <!-- City Stores Page Header -->
-    <header id="cs-header">
+    <header id="states-header">
 
         <h1 class="company-name">
             Cigar Cartel
@@ -60,11 +55,11 @@
             <span class="badge">
                 {{ stores.count }} location{{ stores.count|pluralize }}
             </span>
-            in {{ city.name }}, {{ state.abbreviation }}
+            in {{ state.name }}
         </h2>
 
         <p class="lead">
-            Premium cigars, walk-in humidors, and accessories in {{ city.name }}
+            Premium cigars, walk-in humidors, and accessories in {{ state.name }}
         </p>
 
     </header>

@@ -12695,7 +12695,7 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 /* harmony import */ var gsap_MorphSVGPlugin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/MorphSVGPlugin */ "./node_modules/gsap/MorphSVGPlugin.js");
-// smokeshop/storelocator/static/storelocator/js/base.js
+// CigarCartel/storelocator/static/storelocator/js/base.js
 
 
 
@@ -12706,34 +12706,34 @@ gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_MorphSVGPlugin__WEBPA
 // Age Verification Modal
 // ----------------------
 document.addEventListener("DOMContentLoaded", function () {
-  // Retrieve the verification modal and elements
   var modal = document.getElementById('verification-modal');
   var yesBtn = document.getElementById('yes');
   var noBtn = document.getElementById('no');
-
-  // Retrieve the page content
   var pageContent = document.getElementById('page-content');
 
-  // Show the modal (display: flex;)
-  modal.style.display = 'flex';
-  // Add a 'modal-active' class to the body to prevent background scrolling
-  document.body.classList.add('modal-active');
-  // Add the 'no-animations' class to pause animations
-  pageContent.classList.add('no-animations');
+  // Check if user already verified
+  var ageVerified = localStorage.getItem('ageVerified');
 
-  // Listen for 'click' events on the Yes button
+  // Only show modal if not verified
+  if (!ageVerified) {
+    modal.style.display = 'flex';
+    document.body.classList.add('modal-active');
+    pageContent === null || pageContent === void 0 || pageContent.classList.add('no-animations');
+  }
+
+  // Handle Yes button
   yesBtn === null || yesBtn === void 0 || yesBtn.addEventListener('click', function () {
-    // Hide the modal (display: none;)
+    // Store verification
+    localStorage.setItem('ageVerified', 'true');
+
+    // Hide modal
     modal.style.display = 'none';
-    // Remove the 'modal-active' class to re-enable background scrolling
     document.body.classList.remove('modal-active');
-    // Remove the 'no-animations' class to enable animations
-    pageContent.classList.remove('no-animations');
+    pageContent === null || pageContent === void 0 || pageContent.classList.remove('no-animations');
   });
 
-  // Listen for 'click' events on the No button
+  // Handle No button
   noBtn === null || noBtn === void 0 || noBtn.addEventListener('click', function () {
-    // Redirect to google
     window.location.href = 'https://www.google.com';
   });
 });
@@ -12741,28 +12741,43 @@ document.addEventListener("DOMContentLoaded", function () {
 // Navbar Scroll Effect
 // ---------------------
 document.addEventListener("DOMContentLoaded", function () {
-  // Retrieve the navbar element
   var navbar = document.querySelector('.navbar');
 
-  // Listen for scroll events
+  // Exit early if no navbar
+  if (!navbar) return;
   window.addEventListener("scroll", function () {
-    // Check if the scroll position is greater than 50px
     if (window.scrollY > 50) {
-      // Add the 'scrolled' class to the navbar
       navbar.classList.add('scrolled');
-
-      // Otherwise
     } else {
-      // Remove the 'scrolled' class from the navbar
       navbar.classList.remove('scrolled');
     }
   });
 });
 
+// Utility: Throttle function for performance
+// -------------------------------------------
+function throttle(func, wait) {
+  var timeout;
+  return function executedFunction() {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    var later = function later() {
+      clearTimeout(timeout);
+      func.apply(void 0, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 // Dynamic Header Height CSS Variable
-// --------------------
+// -----------------------------------
 document.addEventListener("DOMContentLoaded", function () {
   var header = document.querySelector('header');
+
+  // Exit early if no header
+  if (!header) return;
   function updateHeaderHeight() {
     var headerHeight = header.offsetHeight;
     document.documentElement.style.setProperty('--header-height', "".concat(headerHeight, "px"));
@@ -12771,27 +12786,31 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initial update
   updateHeaderHeight();
 
-  // Update on window resize
-  window.addEventListener('resize', updateHeaderHeight);
+  // Update on window resize (throttled)
+  window.addEventListener('resize', throttle(updateHeaderHeight, 250));
 });
 
 // Theme Toggle Functionality
-// --------------------
+// ---------------------------
 document.addEventListener("DOMContentLoaded", function () {
   var checkbox = document.getElementById("theme-toggle");
-  var root = document.documentElement;
   var themePath = document.getElementById("themePath");
   var themeIcon = document.getElementById("theme-icon");
 
-  // Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
+  // Exit early if elements don't exist
+  if (!checkbox || !themePath || !themeIcon) return;
+  var root = document.documentElement;
+
+  // Font Awesome paths
   var sunPath = "M210.2 53.9C217.6 50.8 226 51.7 232.7 56.1L320.5 114.3L408.3 56.1C415 51.7 423.4 50.9 430.8 53.9C438.2 56.9 443.4 63.5 445 71.3L465.9 174.5L569.1 195.4C576.9 197 583.5 202.4 586.5 209.7C589.5 217 588.7 225.5 584.3 232.2L526.1 320L584.3 407.8C588.7 414.5 589.5 422.9 586.5 430.3C583.5 437.7 576.9 443.1 569.1 444.6L465.8 465.4L445 568.7C443.4 576.5 438 583.1 430.7 586.1C423.4 589.1 414.9 588.3 408.2 583.9L320.4 525.7L232.6 583.9C225.9 588.3 217.5 589.1 210.1 586.1C202.7 583.1 197.3 576.5 195.8 568.7L175 465.4L71.7 444.5C63.9 442.9 57.3 437.5 54.3 430.2C51.3 422.9 52.1 414.4 56.5 407.7L114.7 320L56.5 232.2C52.1 225.5 51.3 217.1 54.3 209.7C57.3 202.3 63.9 196.9 71.7 195.4L175 174.6L195.9 71.3C197.5 63.5 202.9 56.9 210.2 53.9zM239.6 320C239.6 275.6 275.6 239.6 320 239.6C364.4 239.6 400.4 275.6 400.4 320C400.4 364.4 364.4 400.4 320 400.4C275.6 400.4 239.6 364.4 239.6 320zM448.4 320C448.4 249.1 390.9 191.6 320 191.6C249.1 191.6 191.6 249.1 191.6 320C191.6 390.9 249.1 448.4 320 448.4C390.9 448.4 448.4 390.9 448.4 320z";
-  // Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.
   var moonPath = "M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z";
+
+  // Set theme with animation
   var setTheme = function setTheme(theme) {
     root.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
 
-    // Create GSAP timeline for synchronized animations
+    // GSAP timeline for synchronized animations
     var tl = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline();
 
     // SVG morph animation
@@ -12800,22 +12819,46 @@ document.addEventListener("DOMContentLoaded", function () {
       morphSVG: theme === 'dark' ? moonPath : sunPath,
       ease: 'power2.inOut',
       overwrite: 'auto'
-    }, 0); // start at 0 seconds
+    }, 0);
 
-    // Icon slide animation
+    // Icon slide and rotate animation
     tl.to(themeIcon, {
       duration: 1,
       x: theme === 'dark' ? 27.5 : 0,
       rotate: theme === 'dark' ? 215 : 0,
       ease: 'power2.inOut',
       overwrite: 'auto'
-    }, 0); // also start at 0 seconds
+    }, 0);
   };
-  var savedTheme = localStorage.getItem('theme') || 'light';
+
+  // Get preferred theme (localStorage > system preference > default)
+  var getPreferredTheme = function getPreferredTheme() {
+    var savedTheme = localStorage.getItem('theme');
+    if (savedTheme) return savedTheme;
+
+    // Check system preference
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? 'dark' : 'light';
+  };
+
+  // Initialize theme
+  var savedTheme = getPreferredTheme();
   setTheme(savedTheme);
   checkbox.checked = savedTheme === 'dark';
+
+  // Handle checkbox change
   checkbox.addEventListener('change', function () {
     setTheme(checkbox.checked ? 'dark' : 'light');
+  });
+
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+    // Only auto-switch if user hasn't manually set a preference
+    if (!localStorage.getItem('theme')) {
+      var newTheme = e.matches ? 'dark' : 'light';
+      setTheme(newTheme);
+      checkbox.checked = e.matches;
+    }
   });
 });
 })();
@@ -12831,7 +12874,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 /* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
 /* harmony import */ var gsap_SplitText__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap/SplitText */ "./node_modules/gsap/SplitText.js");
-// smokeshop/storelocator/static/storelocator/js/index.js
+// CigarCartel/storelocator/static/storelocator/js/index.js
 
 
 
@@ -12884,7 +12927,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   // Gold shimmer sweep on company name
   var company = document.querySelector(".company-name");
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.fromTo(".company-name", {
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.fromTo(company, {
     backgroundPosition: "400% center"
   },
   // start left edge
@@ -12896,7 +12939,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ease: "power1.inOut",
     repeat: -1,
     // infinite loop
-    delay: 10,
+    delay: 5,
     // brief pause
 
     scrollTrigger: {
@@ -12918,7 +12961,8 @@ document.addEventListener("DOMContentLoaded", function () {
           type: "words"
         });
         gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(splitWords.words, {
-          yPercent: 'random([-100, 100])',
+          xPercent: 'random([-100, 100])',
+          yPercent: 'random([-50, 50])',
           autoAlpha: 0,
           stagger: {
             amount: 3,
@@ -12927,14 +12971,12 @@ document.addEventListener("DOMContentLoaded", function () {
           scrollTrigger: {
             trigger: item,
             start: "top 85%",
-            toggleActions: "restart pause reverse pause"
+            toggleActions: "play reset play reset"
           }
         });
       });
     }
   });
-
-  // 4. Gentle fade for the footer CTA
 });
 
 // Thumbnail gallery functionality
@@ -12999,8 +13041,8 @@ document.addEventListener("DOMContentLoaded", function () {
 /*!****************************************************!*\
   !*** ./storelocator/static/storelocator/js/map.js ***!
   \****************************************************/
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 // smokeshop/storelocator/static/storelocator/js/map.js
@@ -13061,6 +13103,14 @@ function stepZoomWithCallback(targetZoom) {
     return stepZoomWithCallback(targetZoom, delay, callback);
   }, delay);
 }
+
+// Helper to escape HTML
+function escapeHtml(text) {
+  if (!text) return '';
+  var div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
 function openInfoWindow(marker) {
   if (currentInfoWindow) {
     currentInfoWindow.close();
@@ -13069,21 +13119,34 @@ function openInfoWindow(marker) {
     var store = marker.storeData;
     var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     var directionsUrl = isMobile ? "https://maps.apple.com/?daddr=".concat(store.latitude, ",").concat(store.longitude, "&dirflg=d") : "https://www.google.com/maps/dir/?api=1&destination=".concat(store.latitude, ",").concat(store.longitude);
-    var contentString = "\n            <div class=\"info-window fade-in\">\n                <h3>".concat(store.name, "</h3>\n                <p class=\"info-address\">").concat(store.address, ",</p>\n                <p class=\"info-city\">").concat(store.city_name, ", ").concat(store.state_abbreviation, " ").concat(store.zip_code, "</p>\n                <p class=\"info-phone\"><b>Phone:</b> ").concat(store.phone_number, "</p>\n                <p class=\"info-email\"><b>Email:</b> ").concat(store.email, "</p>\n                <p class=\"info-hours\"><b>Hours:</b> ").concat(store.opening_hour, " - ").concat(store.closing_hour, " </p>\n                <a href=\"").concat(directionsUrl, "\" target=\"_blank\" class=\"get-directions\">Get Directions</a>\n            </div>\n        ");
+
+    // Build content with null checks
+    var contentString = "\n            <div class=\"info-window fade-in\">\n                <h3>".concat(escapeHtml(store.name), "</h3>\n                <p class=\"info-address\">").concat(escapeHtml(store.address), "</p>\n                <p class=\"info-city\">").concat(escapeHtml(store.city_name), ", ").concat(escapeHtml(store.state_abbreviation), " ").concat(escapeHtml(store.zip_code), "</p>\n                <p class=\"info-phone\"><b>Phone:</b> <a href=\"tel:").concat(store.phone_number, "\">").concat(escapeHtml(store.phone_number), "</a></p>\n        ");
+
+    // Only add email if it exists
+    if (store.email) {
+      contentString += "<p class=\"info-email\"><b>Email:</b> <a href=\"mailto:".concat(store.email, "\">").concat(escapeHtml(store.email), "</a></p>");
+    }
+
+    // Only add hours if they exist
+    if (store.opening_hour && store.closing_hour) {
+      contentString += "<p class=\"info-hours\"><b>Hours:</b> ".concat(escapeHtml(store.opening_hour), " - ").concat(escapeHtml(store.closing_hour), "</p>");
+    }
+    contentString += "\n                <a href=\"".concat(directionsUrl, "\" target=\"_blank\" rel=\"noopener\" class=\"get-directions btn btn-primary btn-sm\">\n                    <i class=\"fa-solid fa-route\"></i> Get Directions\n                </a>\n            </div>\n        ");
     currentInfoWindow = new google.maps.InfoWindow({
       content: contentString
     });
     currentInfoWindow.open(map, marker);
 
-    // Dynamically center the map after the info window is rendered
+    // Center map after info window opens
     google.maps.event.addListenerOnce(currentInfoWindow, "domready", function () {
       var iwOuter = document.querySelector(".gm-style-iw");
       if (iwOuter) {
-        var iwHeight = iwOuter.offsetHeight; // height of info window
-        map.panBy(0, -iwHeight); // shift map up so info window is centered
+        var iwHeight = iwOuter.offsetHeight;
+        map.panBy(0, -iwHeight); // Center better
       }
     });
-  }, 150); // brief pause
+  }, 150);
 }
 function zoomToStore(storeId) {
   // Close any existing info window immediately.
@@ -13091,7 +13154,7 @@ function zoomToStore(storeId) {
     currentInfoWindow.close();
   }
   var marker = markers.find(function (m) {
-    return m.storeId == storeId;
+    return m.storeId === parseInt(storeId);
   });
   if (marker) {
     // If a store is already selected and it differs from the newly requested store,
@@ -13116,53 +13179,54 @@ function zoomToStore(storeId) {
     }
   }
 }
-function initMap() {
-  return _initMap.apply(this, arguments);
-}
-function _initMap() {
-  _initMap = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var _yield$google$maps$im, Map, _yield$google$maps$im2, AdvancedMarkerElement, center;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) switch (_context.prev = _context.next) {
-        case 0:
-          _context.next = 2;
-          return google.maps.importLibrary("maps");
-        case 2:
-          _yield$google$maps$im = _context.sent;
-          Map = _yield$google$maps$im.Map;
-          _context.next = 6;
-          return google.maps.importLibrary("marker");
-        case 6:
-          _yield$google$maps$im2 = _context.sent;
-          AdvancedMarkerElement = _yield$google$maps$im2.AdvancedMarkerElement;
-          // Default center (adjust as needed)
-          center = {
-            lat: 28.28562,
-            lng: -81.63381
-          };
-          map = new Map(document.getElementById("map"), {
-            zoom: 10.5,
-            center: center,
-            mapTypeId: "hybrid",
-            mapId: "map"
-          });
 
-          // Parse store data once and create markers.
-          storesDataGlobal = JSON.parse(document.getElementById("stores-data").textContent);
-          storesDataGlobal.forEach(function (store) {
-            if (store.latitude && store.longitude) {
-              var marker = createAdvancedMarker(store, AdvancedMarkerElement, map);
-              markers.push(marker);
-            }
-          });
-        case 12:
-        case "end":
-          return _context.stop();
-      }
-    }, _callee);
-  }));
-  return _initMap.apply(this, arguments);
+// Calculate map center from stores
+function calculateCenter(stores) {
+  var latSum = 0;
+  var lngSum = 0;
+  var count = 0;
+  stores.forEach(function (store) {
+    if (store.latitude && store.longitude) {
+      latSum += parseFloat(store.latitude);
+      lngSum += parseFloat(store.longitude);
+      count++;
+    }
+  });
+  return count > 0 ? {
+    lat: latSum / count,
+    lng: lngSum / count
+  } : {
+    lat: 28.28562,
+    lng: -81.63381
+  }; // Fallback
 }
+
+// Helper function for notifications
+function showNotification(type, message) {
+  // Using Bootstrap 5 toast
+  var toastHtml = "\n        <div class=\"toast align-items-center text-white bg-".concat(type === 'success' ? 'success' : type === 'error' ? 'danger' : 'warning', " border-0\" role=\"alert\">\n            <div class=\"d-flex\">\n                <div class=\"toast-body\">\n                    ").concat(message, "\n                </div>\n                <button type=\"button\" class=\"btn-close btn-close-white me-2 m-auto\" data-bs-dismiss=\"toast\"></button>\n            </div>\n        </div>\n    ");
+
+  // Create toast container if doesn't exist
+  var toastContainer = document.querySelector('.toast-container');
+  if (!toastContainer) {
+    toastContainer = document.createElement('div');
+    toastContainer.className = 'toast-container position-fixed top-0 end-0 p-3';
+    document.body.appendChild(toastContainer);
+  }
+
+  // Add and show toast
+  toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+  var toastElement = toastContainer.lastElementChild;
+  var toast = new bootstrap.Toast(toastElement);
+  toast.show();
+
+  // Remove after hiding
+  toastElement.addEventListener('hidden.bs.toast', function () {
+    toastElement.remove();
+  });
+}
+
+// Get Directions Function
 function getDirections(storeAddress) {
   var isAppleDevice = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   var baseUrl = isAppleDevice ? "https://maps.apple.com/?daddr=" : "https://www.google.com/maps/dir/?api=1&destination=";
@@ -13170,33 +13234,233 @@ function getDirections(storeAddress) {
   window.open(baseUrl + encodedAddress, '_blank');
 }
 
-// Place this in a JS file that loads on your page (after the DOM is ready)
-document.addEventListener("DOMContentLoaded", function () {
-  var addressForm = document.getElementById("address-form");
-  addressForm.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent page reload
-
-    var formData = new FormData(this);
-    var params = new URLSearchParams(formData);
-    var indexUrl = addressForm.getAttribute("data-url");
-    fetch(indexUrl + "?" + params.toString(), {
-      headers: {
-        "X-Requested-With": "XMLHttpRequest"
-      }
-    }).then(function (response) {
-      return response.json();
-    }).then(function (data) {
-      if (data.closest_store) {
-        zoomToStore(data.closest_store.id);
-      } else if (data.errors) {
-        alert("Error: " + JSON.stringify(data.errors));
-      } else {
-        alert("No store found or geocoding failed.");
-      }
-    })["catch"](function (error) {
-      console.error("Error:", error);
+// Add "Use My Location" button
+function geolocation() {
+  // Retrieve the geolocation button
+  var locationBtn = document.getElementById('geolocation');
+  locationBtn.addEventListener('click', function () {
+    if (!navigator.geolocation) {
+      showNotification('error', 'Geolocation not supported');
+      return;
+    }
+    locationBtn.disabled = true;
+    locationBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      map.setCenter(pos);
+      map.setZoom(13);
+      findNearestStore(pos);
+      showNotification('success', 'Found nearest store');
+      locationBtn.disabled = false;
+      locationBtn.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i>';
+    }, function () {
+      locationBtn.disabled = false;
+      locationBtn.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i>';
+      showNotification('error', 'Unable to get your location');
     });
   });
+}
+function findNearestStore(userPos) {
+  var nearestStore = null;
+  var minDistance = Infinity;
+  markers.forEach(function (marker) {
+    var store = marker.storeData;
+    var storePos = {
+      lat: parseFloat(store.latitude),
+      lng: parseFloat(store.longitude)
+    };
+    var distance = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(userPos), new google.maps.LatLng(storePos));
+    if (distance < minDistance) {
+      minDistance = distance;
+      nearestStore = marker;
+    }
+  });
+  if (nearestStore) {
+    zoomToStore(nearestStore.storeId);
+  }
+}
+
+// Initialize Map
+function initMap() {
+  return _initMap.apply(this, arguments);
+}
+function _initMap() {
+  _initMap = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+    var _yield$google$maps$im, _Map, _yield$google$maps$im2, AdvancedMarkerElement, storesDataElement, storesData, center, mapElement, _t2, _t3;
+    return _regenerator().w(function (_context2) {
+      while (1) switch (_context2.p = _context2.n) {
+        case 0:
+          _context2.p = 0;
+          _context2.n = 1;
+          return google.maps.importLibrary("maps");
+        case 1:
+          _yield$google$maps$im = _context2.v;
+          _Map = _yield$google$maps$im.Map;
+          _context2.n = 2;
+          return google.maps.importLibrary("marker");
+        case 2:
+          _yield$google$maps$im2 = _context2.v;
+          AdvancedMarkerElement = _yield$google$maps$im2.AdvancedMarkerElement;
+          // Get stores data with error handling
+          storesDataElement = document.getElementById("stores-data");
+          if (storesDataElement) {
+            _context2.n = 3;
+            break;
+          }
+          console.error("stores-data element not found");
+          return _context2.a(2);
+        case 3:
+          _context2.p = 3;
+          storesData = JSON.parse(storesDataElement.textContent);
+          _context2.n = 5;
+          break;
+        case 4:
+          _context2.p = 4;
+          _t2 = _context2.v;
+          console.error("Failed to parse stores data:", _t2);
+          return _context2.a(2);
+        case 5:
+          // Calculate center from stores if available
+          center = {
+            lat: 28.28562,
+            lng: -81.63381
+          }; // Default
+          if (storesData.length > 0) {
+            center = calculateCenter(storesData);
+          }
+          mapElement = document.getElementById("map");
+          if (mapElement) {
+            _context2.n = 6;
+            break;
+          }
+          console.warn("Map element not found");
+          return _context2.a(2);
+        case 6:
+          map = new _Map(mapElement, {
+            zoom: 10.5,
+            center: center,
+            mapTypeId: "hybrid",
+            mapId: "map"
+          });
+
+          // Create markers
+          storesData.forEach(function (store) {
+            if (store.latitude && store.longitude) {
+              var marker = createAdvancedMarker(store, AdvancedMarkerElement, map);
+              markers.push(marker);
+            }
+          });
+          _context2.n = 8;
+          break;
+        case 7:
+          _context2.p = 7;
+          _t3 = _context2.v;
+          console.error("Error initializing map:", _t3);
+        case 8:
+          return _context2.a(2);
+      }
+    }, _callee2, null, [[3, 4], [0, 7]]);
+  }));
+  return _initMap.apply(this, arguments);
+}
+document.addEventListener("DOMContentLoaded", function () {
+  // 1. Zoom to store listeners
+  document.querySelectorAll('[data-action="zoom-store"]').forEach(function (item) {
+    item.addEventListener('click', function () {
+      var storeId = parseInt(this.dataset.storeId);
+      zoomToStore(storeId);
+    });
+
+    // Keyboard accessibility
+    item.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        var storeId = parseInt(this.dataset.storeId);
+        zoomToStore(storeId);
+      }
+    });
+  });
+
+  // 2. Get directions listeners
+  document.querySelectorAll('[data-action="get-directions"]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var address = this.dataset.address;
+      getDirections(address);
+    });
+  });
+
+  // 3. Form submission handler
+  var addressForm = document.getElementById("address-form");
+  if (addressForm) {
+    addressForm.addEventListener("submit", /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(event) {
+        var submitBtn, originalText, formData, params, indexUrl, response, data, _t;
+        return _regenerator().w(function (_context) {
+          while (1) switch (_context.p = _context.n) {
+            case 0:
+              event.preventDefault();
+              submitBtn = this.querySelector('button[type="submit"]');
+              originalText = submitBtn.innerHTML;
+              submitBtn.disabled = true;
+              submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+              formData = new FormData(this);
+              params = new URLSearchParams(formData);
+              indexUrl = addressForm.getAttribute("data-url");
+              _context.p = 1;
+              _context.n = 2;
+              return fetch(indexUrl + "?" + params.toString(), {
+                headers: {
+                  "X-Requested-With": "XMLHttpRequest"
+                }
+              });
+            case 2:
+              response = _context.v;
+              if (response.ok) {
+                _context.n = 3;
+                break;
+              }
+              throw new Error("HTTP error! status: ".concat(response.status));
+            case 3:
+              _context.n = 4;
+              return response.json();
+            case 4:
+              data = _context.v;
+              if (data.closest_store) {
+                zoomToStore(data.closest_store.id);
+                showNotification('success', "Closest store found: ".concat(data.closest_store.name));
+              } else if (data.errors) {
+                showNotification('error', 'Please enter a valid address');
+              } else {
+                showNotification('warning', 'No stores found near this address');
+              }
+              _context.n = 6;
+              break;
+            case 5:
+              _context.p = 5;
+              _t = _context.v;
+              console.error("Error:", _t);
+              showNotification('error', 'An error occurred. Please try again.');
+            case 6:
+              _context.p = 6;
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalText;
+              return _context.f(6);
+            case 7:
+              return _context.a(2);
+          }
+        }, _callee, this, [[1, 5, 6, 7]]);
+      }));
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }());
+  }
+
+  // 4. Add geolocation button
+  geolocation();
 });
 
 // --------------------
@@ -13204,7 +13468,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // --------------------
 window.initMap = initMap;
 window.zoomToStore = zoomToStore;
-// Expose the function globally
 window.getDirections = getDirections;
 })();
 

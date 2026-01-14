@@ -1,10 +1,4 @@
-:root {
-  --gold-dark: #8d6b1f;
-  --gold-mid: #d4af37;
-  --gold-light: #f8e9a1;
-  --gold-bright: #fffce8;
-}
-
+@charset "UTF-8";
 .parallax-image-container {
   position: fixed;
   top: 0;
@@ -15,9 +9,9 @@
   filter: blur(3px) brightness(0.7) contrast(1.2);
 }
 .parallax-image-container .para-image {
-  position: fixed;
-  width: 100dvw;
-  height: 100dvh;
+  position: absolute;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -26,18 +20,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 7rem;
+  gap: 2rem;
   width: 100%;
   height: calc(100dvh - var(--header-height));
 }
 #hero .brand-logo {
   width: 80dvw;
-  max-width: 600px;
+  max-width: 450px;
   height: auto;
 }
 #hero #hero-nav {
   width: 95dvw;
-  max-width: 1000px;
+  max-width: 850px;
 }
 #hero #hero-nav .hero-nav-links {
   display: flex;
@@ -59,9 +53,9 @@
   color: #fff;
   width: 100%;
   display: block;
-  padding: 0.7rem;
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  font-weight: bold;
+  padding: 0.5rem;
+  font-size: clamp(0.9rem, 2vw, 1.5rem);
+  font-weight: 450;
   transition: color 0.3s;
   text-decoration: none;
 }
@@ -99,28 +93,34 @@
   left: 0;
   width: 100%;
   height: calc(100dvh - var(--header-height));
-  background-color: var(--background);
+  background-color: var(--card);
 }
 #about #panel-wrapper #thanks {
   padding: 0 0.5rem;
-  background: var(--card);
-  flex-direction: column;
 }
-#about #panel-wrapper #thanks .about-title {
-  width: 100%;
+#about #panel-wrapper #thanks .thanks-wrapper {
   height: 100%;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#about #panel-wrapper #thanks .thanks-wrapper .about-title {
+  width: 100%;
   margin: 0;
+  padding: 0.5rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: clamp(2.3rem, 6vw, 4rem);
+  font-size: clamp(1.5rem, 6vw, 3rem);
   font-weight: 400;
 }
-#about #panel-wrapper #thanks .about-title .company-name {
+#about #panel-wrapper #thanks .thanks-wrapper .about-title .company-name {
   /* Premium multi-stop metallic gradient */
-  background: linear-gradient(90deg, var(--gs-dark) 0%, var(--gs-mid) 20%, var(--gs-light) 49%, var(--gs-bright) 50%, var(--gs-light) 51%, var(--gs-mid) 80%, var(--gs-dark) 100%);
+  background: linear-gradient(75deg, var(--gs-dark) 0%, var(--gs-mid) 35%, var(--gs-light) 49%, var(--gs-bright) 50%, var(--gs-light) 51%, var(--gs-mid) 65%, var(--gs-dark) 100%);
   background-size: 300%; /* needed for sweep */
   background-position: 0% center;
   -webkit-background-clip: text;
@@ -131,58 +131,52 @@
   /* optional: subtle emboss for a premium feel */
   text-shadow: 1px 2px 2.5px var(--gs-shadow), 1px 2px 2.5px var(--gs-shadow);
 }
-#about #panel-wrapper #thanks .about-title::after {
+#about #panel-wrapper #thanks .thanks-wrapper .about-title::after {
   content: "";
   width: 100%;
   height: 0.2dvh;
   position: relative;
-  top: 10%;
+  top: 10px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
-#about #panel-wrapper #thanks ul {
+#about #panel-wrapper #thanks .thanks-wrapper .split-text {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0.7rem;
-  height: 100%;
+  gap: 0.5rem;
   margin: 0;
-  padding: 0 0.65rem;
+  padding: 0.65rem;
   list-style: none;
 }
-#about #panel-wrapper #thanks ul li {
+#about #panel-wrapper #thanks .thanks-wrapper .split-text li {
   color: var(--text);
   margin: 0;
-  font-size: clamp(1.03rem, 2.7vw, 1.55rem);
-  font-weight: 350;
-  position: relative;
+  font-size: clamp(0.92rem, 2.7vw, 1.1rem);
   max-width: 700px;
 }
-#about #panel-wrapper #thanks #about-footer {
+#about #panel-wrapper #thanks .thanks-wrapper #about-footer {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
-  width: 100%;
-  height: 100%;
   margin: 0;
+  padding: 0.5rem 0;
   border: none;
+  font-size: clamp(1.1rem, 3.3vw, 1.7rem);
   text-decoration: none;
 }
-#about #panel-wrapper #thanks #about-footer::before {
+#about #panel-wrapper #thanks .thanks-wrapper #about-footer::before {
   content: "";
   width: 100%;
   height: 0.2dvh;
   position: relative;
-  bottom: 10%;
+  bottom: 10px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
-#about #panel-wrapper #thanks #about-footer p {
+#about #panel-wrapper #thanks .thanks-wrapper #about-footer p {
   margin: 0;
-  font-size: clamp(1.4rem, 3.3vw, 2rem);
 }
-#about #panel-wrapper #thanks #about-footer .arrow {
-  font-size: clamp(1.6rem, 2vw, 2rem);
+#about #panel-wrapper #thanks .thanks-wrapper #about-footer .arrow {
   animation: bounce 1.5s infinite;
   color: var(--accent);
 }
@@ -195,7 +189,7 @@
   gap: 1rem;
 }
 #about #panel-wrapper #featured-images .wrapper .ft-cigar-wrapper {
-  width: 90%;
+  width: 95%;
   max-width: 650px;
   outline: 0.1rem solid var(--accent);
   border: 0.6rem solid var(--border);
@@ -215,12 +209,14 @@
 }
 #about #panel-wrapper #featured-images .wrapper .cigar-thumbnails {
   display: flex;
-  gap: 15px;
-  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  align-items: center;
+  justify-content: space-evenly;
 }
 #about #panel-wrapper #featured-images .wrapper .cigar-thumbnails .cigar-thumbnail {
-  width: 100px;
-  height: 100px;
+  width: 25%;
+  aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid var(--border);
@@ -240,26 +236,96 @@
   outline: 2px solid var(--accent) !important;
   outline-offset: 3px !important;
 }
-#about #panel-wrapper #discounts .carousel {
+#about #panel-wrapper #discounts {
+  padding: 0.5rem 1rem;
+}
+#about #panel-wrapper #discounts .discount-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   width: 100%;
-  max-width: 600px;
+  max-width: 1030px;
 }
-#about #panel-wrapper #discounts .carousel .carousel-inner {
-  border-radius: 0.9rem;
+#about #panel-wrapper #discounts .discount-container .discount .discount-header {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
 }
-#about #panel-wrapper #discounts .carousel .carousel-inner .carousel-item {
-  border-radius: 0.9rem;
+#about #panel-wrapper #discounts .discount-container .discount .discount-header .fa-cake-candles {
+  color: #342aa5;
 }
-#about #panel-wrapper #discounts .carousel .carousel-inner .carousel-item img {
-  width: 100%;
-  border-radius: 0.9rem;
-  object-fit: cover;
-  aspect-ratio: 16/9;
+#about #panel-wrapper #discounts .discount-container .discount .discount-header .fa-flag-usa {
+  color: #ff0000;
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header .fa-kit-medical {
+  color: #33ff33;
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header .fa-wand-sparkles {
+  color: royalblue;
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header .fa-ring {
+  color: #ffcc24;
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header .fa-baby-carriage {
+  color: #0682a8;
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header #birthday-discount {
+  background: linear-gradient(0deg, var(--text) 0%, #342aa5 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* Non‑WebKit browsers */
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header #veterans-discount {
+  background: linear-gradient(0deg, #0000ff 30%, #fff 50%, #ff0000 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* Non‑WebKit browsers */
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header #hero-discount {
+  background: linear-gradient(0deg, #3333ff 30%, #33ff33 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* Non‑WebKit browsers */
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header #disney-discount .D {
+  color: orange;
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header #disney-discount .E {
+  color: var(--text);
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header #disney-discount .Di {
+  color: #33ff33;
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header #golf-discount .G {
+  color: #3333ff;
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header #golf-discount .a {
+  color: #fff;
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header #golf-discount .B {
+  color: #33ff33;
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header #wedding-bundle {
+  background: linear-gradient(0deg, #8d6b1f 0%, #d4af37 20%, #d4af37 40%, #f8e9a1 50%, #d4af37 60%, #d4af37 80%, #8d6b1f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* Non‑WebKit browsers */
+}
+#about #panel-wrapper #discounts .discount-container .discount .discount-header h5, #about #panel-wrapper #discounts .discount-container .discount .discount-header p {
+  margin: 0;
+}
+#about #panel-wrapper #discounts .discount-container .discount p {
+  margin: 0;
 }
 
-/* Tablets */
-/* Small Desktop */
-/* Large Desktop */
+/* Responsive adjustments */
+/* Width breakpoints */
+@media (max-height: 570px) {
+  .split-text li {
+    font-size: 0.82rem !important;
+  }
+}
+/* Height breakpoints */
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);

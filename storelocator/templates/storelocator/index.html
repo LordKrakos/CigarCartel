@@ -3,6 +3,10 @@
 {% extends "storelocator/layout.html" %}
 {% load static %}
 
+{% block description %}
+    <meta name="description" content="Find premium cigars at Cigar Cartel locations in Orlando, Kissimmee, Davenport, and Haines City, FL. Visit our walk-in humidors today.">
+{% endblock %}
+
 {% block title %}
     Cigar Cartel
 {% endblock %}
@@ -11,13 +15,23 @@
     <link rel="stylesheet" href="{% static 'storelocator/scss/index.css' %}">
 {% endblock %}
 
-{% block body %}
+{% block nav %}
+    <ul class="locations-list dropdown-menu dropdown-menu-dark dropdown-menu-end">
+        {% for state in states %}
+            <li>
+                <a class="dropdown-item" href="{% url 'storelocator:state_stores' state.slug %}">
+                    {{ state.abbreviation }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
 
-<main id="page-content">
+{% block main %}
 
     <div class="parallax-image-container">
         <img
-            src="https://t4.ftcdn.net/jpg/01/71/13/85/240_F_171138532_HIf9rVIYyMbdPlpIfcK6scPtBWJp0OX7.jpg"
+            src="{% static 'storelocator/images/hero-parallax.jpg' %}"
             alt="Hero Image"
             class="para-image"
             loading="lazy"
@@ -58,54 +72,54 @@
         <div id="panel-wrapper">
 
             <section id="thanks">
+                <div class="thanks-wrapper">
 
-                <h1 class="about-title">
-                    <span class="title-text">
-                        Thanks for visiting
-                    </span>
+                    <h1 class="about-title">
+                        <span class="title-text">
+                            Thanks for visiting
+                        </span>
 
-                    <span class="company-name">
-                        Cigar Cartel
-                    </span>
-                </h1>
-        
-                <ul class="split-text">
+                        <span class="company-name">
+                            Cigar Cartel
+                        </span>
+                    </h1>
+            
+                    <ul class="split-text">
 
-                    <li>
-                        You can find our exceptional walk-in humidors conveniently located across Central Florida, inside of your local 419 Smoke Shops.
-                    </li>
+                        <li>
+                            You can find our exceptional walk-in humidors conveniently located across Central Florida, inside of your local 419 Smoke Shops.
+                        </li>
 
-                    <li>
-                        Each humidor is stocked with the finest cigars, featuring a wide variety of popular cigar brands, including those sought-after, hard-to-find cigars.
-                    </li>
+                        <li>
+                            Each humidor is stocked with the finest cigars, featuring a wide variety of popular cigar brands, including those sought-after, hard-to-find cigars.
+                        </li>
 
-                    <li>
-                        At Cigar Cartel, we are committed to providing you with the finest cigars at the best possible prices. We inspect and hand-pick every cigar to ensure it meets the highest standards of quality and freshness.
-                    </li>
+                        <li>
+                            At Cigar Cartel, we are committed to providing you with the finest cigars at the best possible prices. We inspect and hand-pick every cigar to ensure it meets the highest standards of quality and freshness.
+                        </li>
 
-                    <li>
-                        We also offer a range of cigar accessories, including cutters, ashtrays, lighters, torches, butane, and humidification solutions, to enhance your smoking experience.
-                    </li>
+                        <li>
+                            We also offer a range of cigar accessories, including cutters, ashtrays, lighters, torches, butane, and humidification solutions, to enhance your smoking experience.
+                        </li>
 
-                </ul>
-        
-                <footer id="about-footer">
-                    
-                    <p>
-                        Find a location near you!
-                    </p>
+                    </ul>
+            
+                    <footer id="about-footer">
+                        
+                        <p>
+                            Find a location near you!
+                        </p>
 
-                    <a href="#locator-map" aria-label="Scroll to address form" id="scroll-down">
-                        <i class="arrow fa-solid fa-arrow-down"></i>
-                    </a>
+                        <a href="#locator-map" aria-label="Scroll to address form" id="scroll-down">
+                            <i class="arrow fa-solid fa-arrow-down"></i>
+                        </a>
 
-                </footer>
+                    </footer>
 
+                </div>
             </section>
 
             <section id="featured-images" class="sub-panel">
-
-                <!-- Desktop cigar images -->
                 <div class="wrapper">
 
                     <!-- Featured cigar image -->
@@ -144,78 +158,161 @@
                     </div>
             
                 </div>
-
             </section>
 
             <section id="discounts" class="sub-panel">
+                <div class="discount-container">
 
-                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                    <div class="discount">
 
-                    <div class="carousel-inner deals">
+                        <header class="discount-header">
 
-                        <div class="carousel-item active">
-                            <img
-                                src="{% static 'storelocator/images/birthday.png' %}"
-                                alt="Birthday Treat Discount"
-                            />
-                        </div>
+                            <i class="fa-solid fa-cake-candles"></i>
+                            <h5 id="birthday-discount">
+                                Birthday Treat
+                            </h5>
 
-                        <div class="carousel-item">
-                            <img
-                                src="{% static 'storelocator/images/veterans.png' %}"
-                                alt="Veterans Discount"
-                            />
-                        </div>
+                        </header>
 
-                        <div class="carousel-item">
-                            <img
-                                src="{% static 'storelocator/images/hero.png' %}"
-                                alt="First Responders Discount"
-                            />
-                        </div>
+                        <p>
+                            Celebrate your special day with a free cigar on your birthday!
+                        </p>
 
-                        <div class="carousel-item">
-                            <img
-                                src="{% static 'storelocator/images/disney.png' %}"
-                                alt="Disney Employee Discount"
-                            />
-                        </div>
-
-                        <div class="carousel-item">
-                            <img
-                                src="{% static 'storelocator/images/golf.png' %}"
-                                alt="Golfer's Bundle Discount"
-                            />
-                        </div>
-
-                        <div class="carousel-item">
-                            <img
-                                src="{% static 'storelocator/images/wedding.png' %}"
-                                alt="Wedding Bundle Discount"
-                            />
-                        </div>
-
-                        <div class="carousel-item">
-                            <img
-                                src="{% static 'storelocator/images/newborn.png' %}"
-                                alt="Newborn Bundle Discount"
-                            />
-                        </div>
+                        <small>
+                            (Valid Florida ID required)
+                        </small>
 
                     </div>
 
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
+                    <div class="discount">
 
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                        <header class="discount-header">
+
+                            <i class="fa-solid fa-flag-usa"></i>
+                            <h5 id="veterans-discount">
+                                Honoring Our Veterans
+                            </h5>
+
+                        </header>
+
+                        <p>
+                            A 10% discount on all cigars for veterans.
+                        </p>
+
+                        <small>
+                            (Thank you for your service!)
+                        </small>
+
+                    </div>
+
+                    <div class="discount">
+
+                        <header class="discount-header">
+
+                            <i class="fa-solid fa-kit-medical"></i>
+                            <h5 id="hero-discount">
+                                Heros Discount
+                            </h5>
+
+                        </header>
+
+                        <p>
+                            First responders and government employees receive a special discount.
+                        </p>
+
+                        <small>
+                            (Proof Required)
+                        </small>
+
+                    </div>
+
+                    <div class="discount">
+
+                        <header class="discount-header">
+
+                            <i class="fa-solid fa-wand-sparkles"></i>
+                            <h5 id="disney-discount">
+                                <span class="D">
+                                    Disney
+                                </span>
+                                <span class="E">
+                                    Employee
+                                </span>
+                                <span class="Di">
+                                    Discount
+                                </span>
+                            </h5>
+
+                        </header>
+
+                        <p>
+                            Enjoy a magical discount on all cigars for Disney employees.
+                        </p>
+
+                        <small>
+                            (Employee ID required)
+                        </small>
+
+                    </div>
+
+                    <div class="discount">
+
+                        <header class="discount-header">
+
+                            <i class="fa-solid fa-golf-ball-tee"></i>
+                            <h5 id="golf-discount">
+                                <span class="G">
+                                    Golfer<span class="a">'</span>s
+                                </span>
+                                <span class="B">
+                                    Bundle
+                                </span>
+                                 
+                            </h5>
+
+                        </header>
+
+                        <p>
+                            Discover deals on cigar bundles, Perfect for your next round.
+                        </p>
+
+                    </div>
+
+                    <div class="discount">
+
+                        <header class="discount-header">
+
+                            <i class="fa-solid fa-ring"></i>
+                            <h5 id="wedding-bundle">
+                                Wedding Bundles
+                            </h5>
+
+                        </header>
+
+                        <p>
+                            Celebrate your special occasion with our thoughtfully curated cigar bundles.
+                        </p>
+
+                    </div>
+
+                    <div class="discount">
+
+                        <header class="discount-header">
+
+                            <i class="fa-solid fa-baby-carriage"></i>
+                            <h5 id="newborn-bundle">
+                                Newborn Bundles
+                            </h5>
+
+                        </header>
+
+                        <p>
+                            Celebrate your little bundle of joy with our exclusive newborn bundles, perfect for celebrating new arrivals.
+                        </p>
+
+                    </div>
 
                 </div>
-
             </section>
             
         </div>
@@ -225,29 +322,50 @@
 
         <!-- Address Lookup Form -->
         <form id="address-form" role="search" data-url="{% url 'storelocator:index' %}" method="get">
-            
-            {% csrf_token %}
-            {{ form }}
 
-            <button class="btn btn-primary" type="submit" aria-label="Find a store">
-                Search
+            <div class="input-and-geo">
+
+                {{ form }}
+
+                <button
+                    id="geolocation"
+                    class="form-btn geolocation-btn"
+                    type="button"
+                    title="Use My Location"
+                >
+                    <i class="fa-solid fa-location-crosshairs"></i>
+                </button>
+
+            </div>
+
+            <button
+                id="search"
+                class="form-btn search-btn"
+                type="submit"
+                title="Search Address"
+            >
+                <i class="fa-solid fa-magnifying-glass"></i>
             </button>
 
         </form>
 
-        <div id="map" role="region" aria-label="Store locations map" loading="lazy">
+        <div id="map" role="region" aria-label="Store locations map">
             <!-- Google Map will be rendered here -->
         </div>
 
         <div class="list-group">
             {% for store in stores %}
 
-                <div class="list-group-item list-group-item-action" onclick="zoomToStore('{{ store.id }}');">
+                <div class="list-group-item list-group-item-action" data-store-id="{{ store.id }}" data-action="zoom-store">
+
                     <div class="d-flex w-100 justify-content-between">
+
                         <h5 class="mb-1">{{ store.name }}</h5>
+
                         <small>
                             <i class="fa-regular fa-clock"></i> {{ store.opening_hour }} - {{ store.closing_hour }}
                         </small>
+                        
                     </div>
 
                     <p class="mb-1">{{ store.address }},</p>
@@ -256,6 +374,7 @@
                     <small>
                         <i class="fa-solid fa-phone"></i> <a href="tel:{{ store.phone_number }}">{{ store.phone_number }}</a>
                     </small>
+
                 </div>
 
             {% empty %}
@@ -273,52 +392,68 @@
 
             {% for store in stores %}
 
-                <div id="{{ store.name }}" class="card">
+                <div id="store-{{ store.id }}" class="card">
 
-                    <div id="carouselExampleFade{{ store.id }}" class="carousel slide carousel-fade">
+                    {% if store.main_image or store.primary_image or store.secondary_image %}
+                        <div id="carouselExampleFade{{ store.id }}" class="carousel slide carousel-fade">
+                            <div class="carousel-inner">
 
-                        <div class="carousel-inner">
+                                {% if store.main_image %}
+                                    <div class="carousel-item active">
+                                        <img
+                                            src="{{ store.main_image.url }}"
+                                            class="store-image"
+                                            alt="{{ store.name }} Main Image"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                {% endif %}
 
-                            <div class="carousel-item active">
-                                <img
-                                    src="{{ store.main_image.url }}"
-                                    class="store-image"
-                                    alt="Main {{ store.name }}"
-                                    loading="lazy"
-                                />
+                                {% if store.primary_image %}
+                                    <div class="carousel-item">
+                                        <img
+                                            src="{{ store.primary_image.url }}"
+                                            class="store-image"
+                                            alt="{{ store.name }} Primary Image"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                {% endif %}
+
+                                {% if store.secondary_image %}
+                                    <div class="carousel-item">
+                                        <img
+                                            src="{{ store.secondary_image.url }}"
+                                            class="store-image"
+                                            alt="{{ store.name }} Secondary Image"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                {% endif %}
+
                             </div>
 
-                            <div class="carousel-item">
-                                <img
-                                    src="{{ store.primary_image.url }}"
-                                    class="store-image"
-                                    alt="Primary {{ store.name }}"
-                                    loading="lazy"
-                                />
-                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade{{ store.id }}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
 
-                            <div class="carousel-item">
-                                <img
-                                    src="{{ store.secondary_image.url }}"
-                                    class="store-image"
-                                    alt="Secondary {{ store.name }}"
-                                    loading="lazy"
-                                />
-                            </div>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade{{ store.id }}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
 
                         </div>
+                    {% else %}
 
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade{{ store.id }}" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
+                        <img
+                            src="{% static 'storelocator/images/placeholder-store.jpg' %}"
+                            class="card-img-top"
+                            alt="Store image coming soon"
+                            loading="lazy"
+                        />
 
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade{{ store.id }}" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-
-                    </div>
+                    {% endif %}
 
                     <div class="card-body">
 
@@ -345,8 +480,9 @@
                             <button
                                 class="btn btn-primary directions"
                                 type="button"
-                                aria-label="directions for {{ store.name }}"
-                                onclick="getDirections('{{ store.address }}');"
+                                data-address="{{ store.address }}"
+                                data-action="get-directions"
+                                aria-label="directions to {{ store.name }} in {{ store.city.name }}, {{ store.city.state.name }}"
                             >
                                 <i class="fa-solid fa-route"></i>
                             </button>
@@ -364,7 +500,6 @@
         </div>
     </section>
 
-</main>
 {% endblock %}
 
 {% block scripts %}

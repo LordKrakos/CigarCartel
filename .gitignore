@@ -68,3 +68,5 @@ render.yaml
 
 # Database dump files
 db.json
+
+stuckLog.txt

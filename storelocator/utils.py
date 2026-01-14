@@ -1,16 +1,19 @@
-# smokeshop/storelocator/utils.py
-
 from typing import Optional, Dict, Any
 import logging
 
+from django.http import JsonResponse
 from geopy.geocoders import GoogleV3
 from geopy.distance import distance as geopy_distance
+from geopy.exc import GeocoderTimedOut, GeocoderServiceError
 from django.conf import settings
 
 from .models import Store
 from .serializers import storeSerializer
 
 logger = logging.getLogger(__name__)
+
+# Optional: Set max reasonable distance
+MAX_DISTANCE_METERS = 100_000  # 100km
 
 
 def get_closest_store(address: str) -> Dict[str, Optional[Any]]:
@@ -30,22 +33,23 @@ def get_closest_store(address: str) -> Dict[str, Optional[Any]]:
     Returns:
         Dict[str, Optional[Any]]
     """
-    # Default result structure
     result = {"store": None, "data": None, "distance_m": None, "error": None}
 
-    # 1) Validate address input
     if not address:
         result["error"] = "No address provided."
         return result
 
-    # 2) Geocode the address to coordinates
+    # Geocode the address
     try:
         geolocator = GoogleV3(api_key=settings.GOOGLE_MAPS_API_KEY)
         location = geolocator.geocode(address)
-    except Exception as e:
-        # Catch geocoder exceptions (network, quota, invalid key, etc.)
+    except (GeocoderTimedOut, GeocoderServiceError) as e:
         logger.exception("Geocoding error for address '%s': %s", address, e)
-        result["error"] = f"Geocoding failed: {e}"
+        result["error"] = "Unable to locate address. Please try again."
+        return result
+    except Exception as e:
+        logger.exception("Unexpected geocoding error for address '%s': %s", address, e)
+        result["error"] = "An error occurred. Please try again later."
         return result
 
     if not location:
@@ -54,48 +58,74 @@ def get_closest_store(address: str) -> Dict[str, Optional[Any]]:
 
     user_location = (location.latitude, location.longitude)
 
-    # 3) Query stores that have valid coordinates
-    stores = Store.objects.exclude(latitude__isnull=True).exclude(longitude__isnull=True)
+    # Query stores with coordinates - optimize with select_related
+    stores = (
+        Store.objects
+        .exclude(latitude__isnull=True)
+        .exclude(longitude__isnull=True)
+        .select_related('city', 'city__state')
+    )
 
     if not stores.exists():
         result["error"] = "No stores with coordinates available."
         return result
 
-    # 4) Iterate stores and find the closest
+    # Find closest store
     closest_store = None
-    min_distance = float("inf")
-    min_distance_m = None
+    min_distance_m = float("inf")
 
     for store in stores:
         try:
             store_location = (float(store.latitude), float(store.longitude))
         except (TypeError, ValueError):
-            # Skip stores with invalid coordinate fields
             continue
 
         try:
             dist_m = geopy_distance(user_location, store_location).meters
         except Exception as e:
-            # If distance calculation unexpectedly fails, skip this store
-            logger.warning("Distance calc failed for store id=%s: %s", getattr(store, "id", None), e)
+            logger.warning("Distance calc failed for store id=%s: %s", store.id, e)
             continue
 
-        if dist_m < min_distance:
-            min_distance = dist_m
+        # Optional: Check if within max distance
+        if dist_m < min_distance_m and dist_m < MAX_DISTANCE_METERS:
             min_distance_m = dist_m
             closest_store = store
 
-    # 5) Prepare result
-    if closest_store:
+    # Prepare result
+    if closest_store and min_distance_m < float("inf"):
         result["store"] = closest_store
         result["data"] = storeSerializer(closest_store)
         result["distance_m"] = min_distance_m
-        # Optional debug log
         logger.debug(
             "Closest store for '%s': id=%s name=%s distance_m=%.2f",
             address, closest_store.id, closest_store.name, min_distance_m
         )
     else:
-        result["error"] = "No valid stores found after filtering."
+        result["error"] = "No stores found within reasonable distance."
 
     return result
+
+
+def address_search(request, form):
+    """
+    Helper function to handle address search and AJAX responses.
+    Returns (result_dict, json_response_or_none)
+    """
+    result = {"store": None, "data": None, "distance_m": None, "error": None}
+    
+    if form.is_valid() and form.cleaned_data.get("address"):
+        result = get_closest_store(form.cleaned_data["address"])
+        if result["error"]:
+            form.add_error("address", result["error"])
+    
+    # AJAX request handling
+    if request.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest":
+        if form.errors:
+            return result, JsonResponse({"errors": form.errors}, status=400)
+        return result, JsonResponse({
+            "closest_store": result["data"],
+            "distance_m": result["distance_m"],
+            "error": result["error"]
+        })
+    
+    return result, None

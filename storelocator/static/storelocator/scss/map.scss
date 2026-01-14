@@ -1,8 +1,8 @@
 .info-window {
-    font-family: 'Roboto', sans-serif;
     color: #333;
     padding: 0.8rem;
     font-weight: 400;
+    font-family: 'Roboto', sans-serif;
     font-size: clamp(0.7rem, 0.5vw, 1rem);
 
     h3 {
@@ -49,56 +49,72 @@
 
 #locator-map {
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.5rem;
 
     #address-form {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0.5rem;
+        position: relative;
         width: 95%;
         max-width: 500px;
         margin: 0;
-        z-index: 2;
 
-        div {
+        .input-and-geo {
             display: flex;
-            width: 80%;
+            width: 100%;
             max-width: 800px;
 
-            .address-input {
-                flex: 1;
-                color: var(--text);
-                padding: 0.35rem;
-                border: 1.5px solid var(--border);
-                border-radius: 0.5rem;
-                font-size: clamp(1rem, 1vw, 1.1rem);
-                background-color: var(--card);
-                will-change: transition;
-                transition: border-color 0.3s;
-        
-                &:focus {
-                    outline: none;
-                    border-color: var(--accent);
-                    box-shadow: 0 0 0.2rem var(--accent-shadow);
-                }
-                
-                &::placeholder {
+            div {
+                width: 100%;
+
+                .address-input {
                     color: var(--text);
-                    opacity: 0.6;
+                    width: 100%;
+                    padding: 0.3rem 2rem 0.3rem 1rem;
+                    border: 0.1rem solid transparent;
+                    border-radius: 5rem;
+                    font-size: clamp(1rem, 1vw, 1.1rem);
+                    background-color: var(--card);
+                    will-change: transition;
+                    transition: border-color 0.3s;
+            
+                    &:focus {
+                        outline: none;
+                        border-color: var(--accent);
+                        box-shadow: 0 0 0.2rem var(--accent-shadow);
+                    }
+                    
+                    &::placeholder {
+                        color: var(--text);
+                        opacity: 0.4;
+                    }
                 }
+            }
+
+            #geolocation {
+                position: relative;
+                right: 35px;
+                color: var(--accent);
+                padding: 0.4rem;
+                border: none;
+                border-radius: 12rem;
+                background-color: transparent;
             }
         }
 
-        button {
-            background-color: var(--accent);
+        #search {
+            position: relative;
+            right: 20px;
             border: none;
             padding: 0.45rem 1rem;
             border-radius: 0.5rem;
             cursor: pointer;
+            background-color: var(--accent);
             font-size: clamp(0.9rem, 1vw, 1.1rem);
             transition: background-color 0.3s;
 
@@ -230,5 +246,11 @@
                 }
             }
         }
+    }
+}
+
+@media (min-width: 1440px) {
+    .list-group {
+        min-height: 208px;
     }
 }

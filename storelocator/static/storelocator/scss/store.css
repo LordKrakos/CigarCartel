@@ -1,0 +1,102 @@
+#page-content {
+  gap: 1rem;
+}
+#page-content .company-name {
+  margin: 0;
+  /* Premium multi-stop metallic gradient */
+  background: linear-gradient(75deg, var(--gs-dark) 0%, var(--gs-mid) 35%, var(--gs-light) 49%, var(--gs-bright) 50%, var(--gs-light) 51%, var(--gs-mid) 65%, var(--gs-dark) 100%);
+  background-size: 300%; /* needed for sweep */
+  background-position: 0% center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: "Lobster", sans-serif;
+  font-weight: 400;
+  /* optional: subtle emboss for a premium feel */
+  text-shadow: 1px 2px 2.5px var(--gs-shadow), 1px 2px 2.5px var(--gs-shadow);
+}
+#page-content #store {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+#page-content #store .store-images {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#page-content #store .store-images .carousel {
+  width: 100%;
+  max-width: 600px;
+}
+#page-content #store .store-images .carousel .carousel-inner {
+  border-radius: 0.9rem;
+}
+#page-content #store .store-images .carousel .carousel-inner .carousel-item {
+  border-radius: 0.9rem;
+}
+#page-content #store .store-images .carousel .carousel-inner .carousel-item img {
+  width: 100%;
+  border-radius: 0.9rem;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}
+#page-content #store .info-card {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+}
+#page-content #store .info-card .card-body {
+  width: 100%;
+}
+#page-content #store .info-card .card-body .fa-location-dot {
+  color: red;
+}
+#page-content #store .info-card .card-body .fa-phone {
+  color: green;
+}
+#page-content #store .info-card .card-body .phone-btn {
+  color: #FFF;
+}
+#page-content #store .info-card .card-body .fa-envelope {
+  color: blue;
+}
+#page-content #store .info-card .card-body .fa-clock {
+  color: red;
+}
+#page-content #store .info-card .card-body .buttons {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+}
+#page-content #store .info-card .card-body .buttons a {
+  width: 100%;
+}
+#page-content #locator-map {
+  margin-bottom: 12px;
+}
+#page-content #locator-map h2 {
+  margin: 0;
+}
+#page-content #locator-map #map {
+  border-radius: 0.5rem;
+}
+@media (min-width: 721px) {
+  #page-content #store {
+    flex-direction: row;
+  }
+  #page-content #store .store-images .carousel {
+    width: 100%;
+    max-width: 600px;
+  }
+  #page-content #store .info-card .buttons {
+    flex-direction: column;
+  }
+}
+
+/*# sourceMappingURL=store.css.map */

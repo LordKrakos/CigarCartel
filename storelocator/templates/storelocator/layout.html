@@ -9,40 +9,26 @@
         <!-- Meta tags -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Find premium cigars at Cigar Cartel locations in Orlando, Kissimmee, Davenport, and Haines City, FL. Visit our walk-in humidors today.">
         <meta name="author" content="Joseph Krakos Jr">
+        {% block meta %}{% endblock %}
 
         <!-- Manifest -->
         <link rel="manifest" href="{% static 'storelocator/favicon/manifest.json' %}">
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'storelocator/favicon/favicon-16x16.png' %}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'storelocator/favicon/favicon-32x32.png' %}">
-        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'storelocator/favicon/favicon-96x96.png' %}">
-        <link rel="icon" type="image/png" sizes="192x192" href="{% static 'storelocator/favicon/android-icon-192x192.png' %}">
-        <link rel="shortcut icon" href="{% static 'storelocator/favicon/favicon.ico' %}">
-
-        <!-- Apple Touch Icons -->
-        <link rel="apple-touch-icon" sizes="57x57" href="{% static 'storelocator/favicon/apple-icon-57x57.png' %}">
-        <link rel="apple-touch-icon" sizes="60x60" href="{% static 'storelocator/favicon/apple-icon-60x60.png' %}">
-        <link rel="apple-touch-icon" sizes="72x72" href="{% static 'storelocator/favicon/apple-icon-72x72.png' %}">
-        <link rel="apple-touch-icon" sizes="76x76" href="{% static 'storelocator/favicon/apple-icon-76x76.png' %}">
-        <link rel="apple-touch-icon" sizes="114x114" href="{% static 'storelocator/favicon/apple-icon-114x114.png' %}">
-        <link rel="apple-touch-icon" sizes="120x120" href="{% static 'storelocator/favicon/apple-icon-120x120.png' %}">
-        <link rel="apple-touch-icon" sizes="144x144" href="{% static 'storelocator/favicon/apple-icon-144x144.png' %}">
-        <link rel="apple-touch-icon" sizes="152x152" href="{% static 'storelocator/favicon/apple-icon-152x152.png' %}">
-        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'storelocator/favicon/apple-icon-180x180.png' %}">
-
-        <!-- Android Icons -->
-        <link rel="icon" type="image/png" sizes="36x36" href="{% static 'storelocator/favicon/android-icon-36x36.png' %}">
-        <link rel="icon" type="image/png" sizes="48x48" href="{% static 'storelocator/favicon/android-icon-48x48.png' %}">
-        <link rel="icon" type="image/png" sizes="72x72" href="{% static 'storelocator/favicon/android-icon-72x72.png' %}">
-        <link rel="icon" type="image/png" sizes="144x144" href="{% static 'storelocator/favicon/android-icon-144x144.png' %}">
+        <link rel="icon" href="{% static 'storelocator/favicon/favicon.ico' %}" sizes="any">
+        <link rel="apple-touch-icon" href="{% static 'storelocator/favicon/apple-icon-180x180.png' %}">
+        <link rel="manifest" href="{% static 'storelocator/favicon/manifest.json' %}">
 
         <!-- Browser Configuration -->
         <meta name="msapplication-config" content="{% static 'storelocator/favicon/browserconfig.xml' %}">
-        <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{% static 'storelocator/favicon/ms-icon-144x144.png' %}">
+
+        <!-- Preconnect to improve performance -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net">
+        <link rel="preconnect" href="https://maps.googleapis.com">
 
         <!-- Bootstrap -->
         <link
@@ -61,8 +47,8 @@
         />
 
         <!-- Custom Scss -->
-        <link rel="stylesheet" href="{% static 'storelocator/scss/main.css' %}">
         {% block styles %}{% endblock %}
+        <link rel="stylesheet" href="{% static 'storelocator/scss/main.css' %}">
 
         <title>{% block title %}{% endblock %}</title>
 
@@ -75,7 +61,7 @@
          
     </head>
 
-    <body>
+    <body id="body">
 
         <div id="verification-modal" class="modal" tabindex="-1">
             <div class="modal-dialog">
@@ -107,7 +93,7 @@
             </div>
         </div>
 
-        <header>
+        <header id="main-header">
             <nav class="navbar navbar-dark fixed-top">
                 <div class="container-fluid">
 
@@ -145,7 +131,7 @@
 
                         <div class="offcanvas-header">
 
-                            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+                            <h5 class="company-name offcanvas-title" id="offcanvasDarkNavbarLabel">
                                 Cigar Cartel
                             </h5>
                             
@@ -177,15 +163,8 @@
                                         Locations
                                     </a>
 
-                                    <ul class="locations-list dropdown-menu dropdown-menu-dark dropdown-menu-end">
-                                        {% for city in cities %}
-                                            <li>
-                                                <a class="dropdown-item" href="{% url 'storelocator:city_stores' city.state.slug city.slug %}">
-                                                    {{ city.name }}, {{ city.state.abbreviation }}
-                                                </a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
+                                    {% block nav %}
+                                    {% endblock %}
 
                                 </li>
 
@@ -218,8 +197,10 @@
             </nav>
         </header>
 
-        {% block body %}
-        {% endblock %}
+        <main id="page-content">
+            {% block main %}
+            {% endblock %}
+        </main>
 
         <footer id="footer">
 
@@ -240,6 +221,12 @@
         </footer>
 
         <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous">
+        </script>
+
+        <script
             src="{% static 'storelocator/js/bundle.js' %}">
         </script>
 
@@ -247,13 +234,7 @@
             async
             src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=geometry,marker&callback=initMap&v=weekly&loading=async"
             defer>
-        </script>
-
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-            crossorigin="anonymous">
-        </script>
+        </script>        
 
         {% block scripts %}{% endblock %}
     </body>

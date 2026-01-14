@@ -5,8 +5,6 @@ from .base import *
 # Disable debug mode in production
 DEBUG = False
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',

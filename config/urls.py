@@ -1,3 +1,5 @@
+# CigarCartel/config/urls.py
+
 """
 URL configuration for smokeshop project.
 
@@ -14,15 +16,41 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# CigarCartel/config/urls.py
+
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
+from django.http import JsonResponse
+
+# Customize Django admin
+admin.site.site_header = "Cigar Cartel Admin"
+admin.site.site_title = "Cigar Cartel Admin"
+admin.site.index_title = "Store Management"
+
+
+def health_check(request):
+    """Simple health check endpoint for monitoring"""
+    return JsonResponse({'status': 'ok'})
+
 
 urlpatterns = [
+    # Health check for deployment monitoring
+    path('health/', health_check, name='health_check'),
+    
+    # Django admin
     path('admin/', admin.site.urls),
-    path('', include('storelocator.urls'))
+    
+    # Store locator app (at root)
+    path('', include('storelocator.urls')),
 ]
 
+# Serve media files in development only
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Custom error handlers (optional)
+# handler404 = 'storelocator.views.custom_404'
+# handler500 = 'storelocator.views.custom_500'

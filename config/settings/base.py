@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-import os
+
 from pathlib import Path
 import environ
 
@@ -23,8 +23,8 @@ env = environ.Env()
 environ.Env.read_env(BASE_DIR / ".env")  # 👈 loads smokeshop/.env
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
+SECRET_KEY = env('SECRET_KEY')
+GOOGLE_MAPS_API_KEY = env('GOOGLE_MAPS_API_KEY')
 
 
 # Quick-start development settings - unsuitable for production
@@ -32,8 +32,6 @@ GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
-ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
@@ -114,6 +112,34 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# For better debugging:
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': env('DJANGO_LOG_LEVEL', default='INFO'),
+            'propagate': False,
+        },
+    },
+}
+
+# Cache (if needed later)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

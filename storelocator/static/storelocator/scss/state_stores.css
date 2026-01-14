@@ -1,14 +1,14 @@
 #page-content {
   gap: 1rem;
 }
-#page-content #cs-header {
+#page-content #states-header {
   display: flex;
   gap: 0.5rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-#page-content #cs-header .company-name {
+#page-content #states-header .company-name {
   /* Premium multi-stop metallic gradient */
   margin: 0;
   background: linear-gradient(75deg, var(--gs-dark) 0%, var(--gs-mid) 35%, var(--gs-light) 49%, var(--gs-bright) 50%, var(--gs-light) 51%, var(--gs-mid) 65%, var(--gs-dark) 100%);
@@ -22,17 +22,17 @@
   /* optional: subtle emboss for a premium feel */
   text-shadow: 1px 2px 2.5px var(--gs-shadow), 1px 2px 2.5px var(--gs-shadow);
 }
-#page-content #cs-header .page-title {
+#page-content #states-header .page-title {
   margin: 0;
 }
-#page-content #cs-header .page-title .badge {
+#page-content #states-header .page-title .badge {
   color: #000;
   background: linear-gradient(25deg, var(--gs-dark) 0%, var(--gs-mid) 35%, var(--gs-light) 49%, var(--gs-light) 50%, var(--gs-light) 51%, var(--gs-mid) 65%, var(--gs-dark) 100%);
   text-shadow: 1px 2px 2.5px var(--gs-shadow), 1px 2px 2.5px var(--gs-shadow);
 }
-#page-content #cs-header .lead {
+#page-content #states-header .lead {
   margin: 0;
   padding: 0.5rem;
 }
 
-/*# sourceMappingURL=city_stores.css.map */
+/*# sourceMappingURL=state_stores.css.map */

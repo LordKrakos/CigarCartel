@@ -1,4 +1,4 @@
-// smokeshop/storelocator/static/storelocator/js/index.js
+// CigarCartel/storelocator/static/storelocator/js/index.js
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -57,14 +57,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Gold shimmer sweep on company name
     const company = document.querySelector(".company-name");
 
-    gsap.fromTo(".company-name",
+    gsap.fromTo(company,
         { backgroundPosition: "400% center" },   // start left edge
         {
             backgroundPosition: "100% center",   // sweep to right
             duration: 15,                        // elegant, slow
             ease: "power1.inOut",
             repeat: -1,                          // infinite loop
-            delay: 10,                           // brief pause
+            delay: 5,                           // brief pause
 
             scrollTrigger: {
                 trigger: ".company-name",
@@ -86,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const splitWords = new SplitText(item, { type: "words" });
 
                 gsap.from(splitWords.words, {
-                    yPercent: 'random([-100, 100])',
+                    xPercent: 'random([-100, 100])',
+                    yPercent: 'random([-50, 50])',
                     autoAlpha: 0,
                     stagger: {
                         amount: 3,
@@ -95,14 +96,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     scrollTrigger: {
                         trigger: item,
                         start: "top 85%",
-                        toggleActions: "restart pause reverse pause",
+                        toggleActions: "play reset play reset",
                     }
                 });
             });
         }
     });
-
-    // 4. Gentle fade for the footer CTA
     
 });
 
