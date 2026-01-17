@@ -46,8 +46,6 @@ html[data-theme=dark][data-theme=dark] {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  min-height: 100%;
   padding: 1rem;
   background-color: var(--background);
 }
@@ -55,7 +53,7 @@ html[data-theme=dark][data-theme=dark] {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  max-width: 1200px;
+  width: 1200px;
   margin: 0 auto;
 }
 #locations .card-container .card {
@@ -459,6 +457,7 @@ body #main-header .navbar.scrolled {
 }
 body #main-header .navbar .container-fluid {
   max-width: 1700px;
+  /* Custom theme toggler using Font Awesome icons */
 }
 body #main-header .navbar .container-fluid .logo-container {
   display: flex;
@@ -543,9 +542,6 @@ body #main-header .navbar .container-fluid .offcanvas .locations-list .dropdown-
 body #main-header .navbar .container-fluid .offcanvas .locations-list .dropdown-item:hover {
   background-color: var(--accent);
   color: var(--background);
-}
-body #main-header .navbar .container-fluid {
-  /* Custom theme toggler using Font Awesome icons */
 }
 body #main-header .navbar .container-fluid .theme-toggle-label {
   position: relative;
