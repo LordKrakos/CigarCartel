@@ -488,7 +488,7 @@ body #main-header .navbar .container-fluid .navbar-toggler:focus {
 }
 body #main-header .navbar .container-fluid .offcanvas {
   color: var(--text);
-  height: 100dvh;
+  height: 100vh;
   background-color: var(--header);
   backdrop-filter: blur(0.5rem);
   transition: background-color 2s ease, color 2s ease;
@@ -576,7 +576,7 @@ body main {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: calc(100dvh - var(--header-height));
+  min-height: calc(100vh - var(--header-height));
   /* Breadcrumb Styling */
 }
 body main .breadcrumbs {
