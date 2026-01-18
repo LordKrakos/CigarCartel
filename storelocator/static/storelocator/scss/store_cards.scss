@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     padding: 1rem;
+    width: 100%;
     background-color: var(--background);
 
     .card-container {
@@ -13,10 +14,9 @@
         margin: 0 auto;
 
         .card {
-            position: relative;
-            max-width: 495px;
+            max-width: 500px;
             height: 100%;
-            margin: 0;
+            margin: 0 auto;
             background: var(--card);
             border: 0.01rem solid var(--border);
             border-radius: 0.5rem;
