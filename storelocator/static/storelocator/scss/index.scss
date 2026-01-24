@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     width: 100dvw;
-    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     z-index: -1;
     filter:
@@ -165,7 +165,7 @@
                     &::after {
                         content: '';
                         width: 100%;
-                        height: 0.2vh;
+                        height: 0.2dvh;
                         position: relative;
                         top: 10px;
                         background: linear-gradient(90deg, transparent, var(--accent), transparent);
@@ -203,7 +203,7 @@
                     &::before {
                         content: '';
                         width: 100%;
-                        height: 0.2vh;
+                        height: 0.2dvh;
                         position: relative;
                         bottom: 10px;
                         background: linear-gradient(90deg, transparent, var(--accent), transparent);
@@ -291,6 +291,7 @@
         }
 
         #discounts {
+            padding: 0.5rem 1rem;
 
             .discount-container {
                 display: grid;

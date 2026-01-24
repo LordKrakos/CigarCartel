@@ -274,7 +274,7 @@ body {
         align-items: center;
         justify-content: center;
         width: 100%;
-        min-height: calc(100vh - var(--header-height));
+        min-height: calc(100dvh - var(--header-height));
 
         /* Breadcrumb Styling */
         .breadcrumbs {

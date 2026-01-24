@@ -259,7 +259,7 @@ html[data-theme=dark][data-theme=dark] {
 #locator-map #map {
   width: 95%;
   max-width: 800px;
-  height: 40dvh;
+  height: 40vh;
   max-height: 420px;
   background: var(--border);
   border-radius: 0.5rem 0.5rem 0 0;
@@ -576,7 +576,7 @@ body main {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100dvh - var(--header-height));
   /* Breadcrumb Styling */
 }
 body main .breadcrumbs {

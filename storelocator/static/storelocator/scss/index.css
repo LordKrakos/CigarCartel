@@ -22,7 +22,7 @@
   justify-content: center;
   gap: 2rem;
   width: 100%;
-  height: calc(100dvh - var(--header-height));
+  height: calc(100vh - var(--header-height));
 }
 #hero .brand-logo {
   width: 80dvw;
@@ -69,7 +69,7 @@
 
 .main-panel {
   width: 100dvw;
-  min-height: calc(100dvh - var(--header-height));
+  min-height: calc(100vh - var(--header-height));
 }
 
 #about {
@@ -92,7 +92,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100dvh - var(--header-height));
+  height: calc(100vh - var(--header-height));
   background-color: var(--card);
 }
 #about #panel-wrapper #thanks {
