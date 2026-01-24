@@ -29,5 +29,5 @@ module.exports = {
     },
     
     devtool: 'source-map',
-    mode: 'development' // Change to 'production' for production builds
+    mode: 'production' // Change to 'production' for production builds
 };
