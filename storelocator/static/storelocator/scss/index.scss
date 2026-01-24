@@ -316,7 +316,7 @@
                         }
 
                         .fa-kit-medical {
-                            color: #33ff33;
+                            color: #219921;
                         }
 
                         .fa-wand-sparkles {
@@ -358,7 +358,7 @@
                             background: linear-gradient(
                                 0deg,
                                 #3333ff 30%,
-                                #33ff33 60%,
+                                #219921 60%,
                             );
                             -webkit-background-clip: text;
                             -webkit-text-fill-color: transparent;
@@ -375,7 +375,7 @@
                             }
 
                             .Di {
-                                color: #33ff33;
+                                color: #219921;
                             }
                         }
 
@@ -386,11 +386,11 @@
                             }
 
                             .a {
-                                color: #fff;
+                                color: var(--text);
                             }
 
                             .B {
-                                color: #33ff33;
+                                color: #219921;
                             }
                         }
 

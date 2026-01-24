@@ -258,7 +258,7 @@
   color: #ff0000;
 }
 #about #panel-wrapper #discounts .discount-container .discount .discount-header .fa-kit-medical {
-  color: #33ff33;
+  color: #219921;
 }
 #about #panel-wrapper #discounts .discount-container .discount .discount-header .fa-wand-sparkles {
   color: royalblue;
@@ -282,7 +282,7 @@
   background-clip: text; /* Non‑WebKit browsers */
 }
 #about #panel-wrapper #discounts .discount-container .discount .discount-header #hero-discount {
-  background: linear-gradient(0deg, #3333ff 30%, #33ff33 60%);
+  background: linear-gradient(0deg, #3333ff 30%, #219921 60%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text; /* Non‑WebKit browsers */
@@ -294,16 +294,16 @@
   color: var(--text);
 }
 #about #panel-wrapper #discounts .discount-container .discount .discount-header #disney-discount .Di {
-  color: #33ff33;
+  color: #219921;
 }
 #about #panel-wrapper #discounts .discount-container .discount .discount-header #golf-discount .G {
   color: #3333ff;
 }
 #about #panel-wrapper #discounts .discount-container .discount .discount-header #golf-discount .a {
-  color: #fff;
+  color: var(--text);
 }
 #about #panel-wrapper #discounts .discount-container .discount .discount-header #golf-discount .B {
-  color: #33ff33;
+  color: #219921;
 }
 #about #panel-wrapper #discounts .discount-container .discount .discount-header #wedding-bundle {
   background: linear-gradient(0deg, #8d6b1f 0%, #d4af37 20%, #d4af37 40%, #f8e9a1 50%, #d4af37 60%, #d4af37 80%, #8d6b1f 100%);
