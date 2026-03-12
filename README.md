@@ -1,7 +1,8 @@
 # Cigar Cartel
 
 ## Description
-A store locator for Cigar Cartel locations
+Cigar Cartel is a web application that provides users with a convenient way to locate cigar stores in their area.
+The application features an interactive map, allowing users to easily find nearby stores, view their details, and get directions.
 
 [Click Here](https://cigarcartel.net/)
 
@@ -9,7 +10,7 @@ A store locator for Cigar Cartel locations
 - HTML
 - CSS, SCSS
 - JavaScript, GSAP
-- Python, Django,
+- Python, Django
 - SQLite
 - Google Maps API
 - Webpack
@@ -21,4 +22,4 @@ A store locator for Cigar Cartel locations
 - Search functionality to find stores by location
 - Admin panel for managing store locations and details
 
-![Store Locator Screenshot](https://media.licdn.com/dms/image/v2/D4E2DAQHzzkbAJC-ZCw/profile-treasury-image-shrink_8192_8192/B4EZlc15apIkAg-/0/1758199257619?e=1773896400&v=beta&t=fjiOqKsxG-oP5wywCvsFS8jGBsoWqBMq1GrIBcVQ2Nk)
+![Store Locator Screenshot](storelocator/static/storelocator/images/CigarCartel.png)
