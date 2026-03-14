@@ -68,253 +68,247 @@
 
     </section>
 
-    <section id="about" class="main-panel" role="region" aria-label="Welcome to Cigar Cartel Store Locator">
-        <div id="panel-wrapper">
+    <section id="about">
+        <div class="about-wrapper">
 
-            <section id="thanks">
-                <div class="thanks-wrapper">
+            <h1 class="about-title">
+                <span class="title-text">
+                    Thanks for visiting
+                </span>
 
-                    <h1 class="about-title">
-                        <span class="title-text">
-                            Thanks for visiting
+                <span class="company-name">
+                    Cigar Cartel
+                </span>
+            </h1>
+    
+            <ul class="split-text">
+
+                <li>
+                    You can find our exceptional walk-in humidors conveniently located across Central Florida, inside of your local 419 Smoke Shops.
+                </li>
+
+                <li>
+                    Each humidor is stocked with the finest cigars, featuring a wide variety of popular cigar brands, including those sought-after, hard-to-find cigars.
+                </li>
+
+                <li>
+                    At Cigar Cartel, we are committed to providing you with the finest cigars at the best possible prices. We inspect and hand-pick every cigar to ensure it meets the highest standards of quality and freshness.
+                </li>
+
+                <li>
+                    We also offer a range of cigar accessories, including cutters, ashtrays, lighters, torches, butane, and humidification solutions, to enhance your smoking experience.
+                </li>
+
+            </ul>
+    
+            <footer id="about-footer">
+                
+                <p>
+                    Find a location near you!
+                </p>
+
+                <a href="#locator-map" aria-label="Scroll to address form" id="scroll-down">
+                    <i class="arrow fa-solid fa-arrow-down"></i>
+                </a>
+
+            </footer>
+
+        </div>
+    </section>
+
+    <section id="featured-images" class="sub-panel">
+        <div class="wrapper">
+
+            <!-- Featured cigar image -->
+            <div class="ft-cigar-wrapper">
+                <img
+                    src="{% static 'storelocator/images/variety1.jpg' %}"
+                    alt="Premium cigar selection"
+                    class="featured-cigar"
+                />
+            </div>
+            
+            <!-- Cigar thumbnails - Replace with your own images -->
+            <div class="cigar-thumbnails">
+
+                <img
+                    src="{% static 'storelocator/images/variety1.jpg' %}"
+                    alt="Cigar variety 1"
+                    class="cigar-thumbnail active"
+                    tabindex="0"
+                />
+
+                <img
+                    src="{% static 'storelocator/images/variety2.jpg' %}"
+                    alt="Cigar variety 2"
+                    class="cigar-thumbnail"
+                    tabindex="0"
+                />
+
+                <img
+                    src="{% static 'storelocator/images/variety3.jpg' %}"
+                    alt="Cigar variety 3"
+                    class="cigar-thumbnail"
+                    tabindex="0"
+                />
+
+            </div>
+    
+        </div>
+    </section>
+
+    <section id="discounts" class="sub-panel">
+        <div class="discount-container">
+
+            <div class="discount">
+
+                <header class="discount-header">
+
+                    <i class="fa-solid fa-cake-candles"></i>
+                    <h5 id="birthday-discount">
+                        Birthday Treat
+                    </h5>
+
+                </header>
+
+                <p>
+                    Celebrate your special day with a free cigar on your birthday with any valid purchase!
+                </p>
+
+                <small>
+                    (Valid Florida ID required)
+                </small>
+
+            </div>
+
+            <div class="discount">
+
+                <header class="discount-header">
+
+                    <i class="fa-solid fa-flag-usa"></i>
+                    <h5 id="veterans-discount">
+                        Honoring Our Veterans
+                    </h5>
+
+                </header>
+
+                <p>
+                    A 10% discount on all cigars for veterans.
+                </p>
+
+                <small>
+                    (Thank you for your service!)
+                </small>
+
+            </div>
+
+            <div class="discount">
+
+                <header class="discount-header">
+
+                    <i class="fa-solid fa-kit-medical"></i>
+                    <h5 id="hero-discount">
+                        Heros Discount
+                    </h5>
+
+                </header>
+
+                <p>
+                    First responders and government employees receive a special discount.
+                </p>
+
+                <small>
+                    (Proof Required)
+                </small>
+
+            </div>
+
+            <div class="discount">
+
+                <header class="discount-header">
+
+                    <i class="fa-solid fa-wand-sparkles"></i>
+                    <h5 id="disney-discount">
+                        <span class="D">
+                            Disney
                         </span>
-
-                        <span class="company-name">
-                            Cigar Cartel
+                        <span class="E">
+                            Employee
                         </span>
-                    </h1>
-            
-                    <ul class="split-text">
+                        <span class="Di">
+                            Discount
+                        </span>
+                    </h5>
 
-                        <li>
-                            You can find our exceptional walk-in humidors conveniently located across Central Florida, inside of your local 419 Smoke Shops.
-                        </li>
+                </header>
 
-                        <li>
-                            Each humidor is stocked with the finest cigars, featuring a wide variety of popular cigar brands, including those sought-after, hard-to-find cigars.
-                        </li>
+                <p>
+                    Enjoy a magical discount on all cigars for Disney employees.
+                </p>
 
-                        <li>
-                            At Cigar Cartel, we are committed to providing you with the finest cigars at the best possible prices. We inspect and hand-pick every cigar to ensure it meets the highest standards of quality and freshness.
-                        </li>
+                <small>
+                    (Employee ID required)
+                </small>
 
-                        <li>
-                            We also offer a range of cigar accessories, including cutters, ashtrays, lighters, torches, butane, and humidification solutions, to enhance your smoking experience.
-                        </li>
+            </div>
 
-                    </ul>
-            
-                    <footer id="about-footer">
-                        
-                        <p>
-                            Find a location near you!
-                        </p>
+            <div class="discount">
 
-                        <a href="#locator-map" aria-label="Scroll to address form" id="scroll-down">
-                            <i class="arrow fa-solid fa-arrow-down"></i>
-                        </a>
+                <header class="discount-header">
 
-                    </footer>
+                    <i class="fa-solid fa-golf-ball-tee"></i>
+                    <h5 id="golf-discount">
+                        <span class="G">
+                            Golfer<span class="a">'</span>s
+                        </span>
+                        <span class="B">
+                            Bundle
+                        </span>
+                            
+                    </h5>
 
-                </div>
-            </section>
+                </header>
 
-            <section id="featured-images" class="sub-panel">
-                <div class="wrapper">
+                <p>
+                    Discover deals on cigar bundles, Perfect for your next round.
+                </p>
 
-                    <!-- Featured cigar image -->
-                    <div class="ft-cigar-wrapper">
-                        <img
-                            src="{% static 'storelocator/images/variety1.jpg' %}"
-                            alt="Premium cigar selection"
-                            class="featured-cigar"
-                        />
-                    </div>
-                    
-                    <!-- Cigar thumbnails - Replace with your own images -->
-                    <div class="cigar-thumbnails">
-        
-                        <img
-                            src="{% static 'storelocator/images/variety1.jpg' %}"
-                            alt="Cigar variety 1"
-                            class="cigar-thumbnail active"
-                            tabindex="0"
-                        />
-        
-                        <img
-                            src="{% static 'storelocator/images/variety2.jpg' %}"
-                            alt="Cigar variety 2"
-                            class="cigar-thumbnail"
-                            tabindex="0"
-                        />
-        
-                        <img
-                            src="{% static 'storelocator/images/variety3.jpg' %}"
-                            alt="Cigar variety 3"
-                            class="cigar-thumbnail"
-                            tabindex="0"
-                        />
-        
-                    </div>
-            
-                </div>
-            </section>
+            </div>
 
-            <section id="discounts" class="sub-panel">
-                <div class="discount-container">
+            <div class="discount">
 
-                    <div class="discount">
+                <header class="discount-header">
 
-                        <header class="discount-header">
+                    <i class="fa-solid fa-ring"></i>
+                    <h5 id="wedding-bundle">
+                        Wedding Bundles
+                    </h5>
 
-                            <i class="fa-solid fa-cake-candles"></i>
-                            <h5 id="birthday-discount">
-                                Birthday Treat
-                            </h5>
+                </header>
 
-                        </header>
+                <p>
+                    Celebrate your special occasion with our thoughtfully curated cigar bundles.
+                </p>
 
-                        <p>
-                            Celebrate your special day with a free cigar on your birthday!
-                        </p>
+            </div>
 
-                        <small>
-                            (Valid Florida ID required)
-                        </small>
+            <div class="discount">
 
-                    </div>
+                <header class="discount-header">
 
-                    <div class="discount">
+                    <i class="fa-solid fa-baby-carriage"></i>
+                    <h5 id="newborn-bundle">
+                        Newborn Bundles
+                    </h5>
 
-                        <header class="discount-header">
+                </header>
 
-                            <i class="fa-solid fa-flag-usa"></i>
-                            <h5 id="veterans-discount">
-                                Honoring Our Veterans
-                            </h5>
+                <p>
+                    Celebrate your little bundle of joy with our exclusive newborn bundles, perfect for celebrating new arrivals.
+                </p>
 
-                        </header>
+            </div>
 
-                        <p>
-                            A 10% discount on all cigars for veterans.
-                        </p>
-
-                        <small>
-                            (Thank you for your service!)
-                        </small>
-
-                    </div>
-
-                    <div class="discount">
-
-                        <header class="discount-header">
-
-                            <i class="fa-solid fa-kit-medical"></i>
-                            <h5 id="hero-discount">
-                                Heros Discount
-                            </h5>
-
-                        </header>
-
-                        <p>
-                            First responders and government employees receive a special discount.
-                        </p>
-
-                        <small>
-                            (Proof Required)
-                        </small>
-
-                    </div>
-
-                    <div class="discount">
-
-                        <header class="discount-header">
-
-                            <i class="fa-solid fa-wand-sparkles"></i>
-                            <h5 id="disney-discount">
-                                <span class="D">
-                                    Disney
-                                </span>
-                                <span class="E">
-                                    Employee
-                                </span>
-                                <span class="Di">
-                                    Discount
-                                </span>
-                            </h5>
-
-                        </header>
-
-                        <p>
-                            Enjoy a magical discount on all cigars for Disney employees.
-                        </p>
-
-                        <small>
-                            (Employee ID required)
-                        </small>
-
-                    </div>
-
-                    <div class="discount">
-
-                        <header class="discount-header">
-
-                            <i class="fa-solid fa-golf-ball-tee"></i>
-                            <h5 id="golf-discount">
-                                <span class="G">
-                                    Golfer<span class="a">'</span>s
-                                </span>
-                                <span class="B">
-                                    Bundle
-                                </span>
-                                 
-                            </h5>
-
-                        </header>
-
-                        <p>
-                            Discover deals on cigar bundles, Perfect for your next round.
-                        </p>
-
-                    </div>
-
-                    <div class="discount">
-
-                        <header class="discount-header">
-
-                            <i class="fa-solid fa-ring"></i>
-                            <h5 id="wedding-bundle">
-                                Wedding Bundles
-                            </h5>
-
-                        </header>
-
-                        <p>
-                            Celebrate your special occasion with our thoughtfully curated cigar bundles.
-                        </p>
-
-                    </div>
-
-                    <div class="discount">
-
-                        <header class="discount-header">
-
-                            <i class="fa-solid fa-baby-carriage"></i>
-                            <h5 id="newborn-bundle">
-                                Newborn Bundles
-                            </h5>
-
-                        </header>
-
-                        <p>
-                            Celebrate your little bundle of joy with our exclusive newborn bundles, perfect for celebrating new arrivals.
-                        </p>
-
-                    </div>
-
-                </div>
-            </section>
-            
         </div>
     </section>
 

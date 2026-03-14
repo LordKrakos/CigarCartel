@@ -28,7 +28,7 @@
     justify-content: center;
     gap: 2rem;
     width: 100%;
-    height: calc(100vh - var(--header-height));
+    height: calc(100dvh - var(--header-height));
 
     .brand-logo {
         width: 80dvw;
@@ -88,337 +88,249 @@
 // ----------------------
 // Store Finder Base Layout (Mobile first)
 // ----------------------
-#about {
+section {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    width: 100%;
+}
 
-    #panel-wrapper {
-        position: relative;
-        width: 100%;
+#about,
+#featured-images,
+#discounts {
+    height: calc(100dvh - var(--header-height));
+    background-color: var(--card);
+}
+
+#about {
+
+    .about-wrapper {
         height: 100%;
+        max-width: 580px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
-        section {
+        .about-title {
+            width: 100%;
+            margin: 0;
+            padding: 0.5rem 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            position: absolute;
-            top: 0;
-            left: 0;
+            text-align: center;
+            font-size: clamp(1.5rem, 6vw, 3rem);
+            font-weight: 400;
+
+            .company-name {
+                /* Premium multi-stop metallic gradient */
+                background: linear-gradient(
+                    75deg,
+                    var(--gs-dark) 0%,
+                    var(--gs-mid) 35%,
+                    var(--gs-light) 49%,
+                    var(--gs-bright) 50%,
+                    var(--gs-light) 51%,
+                    var(--gs-mid) 65%,
+                    var(--gs-dark) 100%
+                );
+
+                background-size: 300%;  /* needed for sweep */
+                background-position: 0% center;
+
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+
+                font-family: "Lobster", sans-serif;
+                font-weight: 400;
+
+                /* optional: subtle emboss for a premium feel */
+                text-shadow: 1px 2px 2.5px var(--gs-shadow), 1px 2px 2.5px var(--gs-shadow);
+            }
+
+            &::after {
+                content: '';
+                width: 100%;
+                height: 0.2dvh;
+                position: relative;
+                top: 10px;
+                background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            }
+        }
+
+        .split-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 0;
+            padding: 0.65rem;
+            list-style: none;
+
+            li {
+                color: var(--text);
+                margin: 0;
+                font-size: clamp(0.92rem, 2.7vw, 1.1rem);
+                max-width: 700px;
+            }
+        }
+
+        #about-footer {
             width: 100%;
-            height: calc(100vh - var(--header-height));
-            background-color: var(--card);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0.5rem 0;
+            border: none;
+            font-size: clamp(1.1rem, 3.3vw, 1.7rem);
+            text-decoration: none;
+
+            &::before {
+                content: '';
+                width: 100%;
+                height: 0.2dvh;
+                position: relative;
+                bottom: 10px;
+                background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            }
+    
+            p {
+                margin: 0;
+            }
+
+            .arrow {
+                animation: bounce 1.5s infinite;
+                color: var(--accent);
+            }
         }
+        
+    } 
+}
 
-        #thanks {
-            padding: 0 0.5rem;
+#featured-images {
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
 
-            .thanks-wrapper {
-                height: 100%;
-                max-width: 580px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
+    .wrapper {
+        display: flex;
+        flex: 2;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
 
-                .about-title {
-                    width: 100%;
-                    margin: 0;
-                    padding: 0.5rem 0;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    text-align: center;
-                    font-size: clamp(1.5rem, 6vw, 3rem);
-                    font-weight: 400;
+        .ft-cigar-wrapper {
+            width: 95%;
+            max-width: 650px;
+            outline: 0.1rem solid var(--accent);
+            border: 0.6rem solid var(--border);
+            border-radius: 0.7rem;
+            box-shadow: 0 15px 40px var(--accent-shadow);
 
-                    .company-name {
-                        /* Premium multi-stop metallic gradient */
-                        background: linear-gradient(
-                            75deg,
-                            var(--gs-dark) 0%,
-                            var(--gs-mid) 35%,
-                            var(--gs-light) 49%,
-                            var(--gs-bright) 50%,
-                            var(--gs-light) 51%,
-                            var(--gs-mid) 65%,
-                            var(--gs-dark) 100%
-                        );
+            .featured-cigar {
+                width: 100%;
+                max-height: 350px;
+                object-fit: cover;
+                aspect-ratio: 16 / 9;
+                border-radius: calc(0.7rem / 3);
 
-                        background-size: 300%;  /* needed for sweep */
-                        background-position: 0% center;
-
-                        -webkit-background-clip: text;
-                        -webkit-text-fill-color: transparent;
-                        background-clip: text;
-
-                        font-family: "Lobster", sans-serif;
-                        font-weight: 400;
-
-                        /* optional: subtle emboss for a premium feel */
-                        text-shadow: 1px 2px 2.5px var(--gs-shadow), 1px 2px 2.5px var(--gs-shadow);
-                    }
-
-                    &::after {
-                        content: '';
-                        width: 100%;
-                        height: 0.2dvh;
-                        position: relative;
-                        top: 10px;
-                        background: linear-gradient(90deg, transparent, var(--accent), transparent);
-                    }
-                }
-
-                .split-text {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.5rem;
-                    margin: 0;
-                    padding: 0.65rem;
-                    list-style: none;
-
-                    li {
-                        color: var(--text);
-                        margin: 0;
-                        font-size: clamp(0.92rem, 2.7vw, 1.1rem);
-                        max-width: 700px;
-                    }
-                }
-
-                #about-footer {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    margin: 0;
-                    padding: 0.5rem 0;
-                    border: none;
-                    font-size: clamp(1.1rem, 3.3vw, 1.7rem);
-                    text-decoration: none;
-
-                    &::before {
-                        content: '';
-                        width: 100%;
-                        height: 0.2dvh;
-                        position: relative;
-                        bottom: 10px;
-                        background: linear-gradient(90deg, transparent, var(--accent), transparent);
-                    }
-            
-                    p {
-                        margin: 0;
-                    }
-
-                    .arrow {
-                        animation: bounce 1.5s infinite;
-                        color: var(--accent);
-                    }
-                }
-                
-            } 
-        }
-
-        #featured-images {
-
-            .wrapper {
-                display: flex;
-                flex: 2;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 1rem;
-
-                .ft-cigar-wrapper {
-                    width: 95%;
-                    max-width: 650px;
-                    outline: 0.1rem solid var(--accent);
-                    border: 0.6rem solid var(--border);
-                    border-radius: 0.7rem;
-                    box-shadow: 0 15px 40px var(--accent-shadow);
-
-                    .featured-cigar {
-                        width: 100%;
-                        max-height: 350px;
-                        object-fit: cover;
-                        aspect-ratio: 16 / 9;
-                        border-radius: calc(0.7rem / 3);
-
-                        &:focus {
-                            outline: 2px solid var(--accent) !important;
-                            outline-offset: 3px !important;
-                        }
-                    }
-                }
-
-                .cigar-thumbnails {
-                    display: flex;
-                    width: 100%;
-                    max-width: 600px;
-                    align-items: center;
-                    justify-content: space-evenly;
-
-                    .cigar-thumbnail {
-                        width: 25%;
-                        aspect-ratio: 1 / 1;
-                        object-fit: cover;
-                        border-radius: 8px;
-                        border: 1px solid var(--border);
-                        transition: all 0.3s ease;
-                        cursor: pointer;
-                        background-color: rgba(0, 0, 0, 0.4);
-                        padding: 5px;
-
-                        &.active {
-                            border-color: var(--accent);
-                            box-shadow: 0 0 15px var(--accent-shadow);
-                        }
-
-                        &:hover {
-                            transform: translateY(-5px);
-                        }
-
-                        &:focus {
-                            outline: 2px solid var(--accent) !important;
-                            outline-offset: 3px !important;
-                        }
-                    }
+                &:focus {
+                    outline: 2px solid var(--accent) !important;
+                    outline-offset: 3px !important;
                 }
             }
         }
 
-        #discounts {
-            padding: 0.5rem 1rem;
+        .cigar-thumbnails {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+            align-items: center;
+            justify-content: space-evenly;
 
-            .discount-container {
-                display: grid;
-                gap: 1rem;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                width: 100%;
-                max-width: 1030px;
+            .cigar-thumbnail {
+                width: 25%;
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                border-radius: 8px;
+                border: 1px solid var(--border);
+                transition: all 0.3s ease;
+                cursor: pointer;
+                background-color: rgba(0, 0, 0, 0.4);
+                padding: 5px;
 
-                .discount {
-
-                    .discount-header {
-                        display: flex;
-                        align-items: baseline;
-                        gap: 5px;
-
-                        .fa-cake-candles {
-                            color: #342aa5;
-                        }
-
-                        .fa-flag-usa {
-                            color: #ff0000;
-                        }
-
-                        .fa-kit-medical {
-                            color: #219921;
-                        }
-
-                        .fa-wand-sparkles {
-                            color: royalblue;
-                        }
-
-                        .fa-ring {
-                            color: #ffcc24;
-                        }
-
-                        .fa-baby-carriage {
-                            color: #0682a8;
-                        }
-
-                        #birthday-discount {
-                            background: linear-gradient(
-                                0deg,
-                                var(--text) 0%,
-                                #342aa5 60%,
-                            );
-                            -webkit-background-clip: text;
-                            -webkit-text-fill-color: transparent;
-                            background-clip: text; /* Non‑WebKit browsers */
-                        }
-
-                        #veterans-discount {
-                            background: linear-gradient(
-                                0deg,
-                                #0000ff 30%,
-                                #fff 50%,
-                                #ff0000 60%,
-                            );
-                            -webkit-background-clip: text;
-                            -webkit-text-fill-color: transparent;
-                            background-clip: text; /* Non‑WebKit browsers */
-                        }
-
-                        #hero-discount {
-                            background: linear-gradient(
-                                0deg,
-                                #3333ff 30%,
-                                #219921 60%,
-                            );
-                            -webkit-background-clip: text;
-                            -webkit-text-fill-color: transparent;
-                            background-clip: text; /* Non‑WebKit browsers */
-                        }
-
-                        #disney-discount {
-                            .D {
-                                color: orange;
-                            }
-
-                            .E {
-                                color: var(--text);
-                            }
-
-                            .Di {
-                                color: #219921;
-                            }
-                        }
-
-                        #golf-discount {
-
-                            .G {
-                                color: #3333ff;
-                            }
-
-                            .a {
-                                color: var(--text);
-                            }
-
-                            .B {
-                                color: #219921;
-                            }
-                        }
-
-                        #wedding-bundle {
-                            background: linear-gradient(
-                                0deg,
-                                #8d6b1f 0%,
-                                #d4af37 20%,
-                                #d4af37 40%,
-                                #f8e9a1 50%,
-                                #d4af37 60%,
-                                #d4af37 80%,
-                                #8d6b1f 100%
-                            );
-                            -webkit-background-clip: text;
-                            -webkit-text-fill-color: transparent;
-                            background-clip: text; /* Non‑WebKit browsers */
-                        }
-
-                        h5, p {
-                            margin: 0;
-                        }
-                    }
-
-                    p {
-                        margin: 0;
-                    }
+                &.active {
+                    border-color: var(--accent);
+                    box-shadow: 0 0 15px var(--accent-shadow);
                 }
+
+                &:hover {
+                    transform: translateY(-5px);
+                }
+
+                &:focus {
+                    outline: 2px solid var(--accent) !important;
+                    outline-offset: 3px !important;
+                }
+            }
+        }
+    }
+}
+
+#discounts {
+    padding: 0.5rem 1rem;
+    background-color: var(--card);
+
+    .discount-container {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        width: 100%;
+        max-width: 1030px;
+
+        .discount {
+            font-size: clamp(0.92rem, 2.7vw, 1.1rem);
+
+            .discount-header {
+                display: flex;
+                align-items: baseline;
+                gap: 5px;
+
+                .fa-cake-candles {
+                    color: #342aa5;
+                }
+
+                .fa-flag-usa {
+                    color: #ff0000;
+                }
+
+                .fa-kit-medical {
+                    color: #219921;
+                }
+
+                .fa-wand-sparkles {
+                    color: royalblue;
+                }
+
+                .fa-ring {
+                    color: #ffcc24;
+                }
+
+                .fa-baby-carriage {
+                    color: #0682a8;
+                }
+
+                h5, p {
+                    margin: 0;
+                }
+            }
+
+            p {
+                margin: 0;
             }
         }
     }
@@ -436,6 +348,10 @@
 @media (max-height: 570px) {
     .split-text li {
         font-size: 0.82rem !important;
+    }
+
+    #discounts {
+        height: 100%;
     }
 }
 

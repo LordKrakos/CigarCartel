@@ -3,24 +3,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  min-height: 100%;
   padding: 1rem;
+  width: 100%;
   background-color: var(--background);
 }
 #locations .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  width: 100%;
-  max-width: 1200px;
+  width: 1200px;
   margin: 0 auto;
 }
 #locations .card-container .card {
-  position: relative;
-  max-width: 495px;
+  max-width: 500px;
   height: 100%;
-  margin: 0;
+  margin: 0 auto;
   background: var(--card);
   border: 0.01rem solid var(--border);
   border-radius: 0.5rem;
@@ -105,13 +102,6 @@
 #locations .card-container .card .location-contact-directions .directions:hover {
   color: var(--bs-green);
   box-shadow: 0.2rem 0.2rem 0.3rem var(--accent-shadow);
-}
-
-/* Tablets */
-@media (min-width: 768px) {
-  .card-container {
-    grid-template-columns: repeat(auto-fit, minmax(1, 3fr));
-  }
 }
 
 /*# sourceMappingURL=store_cards.css.map */

@@ -2,52 +2,9 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
 
 // Register GSAP's ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger, SplitText);
-
-// Scroll-triggered panel animations
-// ----------------------------------
-document.addEventListener("DOMContentLoaded", () => {
-
-    // Retrieve all panels
-    const panels = gsap.utils.toArray('.sub-panel');
-    // Get the total number of panels
-    const totalPanels = panels.length;
-
-    // Create a timeline
-    const tl = gsap.timeline({
-
-        // Configure ScrollTrigger
-        scrollTrigger: {
-            // Set the element that triggers the animation
-            trigger: '#about',
-            // Define the start and end points for the animation
-            start: 'top 64px',
-            // Calculate the end point based on the number of panels
-            end: () => `+=${window.innerHeight * totalPanels}`,
-            // Pin the trigger element during the animation
-            pin: true,
-            // Add spacing to the pinned element
-            pinSpacing: true,
-            // Enable scrubbing for smooth scrolling
-            scrub: 1.2,
-        }
-
-    });
-
-    // Animate each panel sequentially
-    panels.forEach((panel, i) => {
-
-        tl.from(panel, {
-            xPercent: i % 2 === 0 ? -100 : 100,
-            opacity: 0,
-            delay: 0.3,
-        }, i); // add at index so it progresses panel-by-panel
-
-    });
-});
+gsap.registerPlugin(ScrollTrigger);
 
 
 // About Section Text Animations
@@ -55,53 +12,24 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
 
     // Gold shimmer sweep on company name
-    const company = document.querySelector(".company-name");
+    const company = document.querySelector("#about .company-name") || document.querySelector("h1.company-name");
 
     gsap.fromTo(company,
         { backgroundPosition: "400% center" },   // start left edge
         {
             backgroundPosition: "100% center",   // sweep to right
-            duration: 15,                        // elegant, slow
+            duration: 33,                        // elegant, slow
             ease: "power1.inOut",
             repeat: -1,                          // infinite loop
-            delay: 5,                           // brief pause
 
             scrollTrigger: {
-                trigger: ".company-name",
+                trigger: company,
                 start: "top 85%",                // start when in view
                 end: "bottom 10%",
-                toggleActions: "play pause resume pause",
-                once: false,                     // keeps looping
+                toggleActions: "play reset play reset", // loop on scroll
             }
         }
     );
-
-
-    // 3. Line-by-line reveal for each <li>
-    document.fonts.ready.then(() => {
-        const listItems = gsap.utils.toArray("#thanks .split-text");
-        if (listItems.length > 0) {
-
-            listItems.forEach((item) => {
-                const splitWords = new SplitText(item, { type: "words" });
-
-                gsap.from(splitWords.words, {
-                    xPercent: 'random([-100, 100])',
-                    yPercent: 'random([-50, 50])',
-                    autoAlpha: 0,
-                    stagger: {
-                        amount: 3,
-                        from: 'random'
-                    },
-                    scrollTrigger: {
-                        trigger: item,
-                        start: "top 85%",
-                        toggleActions: "play reset play reset",
-                    }
-                });
-            });
-        }
-    });
     
 });
 

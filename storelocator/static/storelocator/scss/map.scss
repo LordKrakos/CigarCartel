@@ -206,14 +206,10 @@
             }
 
             h5 {
-                font-size: clamp(1rem, 1.5vw, 1.3rem);
-                background: linear-gradient(0deg, var(--hero-title-primary), var(--hero-title-secondary) 70%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text; /* Non‑WebKit browsers */
-                color: #000; /* fallback */
+                color: var(--accent);
                 margin: 0;
-                font-family: "Lobster", sans-serif;
+                font-family: "Roboto", sans-serif;
+                font-size: clamp(1rem, 1.5vw, 1.3rem);
                 text-shadow: 0 0 var(--accent-shadow);
             }
 

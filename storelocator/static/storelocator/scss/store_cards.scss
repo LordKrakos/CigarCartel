@@ -53,23 +53,10 @@
                     text-decoration: none;
 
                     .card-title {
-                        font-size: clamp(1.15rem, 1.6vw, 1.5rem);
-                        background: linear-gradient(
-                            0deg,
-                            var(--gs-dark) 0%,
-                            var(--gs-mid) 20%,
-                            var(--gs-mid) 40%,
-                            var(--gs-light) 50%,
-                            var(--gs-mid) 60%,
-                            var(--gs-mid) 80%,
-                            var(--gs-dark) 100%
-                        );
-                        -webkit-background-clip: text;
-                        -webkit-text-fill-color: transparent;
-                        background-clip: text; /* Non‑WebKit browsers */
                         color: var(--accent); /* fallback */
                         margin: 0;
-                        font-family: "Lobster", sans-serif;
+                        font-family: "Roboto", sans-serif;
+                        font-size: clamp(1.15rem, 1.6vw, 1.5rem);
                         text-shadow: 1px 2px 2px var(--gs-shadow), 1px 2px 2px var(--gs-shadow);
                     }
                 }
